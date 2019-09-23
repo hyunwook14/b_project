@@ -1,0 +1,27 @@
+@charset "UTF-8";
+
+nav{
+	width:15%;
+	float:left;
+	background-color: #f1f1f1;
+	height:1000px;
+    
+}
+.nav{
+	height: 100%;
+}
+section{
+	width:80%;
+	float:left;
+}
+footer{
+}
+ul{
+	list-style: none;
+	padding-inline-start: 0;
+}
+
+.menu li{
+	padding: 20px 10px;
+	text-align: center;
+}
