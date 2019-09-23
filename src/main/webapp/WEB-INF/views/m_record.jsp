@@ -13,29 +13,86 @@
 <script>
 	$(document).ready(function(){
 		$("button").click(function(){
-			var textflag;
+			var indextext = $("button").index(this);
+			console.log(indextext,"----index" )
+			
+			var textflag;	 	//버튼클릭시 여러이벤트
+			var pmflag;			//득점 감점 flag
 			var classtexts = $(this).attr("class").split(" ");
 			for(var i = 0; i<classtexts.length; i++){
 				textflag = classtexts[i];
 			}
-			console.log(textflag, "---어떤거클릭?")
+			if(classtexts[1] == "btn-success") pmflag = 1; 	//득점
+			else pmflag = 0; 								//감점
 			
 			if(textflag=="score2"){
+				var score = parseInt($(this).parent()[0].childNodes[0].innerText);
+				if( pmflag == 1){
+					score += 2;
+				}else{
+					score -= 2;
+				}
+				$(this).parent()[0].childNodes[0].innerText = score;
 			}else if(textflag=="score3"){
-				
+				var score = parseInt($(this).parent()[0].childNodes[0].innerText);
+				if( pmflag == 1){
+					score += 3;
+				}else{
+					score -= 3;
+				}
+				$(this).parent()[0].childNodes[0].innerText = score;
 			}else if(textflag=="score1"){
-				
+				var score = parseInt($(this).parent()[0].childNodes[0].innerText);
+				if( pmflag == 1){
+					score += 1;
+				}else{
+					score -= 1;
+				}
+				$(this).parent()[0].childNodes[0].innerText = score;
 			}else if(textflag=="foul"){
-				
+				var score = parseInt($(this).parent()[0].childNodes[0].innerText);
+				if( pmflag == 1){
+					score += 1;
+				}else{
+					score -= 1;
+				}
+				$(this).parent()[0].childNodes[0].innerText = score;
 			}else if(textflag=="assist"){
-				
+				var score = parseInt($(this).parent()[0].childNodes[0].innerText);
+				if( pmflag == 1){
+					score += 1;
+				}else{
+					score -= 1;
+				}
+				$(this).parent()[0].childNodes[0].innerText = score;
 			}else if(textflag=="steal"){
-				
+				var score = parseInt($(this).parent()[0].childNodes[0].innerText);
+				if( pmflag == 1){
+					score += 1;
+				}else{
+					score -= 1;
+				}
+				$(this).parent()[0].childNodes[0].innerText = score;
 			}else if(textflag=="block"){
-				
+				var score = parseInt($(this).parent()[0].childNodes[0].innerText);
+				if( pmflag == 1){
+					score += 1;
+				}else{
+					score -= 1;
+				}
+				$(this).parent()[0].childNodes[0].innerText = score;
 			}else if(textflag=="turnover"){
-				
+				var score = parseInt($(this).parent()[0].childNodes[0].innerText);
+				if( pmflag == 1){
+					score += 1;
+				}else{
+					score -= 1;
+				}
+				$(this).parent()[0].childNodes[0].innerText = score;
 			}
+			
+			/*console.log($(this).parent().parent())  */
+			
 		});
 	});
 </script>
@@ -70,40 +127,49 @@
 		<td>총득점</td>	
 	</tr>
 </thead>
-	<tr>
+	<tr class="people">
 		<td>home</td>
 		<td>진현욱</td>
-		<td>2 <button type="button" class="btn btn-success scroe2">+</button><button type="button" class="btn btn-danger">-</button>
+		<td><span class="score2">0</span> <button type="button" class="btn btn-success score2">+</button><button type="button" class="btn btn-danger score2">-</button>
 		</td>
-		<td>0 <button type="button" class="btn btn-success score3">+</button><button type="button" class="btn btn-danger">-</button>
+		<td><span class="score3">0</span> <button type="button" class="btn btn-success score3">+</button><button type="button" class="btn btn-danger score3">-</button>
 		</td>
-		<td>2 <button type="button" class="btn btn-success score1">+</button><button type="button" class="btn btn-danger">-</button>
+		<td><span class="score1">0</span> <button type="button" class="btn btn-success score1">+</button><button type="button" class="btn btn-danger score1">-</button>
 		</td>
-		<td>0 <button type="button" class="btn btn-success foul">+</button><button type="button" class="btn btn-danger">-</button> 
+		<td><span class="foul">0</span> <button type="button" class="btn btn-success foul">+</button><button type="button" class="btn btn-danger foul">-</button> 
 		</td>
-		<td>5 <button type="button" class="btn btn-success assist">+</button><button type="button" class="btn btn-danger">-</button>
+		<td><span class="assist">0</span> <button type="button" class="btn btn-success assist">+</button><button type="button" class="btn btn-danger assist">-</button>
 		</td>
-		<td>0 <button type="button" class="btn btn-success steal">+</button><button type="button" class="btn btn-danger">-</button>
+		<td><span class="steal">0</span> <button type="button" class="btn btn-success steal">+</button><button type="button" class="btn btn-danger steal">-</button>
 		</td>
-		<td>0 <button type="button" class="btn btn-success block">+</button><button type="button" class="btn btn-danger">-</button>
+		<td><span class="block">0</span> <button type="button" class="btn btn-success block">+</button><button type="button" class="btn btn-danger block">-</button>
 		</td>
-		<td>0 <button type="button" class="btn btn-success turnover">+</button><button type="button" class="btn btn-danger">-</button>
+		<td><span class="turnover">0</span> <button type="button" class="btn btn-success turnover">+</button><button type="button" class="btn btn-danger turnover">-</button>
 		</td>
-		<td>6 
+		<td><span class="totalscore">0</span>
 		</td>	
 	</tr>
 	<tr>
 		<td>away</td>
 		<td>고동희</td>
-		<td>2</td>
-		<td>0</td>
-		<td>2</td>
-		<td>0</td>
-		<td>5</td>
-		<td>0</td>
-		<td>0</td>
-		<td>0</td>
-		<td>6</td>	
+		<td><span class="score2">0</span> <button type="button" class="btn btn-success score2">+</button><button type="button" class="btn btn-danger score2">-</button>
+		</td>
+		<td><span class="score3">0</span> <button type="button" class="btn btn-success score3">+</button><button type="button" class="btn btn-danger score3">-</button>
+		</td>
+		<td><span class="score1">0</span> <button type="button" class="btn btn-success score1">+</button><button type="button" class="btn btn-danger score1">-</button>
+		</td>
+		<td><span class="foul">0</span> <button type="button" class="btn btn-success foul">+</button><button type="button" class="btn btn-danger foul">-</button> 
+		</td>
+		<td><span class="assist">0</span> <button type="button" class="btn btn-success assist">+</button><button type="button" class="btn btn-danger assist">-</button>
+		</td>
+		<td><span class="steal">0</span> <button type="button" class="btn btn-success steal">+</button><button type="button" class="btn btn-danger steal">-</button>
+		</td>
+		<td><span class="block">0</span> <button type="button" class="btn btn-success block">+</button><button type="button" class="btn btn-danger block">-</button>
+		</td>
+		<td><span class="turnover">0</span> <button type="button" class="btn btn-success turnover">+</button><button type="button" class="btn btn-danger turnover">-</button>
+		</td>
+		<td><span class="totalscore">0</span>
+		</td>	
 	</tr>
 	
 
