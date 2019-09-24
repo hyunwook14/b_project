@@ -45,4 +45,9 @@ public class HomeController {
 		return "m_list";
 	}
 	
+	@RequestMapping("m_detail")
+	public String m_detail() {
+		return "m_detail";
+	}
+	
 }
