@@ -11,7 +11,11 @@
 <link rel="stylesheet" type="text/css" href="/web/resources/css/Main.css" >
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-
+<style>
+.vab{
+	vertical-align:bottom;
+}
+</style>
 <script>
 	function score(textflag){
 		
@@ -23,18 +27,17 @@
 			console.log("경기종료")
 		});
 		
-		$(".plusp").click(function(e){
-			e.preventDefault();
+		$(".plusp").click(function(){
 			$("#myModal").modal("show"); //모달창 띄우기
 		});
 		
 		$(".btn-success").click(function(e){
 			
-		})
+		});
 		
 		$(".btn-danger").click(function(e){
 			
-		})
+		});
 		
 		$("button").click(function(e){
 			var index = $("button").index(this);
@@ -187,7 +190,7 @@
 		</tr>
 		<tr>
 			<td>away</td>
-			<td>고동희</td>
+			<td>Jordan</td>
 			<td><span class="score2">0</span> <button type="button" class="btn btn-success score2">+</button><button type="button" class="btn btn-danger score2">-</button>
 			</td>
 			<td><span class="score3">0</span> <button type="button" class="btn btn-success score3">+</button><button type="button" class="btn btn-danger score3">-</button>
@@ -217,10 +220,26 @@
 	      <div class="modal-content">
 	        <div class="modal-header">
 	          <button type="button" class="close" data-dismiss="modal">&times;</button>
-	          <h4 class="modal-title">Modal Header</h4>
+	          <h4 class="modal-title">선수등록</h4>
 	        </div>
 	        <div class="modal-body">
-	          <p>Some text in the modal.</p>
+	          <form>
+	          	<label class="radio-inline">
+	          		<input type="radio" name="team" checked> home
+	          	</label>
+	          	<label class="radio-inline">
+	          		<input type="radio" name="team" > away
+	          	</label>
+	          	
+	          	<div class="input-group">
+	          		<label for="p_name" class="form-group">이름:</label>
+	          		<input type="text" class="form-control" placeholder="선수이름입력을 입력하세요" >
+	          		<div class="input-group-btn vab"><br>
+				        <button class="btn btn-default " type="submit"><i class="glyphicon glyphicon-search"></i></button>
+				    </div>
+	          	</div>
+	          	<input type="submit" class="btn btn-default" value="등록">
+	          </form>
 	        </div>
 	        <div class="modal-footer">
 	          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
