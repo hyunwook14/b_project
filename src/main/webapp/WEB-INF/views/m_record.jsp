@@ -14,7 +14,6 @@
 	$(document).ready(function(){
 		$("button").click(function(){
 			var indextext = $("button").index(this);
-			console.log(indextext,"----index" )
 			
 			var textflag;	 	//버튼클릭시 여러이벤트
 			var pmflag;			//득점 감점 flag
@@ -25,30 +24,41 @@
 			if(classtexts[1] == "btn-success") pmflag = 1; 	//득점
 			else pmflag = 0; 								//감점
 			
+			var totalscore = parseInt($(this).parent().parent().eq(0).children().eq(10)[0].innerText);
+			
 			if(textflag=="score2"){
 				var score = parseInt($(this).parent()[0].childNodes[0].innerText);
 				if( pmflag == 1){
 					score += 2;
+					totalscore += 2;
 				}else{
 					score -= 2;
+					totalscore -= 2;
 				}
 				$(this).parent()[0].childNodes[0].innerText = score;
+				$(this).parent().parent().eq(0).children().eq(10)[0].innerText= totalscore;
 			}else if(textflag=="score3"){
 				var score = parseInt($(this).parent()[0].childNodes[0].innerText);
 				if( pmflag == 1){
 					score += 3;
+					totalscore += 3;
 				}else{
 					score -= 3;
+					totalscore -= 3;
 				}
 				$(this).parent()[0].childNodes[0].innerText = score;
+				$(this).parent().parent().eq(0).children().eq(10)[0].innerText= totalscore;
 			}else if(textflag=="score1"){
 				var score = parseInt($(this).parent()[0].childNodes[0].innerText);
 				if( pmflag == 1){
 					score += 1;
+					totalscore += 1;
 				}else{
 					score -= 1;
+					totalscore -= 1;
 				}
 				$(this).parent()[0].childNodes[0].innerText = score;
+				$(this).parent().parent().eq(0).children().eq(10)[0].innerText= totalscore;
 			}else if(textflag=="foul"){
 				var score = parseInt($(this).parent()[0].childNodes[0].innerText);
 				if( pmflag == 1){
