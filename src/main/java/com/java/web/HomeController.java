@@ -40,4 +40,9 @@ public class HomeController {
 		return "m_record";
 	}
 	
+	@RequestMapping("m_list")
+	public String m_list() {
+		return "m_list";
+	}
+	
 }

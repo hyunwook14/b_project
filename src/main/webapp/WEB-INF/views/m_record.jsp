@@ -3,25 +3,105 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>기록지</title>
+	<meta charset="UTF-8">
+	<title>기록지</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/web/resources/css/Main.css" >
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<style>
+		.vab{
+			vertical-align:bottom;
+		}
+	</style>
 </head>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="/web/resources/css/Main.css" >
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-<style>
-.vab{
-	vertical-align:bottom;
-}
-</style>
+
 <script>
-	function score(textflag){
+	function score(textflag, totalscore, parent, pmflag){
 		
-	}
+		if(textflag=="score2"){
+			 var score = parseInt(parent.children().eq(2).children().eq(0).text());
+			 if(pmflag ==1){
+				 score += 2;
+				 totalscore += 2;
+			 }else{
+				 score -= 2;
+				 totalscore -=2;
+			 }
+			 parent.children().eq(2).children().eq(0).text(score);
+		}else if(textflag=="score3"){
+			var score = parseInt(parent.children().eq(3).children().eq(0).text()); 
+			if(pmflag ==1){
+				 score += 3;
+				 totalscore += 3;
+			 }else{
+				 score -= 3;
+				 totalscore -=3;
+			 }
+			 parent.children().eq(3).children().eq(0).text(score);
+		}else if(textflag=="score1"){
+			var score = parseInt(parent.children().eq(4).children().eq(0).text()); 
+			if(pmflag ==1){
+				 score += 1;
+				 totalscore += 1;
+			 }else{
+				 score -= 1;
+				 totalscore -=1;
+			 }
+			 parent.children().eq(4).children().eq(0).text(score);
+		}else if(textflag=="foul"){
+			var score = parseInt(parent.children().eq(5).children().eq(0).text()); 
+			if(pmflag ==1){
+				 score += 1;
+			 }else{
+				 score -= 1;
+			 }
+			 parent.children().eq(5).children().eq(0).text(score);
+		}else if(textflag=="assist"){
+			var score = parseInt(parent.children().eq(6).children().eq(0).text()); 
+			if(pmflag ==1){
+				 score += 1;
+			 }else{
+				 score -= 1;
+			 }
+			 parent.children().eq(6).children().eq(0).text(score);
+		}else if(textflag=="steal"){
+			var score = parseInt(parent.children().eq(7).children().eq(0).text()); 
+			if(pmflag ==1){
+				 score += 1;
+			 }else{
+				 score -= 1;
+			 }
+			 parent.children().eq(7).children().eq(0).text(score);
+		}else if(textflag=="block"){
+			var score = parseInt(parent.children().eq(8).children().eq(0).text()); 
+			if(pmflag ==1){
+				 score += 1;
+			 }else{
+				 score -= 1;
+			 }
+			 parent.children().eq(8).children().eq(0).text(score);
+		}else if(textflag=="turnover"){
+			var score = parseInt(parent.children().eq(9).children().eq(0).text()); 
+			if(pmflag ==1){
+				 score += 1;
+			 }else{
+				 score -= 1;
+			 }
+			 parent.children().eq(9).children().eq(0).text(score);
+		}
+		
+		
+		
+		parent.children().eq(10).children().text(totalscore);	
+		}
 	
 	$(document).ready(function(){
+		$(".back").click(function(e){
+			location.href="/web/m_list";
+		});
+		
 		$("#matchend").click(function(e){
 			e.preventDefault();
 			console.log("경기종료")
@@ -32,13 +112,37 @@
 		});
 		
 		$(".btn-success").click(function(e){
+			var textflag;	 	//버튼클릭시 여러이벤트
+			var pmflag;			//득점 감점 flag
+			var classtexts = $(this).attr("class").split(" ");
+			for(var i = 0; i<classtexts.length; i++){
+				textflag = classtexts[i];
+			}
+			if(classtexts[1] == "btn-success") pmflag = 1; 	//득점
+			else pmflag = 0; 								//감점
+			
+			var totalscore = parseInt($(this).parent().parent().eq(0).children().eq(10)[0].innerText);
+			var parent = $(this).parent().parent();
+			score(textflag, totalscore, parent, pmflag);
 			
 		});
 		
 		$(".btn-danger").click(function(e){
+			var textflag;	 	//버튼클릭시 여러이벤트
+			var pmflag;			//득점 감점 flag
+			var classtexts = $(this).attr("class").split(" ");
+			for(var i = 0; i<classtexts.length; i++){
+				textflag = classtexts[i];
+			}
+			if(classtexts[1] == "btn-success") pmflag = 1; 	//득점
+			else pmflag = 0; 								//감점
 			
+			var totalscore = parseInt($(this).parent().parent().eq(0).children().eq(10)[0].innerText);
+			var parent = $(this).parent().parent();
+			score(textflag, totalscore, parent, pmflag);
 		});
 		
+		/*
 		$("button").click(function(e){
 			var index = $("button").index(this);
 			if( index == 0){
@@ -130,9 +234,9 @@
 					$(this).parent()[0].childNodes[0].innerText = score;
 				}
 			
-			/*console.log($(this).parent().parent())  */
+			/*console.log($(this).parent().parent())  *//*
 			}
-		});
+		});*/
 	});
 </script>
 <body>
@@ -211,7 +315,7 @@
 			</td>	
 		</tr>
 	</table>
-	<button type="button" class="btn" id="matchend">경기종료</button>
+	<button type="button" class="btn back">뒤로</button><button type="button" class="btn" id="matchend">경기종료</button>
 	<!-- Modal -->
 	  <div class="modal fade" id="myModal" role="dialog">
 	    <div class="modal-dialog">
