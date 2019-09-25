@@ -37,54 +37,75 @@
 </script>
 </head>
 <body>
-<nav class="">
- <div class="nav">
- <ul class="menu nav nav-pills nav-stacked">
- 	<li class=""><a href="/web/Main">Home</a></li>
- 	<li class=""><a href="#section2">정보등록</a></li>
- 	<li class=""><a href="#section3">선수추천목록</a>
- 	<li class=""><a href="#setion4">운동목록</a>
- 	<li class="active"><a href="/web/m_list">경기기록</a>
- </ul>
- </div>
-</nav>
-<section class="">
-	
-	<div class="w80p">
-		<h1 class="mtb20"> 경기 목록 </h1>
-		<div class="mtb10">
-			<form>
-				<button type="button" class="btn btn-primary add">경기추가</button>
-			</form>
+	<section class="container-fluid">
+		<div class="row content">
+			 <nav class="col-sm-3 sidenav">
+				 <ul class="menu nav nav-pills nav-stacked">
+				 	<li class="active"><a href="/web/Main">Home</a></li>
+				 	<li class=""><a href="#section2">정보등록</a></li>
+				 	<li class=""><a href="#section3">선수추천목록</a>
+				 	<li class=""><a href="#setion4">운동목록</a>
+				 	<li class=""><a href="/web/m_list">경기기록</a>
+				 	<li class=""><a href="#section5">관리자</a>
+				 </ul>
+				 <div>
+					<form class="row form-group">
+						<div class="col-sm-12 ">
+							<div class="form-control text-center">Admin</div>
+						</div>
+						<div class="col-sm-6">
+							<button class=" btn form-control">내정보</button>
+						</div>
+						<div class="col-sm-6">
+							<button class=" btn form-control">로그아웃</button>
+						</div>
+					</form>	 
+				 </div>
+			 </nav>
+			 
+		 	 <section class="col-sm-9">
+				<header class="jumbotron bgc">
+					<div class="container text-center">
+						<img src="http://www.gdu.co.kr/images/main/logo.png" alt="IMAGE">
+					</div>
+				</header>
+				<div class="bgray linep10"></div>	
+				<div class="w80p">
+			<h1 class="mtb20"> 경기 목록 </h1>
+			<div class="mtb10">
+				<form>
+					<button type="button" class="btn btn-primary add">경기추가</button>
+				</form>
+			
+			</div>
+		
+			<table class="table">
+				<thead>
+					<tr>
+						<td>날짜</td>
+						<td>쿼터</td>
+						<td>인원</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>2019-09-24</td>
+						<td>1Q</td>
+						<td>10</td>
+					</tr>
+					<tr>
+						<td>2019-09-24</td>
+						<td>2Q</td>
+						<td>10</td>
+					</tr>
+				</tbody>
+			</table>
 		
 		</div>
-		
-		<table class="table">
-			<thead>
-				<tr>
-					<td>날짜</td>
-					<td>쿼터</td>
-					<td>인원</td>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>2019-09-24</td>
-					<td>1Q</td>
-					<td>10</td>
-				</tr>
-				<tr>
-					<td>2019-09-24</td>
-					<td>2Q</td>
-					<td>10</td>
-				</tr>
-			</tbody>
-		</table>
-		
-		
-		
-	</div>
-</section>
+			
+			</section>
+		</div>
+	</section>
 <footer></footer>
 </body>
 </html>

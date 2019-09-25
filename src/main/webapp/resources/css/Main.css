@@ -1,22 +1,16 @@
 @charset "UTF-8";
-
 nav{
-	width:15%;
-	float:left;
 	background-color: #f1f1f1;
-	height:1000px;
-    
+	height:850px  
 }
 .nav{
-	height: 100%;
+	/* height: 100%; */
 }
-section{
-	width:85%;
-	float:left;
-}
+
 footer{
+
 }
-ul{
+ ul{
 	list-style: none;
 	padding-inline-start: 0;
 }
@@ -24,4 +18,13 @@ ul{
 .menu li{
 	padding: 20px 10px;
 	text-align: center;
+} 
+
+.text-center{
+	text-algin:center;
+}
+
+.bgc{
+	  background-color:#337ab7;
+	  margin-bottom: 0px;
 }
