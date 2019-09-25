@@ -3,9 +3,6 @@ nav{
 	background-color: #f1f1f1;
 	height:850px  
 }
-.nav{
-	/* height: 100%; */
-}
 
 footer{
 
@@ -14,12 +11,10 @@ footer{
 	list-style: none;
 	padding-inline-start: 0;
 }
-
 .menu li{
 	padding: 20px 10px;
 	text-align: center;
 } 
-
 .text-center{
 	text-algin:center;
 }

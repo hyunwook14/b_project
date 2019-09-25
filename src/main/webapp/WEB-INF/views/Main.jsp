@@ -40,6 +40,14 @@
 }
 
 </style>
+
+<script>
+	/* $(document).ready(function(){
+		$(".c_user").click(function(){
+			location.href="/web/c_user";
+		})
+	}) */
+</script>
 </head>
 <body>
 	<section class="container-fluid">
@@ -100,7 +108,7 @@
 							<div class="form-group">
 								<div class="col-sm-offset-2 col-sm-10">
 									<button class="btn">로그인</button>
-									<button class="btn">회원가입</button>
+									<button class="btn c_user" formaction="/web/c_user">회원가입</button>
 								</div>
 							</div>
 						</form>
@@ -109,7 +117,6 @@
 			
 			</section>
 		</div>
-		
 		
 	</section>
 	<footer>
