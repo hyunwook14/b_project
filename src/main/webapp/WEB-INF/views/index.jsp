@@ -54,7 +54,7 @@
 		<div class="row content">
 			 <nav class="col-sm-3 sidenav">
 				 <ul class="menu nav nav-pills nav-stacked">
-				 	<li class="active"><a href="/web/Main">Home</a></li>
+				 	<li class="active"><a href="/web/index">Home</a></li>
 				 	<li class=""><a href="#section2">정보등록</a></li>
 				 	<li class=""><a href="#section3">선수추천목록</a>
 				 	<li class=""><a href="#setion4">운동목록</a>

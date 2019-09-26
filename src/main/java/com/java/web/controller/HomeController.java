@@ -20,9 +20,9 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping("/Main")
-	public String main() {
-		return "Main";
+	@RequestMapping("/index")
+	public String index() {
+		return "index";
 	}
 	
 	@RequestMapping("/login")
@@ -30,24 +30,29 @@ public class HomeController {
 		return "login";
 	}
 	
-	@RequestMapping("c_user")
+	@RequestMapping("/c_user")
 	public String c_user() {
 		return "c_user";
 	}
 	
-	@RequestMapping("m_record")
+	@RequestMapping("/m_record")
 	public String m_record() {
 		return "m_record";
 	}
 	
-	@RequestMapping("m_list")
+	@RequestMapping("/m_list")
 	public String m_list() {
 		return "m_list";
 	}
 	
-	@RequestMapping("m_detail")
+	@RequestMapping("/m_detail")
 	public String m_detail() {
 		return "m_detail";
+	}
+	
+	@RequestMapping("/main")
+	public String main(){
+		return "main";
 	}
 	
 }

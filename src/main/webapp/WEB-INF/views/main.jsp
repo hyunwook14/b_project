@@ -4,36 +4,35 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>기록 목록</title>
+<title>Main</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/web/resources/css/Main.css" >
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <style>
-	.w80p{
-		width:75%;
-		margin: auto;
-	}
-	.w20{
-		width: 350px;
-		text-align: center;
-	}
-	.mtb10{
-		margin: 10px 0;
-	}
-	.mtb10{
-		margin: 20px 0;
-	}
-	tbody{
-		cursor:pointer;
-	}
+*{
+	padiing:0;
+	margin:0;
+}
+.ptb50p{
+	padding:25px 0;
+}
+.mt50p{
+	 margin-top:50px; 
+}
+.mb0{
+	margin-bottom:0;
+}
+.progressw{
+	width:33%;
+}
+
 </style>
+
 <script>
-	$(document).ready(function(){
-		$(".add").click(function(){
-			location.href="/web/m_record"
-		});
-	});
+	/* $(document).ready(function(){
+		
+	}) */
 </script>
 </head>
 <body>
@@ -42,7 +41,7 @@
 			 <nav class="col-sm-3 sidenav">
 				 <ul class="menu nav nav-pills nav-stacked">
 				 	<li class="active"><a href="/web/index">Home</a></li>
-				 	<li class=""><a href="#section2">정보등록</a></li>
+				 	<li class=""><a href="#section2">신체정보등록</a></li>
 				 	<li class=""><a href="#section3">선수추천목록</a>
 				 	<li class=""><a href="#setion4">운동목록</a>
 				 	<li class=""><a href="/web/m_list">경기기록</a>
@@ -70,42 +69,60 @@
 					</div>
 				</header>
 				<div class="bgray linep10"></div>	
-				<div class="w80p">
-			<h1 class="mtb20"> 경기 목록 </h1>
-			<div class="mtb10">
-				<form>
-					<button type="button" class="btn btn-primary add">경기추가</button>
-				</form>
-			
-			</div>
-		
-			<table class="table">
-				<thead>
-					<tr>
-						<td>날짜</td>
-						<td>쿼터</td>
-						<td>인원</td>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>2019-09-24</td>
-						<td>1Q</td>
-						<td>10</td>
-					</tr>
-					<tr>
-						<td>2019-09-24</td>
-						<td>2Q</td>
-						<td>10</td>
-					</tr>
-				</tbody>
-			</table>
-		
-		</div>
-			
+				<div class="container userinfo">
+					<div class="row">
+						<button type="button" class="btn form-control" data-toggle="collapse" data-target="#userinfolist">내 신체정보보기 </button>
+					</div>
+					<div class="row collapse mt50p" id="userinfolist">
+							<div class="progress">
+										<div class="progress-bar progressw" role="progressbar" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100" >33%</div>
+							</div>
+							<div class="col-sm-4">
+								<div class="well">
+									<table class="table table-bordered mb0">
+										<tbody>
+											<tr>
+												<td>nickname</td>
+												<td>우키</td>
+											</tr>
+											<tr>
+												<td>키</td>
+												<td>199</td>
+											</tr>
+											<tr>
+												<td>몸무게</td>
+												<td>100</td>
+											</tr>
+											<tr>
+												<td>추천포지션</td>
+												<td>F</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<div class="col-sm-4">
+								<div class="well">
+									2
+								</div>
+							</div>
+							<div class="col-sm-4">
+								<div class="well">
+									3
+								</div>
+							</div>
+					</div>
+				</div>
+				<div>
+					
+				</div>
 			</section>
 		</div>
+		
 	</section>
-<footer></footer>
+	<footer>
+	 <div>
+	 </div>
+	</footer>
 </body>
 </html>
