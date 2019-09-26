@@ -112,6 +112,33 @@
 								</div>
 							</div>
 					</div>
+					<div class="">
+						<div>
+							<button type="button" class="btn form-control" data-toggle="collapse" data-target="#mymatch">내 시합목록 </button>
+						</div>
+						<div class="row collapse mt50p" id="mymatch">
+							<div class="">
+								<table class="table table-bordered mb0">
+										<thead>
+											<tr>
+												<td>경기날짜</td>
+												<td>쿼터</td>
+												<td>총인원</td>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>2019-09-26</td>
+												<td>1</td>
+												<td>12</td>
+											</tr>
+											
+										</tbody>
+									</table>
+							</div>
+						</div>
+							 
+					</div>
 				</div>
 				<div>
 					
