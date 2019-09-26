@@ -55,4 +55,9 @@ public class HomeController {
 		return "main";
 	}
 	
+	@RequestMapping("/bodyinfo_register")
+	public String bodyinfo_register() {
+		return "bodyinfo_register";
+	}
+	
 }

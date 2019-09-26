@@ -4,47 +4,29 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>home</title>
+<title>신체정보등록</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/web/resources/css/Main.css" >
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <style>
 *{
 	padiing:0;
 	margin:0;
 }
-
-.bgray{
-	background-color: #f1f1f1;
-}
-.linep10{
-	padding:10px 0;
-}
-
-.biw100{
-	width:100%;
-	height:calc(850px - 162px);
-	background-image: url('https://news.hmgjournal.com/upload/common/activeSquare/binary/slamdunk-1[0].jpg');
-	background-repeat: no-repeat;
-	background-position: top;
-	background-size:cover;
-}
-.opacityd{
-	opacity:1;
-}
 .ptb50p{
 	padding:25px 0;
 }
-.containerw{
- width:750px;
+
+.mb0{
+	margin-bottom:0;
 }
+
 </style>
 
 <script>
 	/* $(document).ready(function(){
-		$(".c_user").click(function(){
-			location.href="/web/c_user";
-		})
+		
 	}) */
 </script>
 </head>
@@ -53,8 +35,8 @@
 		<div class="row content">
 			 <nav class="col-sm-3 sidenav">
 				 <ul class="menu nav nav-pills nav-stacked">
-				 	<li class="active"><a href="/web/index">Home</a></li>
-				 	<li class=""><a href="/web/bodyinfo_register">신체정보등록</a></li>
+				 	<li class=""><a href="/web/index">Home</a></li>
+				 	<li class="active"><a href="/web/bodyinfo_register">신체정보등록</a></li>
 				 	<li class=""><a href="#section3">선수추천목록</a>
 				 	<li class=""><a href="#setion4">운동목록</a>
 				 	<li class=""><a href="/web/m_list">경기기록</a>
@@ -82,38 +64,36 @@
 					</div>
 				</header>
 				<div class="bgray linep10"></div>	
-				<div class="biw100 imgw">
-					<div class="ptb50p"></div>
-					
-					<div class="container well containerw">
-						<form class="form-horizontal">
+				<div class="container bodyinfo row">
+					<div class="col-sm-8">
+						<form >
+							<div class="form-group">
+								<label for="nickname">닉네임:</label>
+								<input type="text" id="nickname" name="nickname" placeholder="닉네임을입력하세요" class="form-control">
+							</div>
+							<div class="form-group">
+								<label for="height">키:</label>
+								<input type="number" id="height" name="height" placeholder="키를입력해주세요" class="form-control">
+							</div>
+							<div class="form-group">
+								<label for="weight">몸무게:</label>
+								<input type="number" id="weight" name="weight" placeholder="몸무게를입력해주세요" class="form-control"> 
+							</div>
 							<div class="form-group ">
-								<div class="col-sm-offset-1 ">
-									<label class="control-label">로그인</label>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="control-label col-sm-2" for="id"> id:</label>
-								<div class="col-sm-10">
-									<input type="text" class="form-control" name="id" id="id" placeholder="아아디를입력해주세요">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="control-label col-sm-2"> pw:</label>
-								<div class="col-sm-10">
-									<input type="password" class="form-control" name="pw" placeholder="비밀번호를입력해주세요">
-								</div>
-							</div>
-							<div class="form-group">
-								<div class="col-sm-offset-1 col-sm-10">
-									<button class="btn">로그인</button>
-									<button class="btn c_user" formaction="/web/c_user">회원가입</button>
-								</div>
-							</div>
+								<div class="btn col-sm-6 btn-default" data-toggle="collapse" data-target="#position">포지션추천</div>
+								<div class="btn col-sm-6 btn-default">등록</div>
+							</div>					
 						</form>
+						<div class="collapse" id="position">
+							<label>Gaurd:</label>
+							<p>가드에간단한설명</p>
+						</div>
 					</div>
+					
 				</div>
-			
+				<div>
+					
+				</div>
 			</section>
 		</div>
 		

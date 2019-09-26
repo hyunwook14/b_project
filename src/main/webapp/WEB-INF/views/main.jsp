@@ -17,9 +17,7 @@
 .ptb50p{
 	padding:25px 0;
 }
-.mt50p{
-	 margin-top:50px; 
-}
+
 .mb0{
 	margin-bottom:0;
 }
