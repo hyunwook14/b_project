@@ -65,4 +65,9 @@ public class HomeController {
 		return "admin";
 	}
 	
+	@RequestMapping("/player_recommand")
+	public String player_recommand() {
+		return "player_recommand";
+	}
+	
 }
