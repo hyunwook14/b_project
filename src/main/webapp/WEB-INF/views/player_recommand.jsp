@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>관리자</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="/web/resources/css/Main.css" >
+<link rel="stylesheet" type="text/css" href="/resources/css/Main.css" >
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <style>
@@ -47,12 +47,12 @@
 		<div class="row content">
 			 <nav class="col-sm-3 sidenav">
 				 <ul class="menu nav nav-pills nav-stacked">
-				 	<li class=""><a href="/web/index">Home</a></li>
-				 	<li class=""><a href="/web/bodyinfo_register">신체정보등록</a></li>
-				 	<li class="active"><a href="/web/player_recommand">선수추천목록</a>
-				 	<li class=""><a href="#setion4">운동목록</a>
-				 	<li class=""><a href="/web/m_list">경기기록</a>
-				 	<li class=""><a href="/web/admin">관리자</a>
+				 	<li class=""><a href="/">Home</a></li>
+				 	<li class=""><a href="/bodyinfo_register">신체정보등록</a></li>
+				 	<li class="active"><a href="/player_recommand">선수추천목록</a>
+				 	<li class=""><a href="/exercise_recommand">운동목록</a>
+				 	<li class=""><a href="/m_list">경기기록</a>
+				 	<li class=""><a href="/admin">관리자</a>
 				 </ul>
 				 <div>
 					<form class="row form-group">
@@ -81,32 +81,15 @@
 					<h1>선수목록</h1>
 					<div class="row">
 						<div class="col-sm-2">
-							<img src="/web/resources/img/290776.jpg" alt="선수" class="img-circle" data-toggle="modal" data-target="#myModal">
+							<img src="/resources/img/290776.jpg" alt="선수" class="img-circle" data-toggle="modal" data-target="#myModal">
 						</div>
 						<div class="col-sm-2">
-							<img src="/web/resources/img/290776.jpg" alt="선수" class="img-circle" data-toggle="modal" data-target="#myModal">
+							<img src="/resources/img/290776.jpg" alt="선수" class="img-circle" data-toggle="modal" data-target="#myModal">
 						</div>
 						<div class="col-sm-2">
-							<img src="/web/resources/img/290776.jpg" alt="선수" class="img-circle" data-toggle="modal" data-target="#myModal">
+							<img src="/resources/img/290776.jpg" alt="선수" class="img-circle" data-toggle="modal" data-target="#myModal">
 						</div>
-						<div class="col-sm-2">
-							<img src="/web/resources/img/290776.jpg" alt="선수" class="img-circle" data-toggle="modal" data-target="#myModal">
-						</div>
-						<div class="col-sm-2">
-							<img src="/web/resources/img/290776.jpg" alt="선수" class="img-circle" data-toggle="modal" data-target="#myModal">
-						</div>
-						<div class="col-sm-2">
-							<img src="/web/resources/img/290776.jpg" alt="선수" class="img-circle">
-						</div>
-						<div class="col-sm-2">
-							<img src="/web/resources/img/290776.jpg" alt="선수" class="img-circle">
-						</div>
-						<div class="col-sm-2">
-							<img src="/web/resources/img/290776.jpg" alt="선수" class="img-circle">
-						</div>
-						<div class="col-sm-2">
-							<img src="/web/resources/img/290776.jpg" alt="선수" class="img-circle">
-						</div>
+						
 						
 					</div>
 					
@@ -127,7 +110,7 @@
 				        </div>
 				        <div class="modal-body media ">
 				        	<div class="media-left">
-				        		<img src="/web/resources/img/290776.jpg" alt="선수" class="media-object" style="width:">
+				        		<img src="/resources/img/290776.jpg" alt="선수" class="media-object" style="width:">
 				        	</div>
 				        	<div class="media-body ">
 					        	<ul class="table ">

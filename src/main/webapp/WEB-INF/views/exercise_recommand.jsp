@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>신체정보등록</title>
+<title>관리자</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/resources/css/Main.css" >
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -21,11 +21,18 @@
 .mb0{
 	margin-bottom:0;
 }
-.bodyinfo .row{
-	width: 800px; 
-	margin:10px auto; 
-	padding:15px 15px; 
-	background-color:#f1f1f1;
+
+.table .tr, .tr li{
+	display:inline-block;
+}
+.tr li{
+	padding: 13px 20px;
+	width:150px;
+	border-bottom: 1px solid grey;
+	box-sizing: border-box;
+}
+.liwidth{
+	width:500px;
 }
 </style>
 
@@ -41,9 +48,9 @@
 			 <nav class="col-sm-3 sidenav">
 				 <ul class="menu nav nav-pills nav-stacked">
 				 	<li class=""><a href="/">Home</a></li>
-				 	<li class="active"><a href="/bodyinfo_register">신체정보등록</a></li>
+				 	<li class=""><a href="/bodyinfo_register">신체정보등록</a></li>
 				 	<li class=""><a href="/player_recommand">선수추천목록</a>
-				 	<li class=""><a href="/exercise_recommand">운동목록</a>
+				 	<li class="active"><a href="/exercise_recommand">운동목록</a>
 				 	<li class=""><a href="/m_list">경기기록</a>
 				 	<li class=""><a href="/admin">관리자</a>
 				 </ul>
@@ -69,36 +76,8 @@
 					</div>
 				</header>
 				<div class="bgray linep10"></div>	
-				<div class="container bodyinfo ">
-					<div class="row" style="">
-						<form>
-							<div class="form-group">
-								<label for="nickname">닉네임:</label>
-								<input type="text" id="nickname" name="nickname" placeholder="닉네임을입력하세요" class="form-control">
-							</div>
-							<div class="form-group">
-								<label for="height">키:</label>
-								<input type="number" id="height" name="height" placeholder="키를입력해주세요" class="form-control">
-							</div>
-							<div class="form-group">
-								<label for="weight">몸무게:</label>
-								<input type="number" id="weight" name="weight" placeholder="몸무게를입력해주세요" class="form-control"> 
-							</div>
-							<div class="form-group ">
-								<div class="btn col-sm-6 btn-default" data-toggle="collapse" data-target="#position">포지션추천</div>
-								<div class="btn col-sm-6 btn-default">등록</div>
-							</div>					
-						</form>
-						<div class="collapse" id="position">
-							<label>Gaurd:</label>
-							<p>가드에간단한설명</p>
-						</div>
-					</div>
-					
-				</div>
-				<div>
-					
-				</div>
+				
+				  
 			</section>
 		</div>
 		

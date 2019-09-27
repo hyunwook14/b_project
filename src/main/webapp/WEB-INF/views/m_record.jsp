@@ -6,7 +6,7 @@
 	<meta charset="UTF-8">
 	<title>기록지</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="/web/resources/css/Main.css" >
+	<link rel="stylesheet" type="text/css" href="/resources/css/Main.css" >
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 	<style>
@@ -99,7 +99,7 @@
 	
 	$(document).ready(function(){
 		$(".back").click(function(e){
-			location.href="/web/m_list";
+			location.href="/m_list";
 		});
 		
 		$("#matchend").click(function(e){
@@ -244,12 +244,12 @@
 		<div class="row content">
 			 <nav class="col-sm-3 sidenav">
 				 <ul class="menu nav nav-pills nav-stacked">
-				 	<li class="active"><a href="/web/index">Home</a></li>
-				 	<li class=""><a href="#section2">정보등록</a></li>
-				 	<li class=""><a href="#section3">선수추천목록</a>
-				 	<li class=""><a href="#setion4">운동목록</a>
-				 	<li class=""><a href="/web/m_list">경기기록</a>
-				 	<li class=""><a href="#section5">관리자</a>
+				 	<li class=""><a href="/">Home</a></li>
+				 	<li class=""><a href="/bodyinfo_register">신체정보등록</a></li>
+				 	<li class=""><a href="/player_recommand">선수추천목록</a>
+				 	<li class=""><a href="/exercise_recommand">운동목록</a>
+				 	<li class="active"><a href="/m_list">경기기록</a>
+				 	<li class=""><a href="/admin">관리자</a>
 				 </ul>
 				 <div>
 					<form class="row form-group">

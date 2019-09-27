@@ -16,13 +16,12 @@ public class HomeController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		
-		return "home";
+		return "index";
 	}
 	
-	@RequestMapping("/index")
+	@RequestMapping("/home")
 	public String index() {
-		return "index";
+		return "home";
 	}
 	
 	@RequestMapping("/login")
@@ -70,4 +69,8 @@ public class HomeController {
 		return "player_recommand";
 	}
 	
+	@RequestMapping("/exercise_recommand")
+	public String exercise_recommand() {
+		return "exercise_recommand";
+	}
 }
