@@ -10,10 +10,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <style>
-*{
-	padiing:0;
-	margin:0;
-}
+
 .ptb50p{
 	padding:25px 0;
 }
@@ -23,6 +20,9 @@
 }
 .progressw{
 	width:33%;
+}
+.vertical-align{
+	vertical-align: middle !important ;
 }
 
 </style>
@@ -77,19 +77,22 @@
 							</div>
 							<div class="col-sm-4">
 								<div class="well">
-									<table class="table table-bordered mb0">
+									<button type="button" class="btn">수정</button>
+									<button type="button" class="btn hidden">확인</button>
+									<button type="button" class="btn">삭제</button>
+									<table class="table table-bordered mb0 ">
 										<tbody>
-											<tr>
-												<td>nickname</td>
-												<td>우키</td>
+											<tr class="text_center">
+												<td class="vertical-align">nickname</td>
+												<td><input type="text" value="우키" class="form-control" disabled></td>
 											</tr>
 											<tr>
-												<td>키</td>
-												<td>199</td>
+												<td class="vertical-align">키</td>
+												<td><input type="number" value="199" class="form-control" disabled></td>
 											</tr>
 											<tr>
-												<td>몸무게</td>
-												<td>100</td>
+												<td class="vertical-align">몸무게</td>
+												<td><input type="number" value="100" class="form-control" disabled></td>
 											</tr>
 											<tr>
 												<td>추천포지션</td>

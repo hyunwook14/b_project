@@ -60,4 +60,9 @@ public class HomeController {
 		return "bodyinfo_register";
 	}
 	
+	@RequestMapping("/admin")
+	public String admin() {
+		return "admin";
+	}
+	
 }
