@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자</title>
+<title>운동선수추천</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/resources/css/Main.css" >
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -50,7 +50,7 @@
 				 	<li class=""><a href="/">Home</a></li>
 				 	<li class=""><a href="/bodyinfo_register">신체정보등록</a></li>
 				 	<li class=""><a href="/player_recommand">선수추천목록</a>
-				 	<li class="active"><a href="/exercise_recommand">운동목록</a>
+				 	<li class="active"><a href="/exercise_recommand">운동추천목록</a>
 				 	<li class=""><a href="/m_list">경기기록</a>
 				 	<li class=""><a href="/admin">관리자</a>
 				 </ul>
@@ -75,9 +75,29 @@
 						<img src="http://www.gdu.co.kr/images/main/logo.png" alt="IMAGE">
 					</div>
 				</header>
-				<div class="bgray linep10"></div>	
-				
-				  
+				<div class="bgray linep10"></div>
+				<div class="container liwidth">
+					<div class="dropdown">
+						<button class="btn dropdown-toggle form-control" type="button" data-toggle="dropdown">포지션
+						<span class="caret"></span></button>
+						<ul class="dropdown-menu">
+							<li><a href="#">1.포인트가드</a></li>
+							<li><a href="#">2.슈팅가드</a></li>
+							<li><a href="#">3.스몰포워드</a></li>
+							<li><a href="#">4.파워포워드</a></li>
+							<li><a href="#">5.센터</a></li>
+						</ul>
+					</div>
+				</div>	
+				<div>
+					<h2>포인트가드</h2>
+					<h3>요구 되는 능력</h3>
+					<span class="label label-info">속도</span>
+					<span class="label label-info">민첩성</span>
+					<span class="label label-info">볼 핸들링</span>
+					<span class="label label-info">패싱</span>
+					<span class="label label-info">득점</span>
+				</div>			  
 			</section>
 		</div>
 		
