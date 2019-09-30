@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="user">
+  <select id="test" resultType="String">
+    select 1 as test
+  </select>
+  
+  <select id="selectuser" parameterType="com.java.web.vo.MemberUserVO" resultType="com.java.web.vo.MemberUserVO">
+  	select user_id, user_pw from member_user where user_delYN = 'N' <if test="user_id != '' "> and user_id = #{user_id} </if> <if test="user_pw != ''"> and user_pw = #{user_pw}</if>
+  </select>
+ 
+  <select id="idcheck" parameterType="String" resultType="String">
+   select user_id from member_user where user_id = #{id}
+  </select>
+ 
+  <insert id="createuser" parameterType="com.java.web.vo.MemberUserVO">
+  	insert into member_user (user_id, user_pw, user_email) values (#{user_id}, #{user_pw}, #{user_email})
+  </insert>  
+</mapper>

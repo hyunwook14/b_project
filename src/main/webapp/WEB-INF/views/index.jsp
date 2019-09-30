@@ -42,9 +42,7 @@
 
 <script>
 	/* $(document).ready(function(){
-		$(".c_user").click(function(){
-			location.href="/web/c_user";
-		})
+		
 	}) */
 </script>
 </head>
@@ -58,9 +56,9 @@
 				 	<li class=""><a href="/player_recommand">선수추천목록</a>
 				 	<li class=""><a href="/exercise_recommand">운동목록</a>
 				 	<li class=""><a href="/m_list">경기기록</a>
-				 	<li class=""><a href="/admin">관리자</a>
+				 	<li id="admin" class="hidden"><a href="/admin">관리자</a>
 				 </ul>
-				 <div>
+				 <div class="hidden">
 					<form class="row form-group">
 						<div class="col-sm-12 ">
 							<div class="form-control text-center">Admin</div>
@@ -95,18 +93,18 @@
 							<div class="form-group">
 								<label class="control-label col-sm-2" for="id"> id:</label>
 								<div class="col-sm-10">
-									<input type="text" class="form-control" name="id" id="id" placeholder="아아디를입력해주세요">
+									<input type="text" class="form-control" name="user_id" id="id" placeholder="아아디를입력해주세요">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="control-label col-sm-2"> pw:</label>
+								<label class="control-label col-sm-2" for="pw"> pw:</label>
 								<div class="col-sm-10">
-									<input type="password" class="form-control" name="pw" placeholder="비밀번호를입력해주세요">
+									<input type="password" class="form-control" name="user_pw" id="pw" placeholder="비밀번호를입력해주세요">
 								</div>
 							</div>
 							<div class="form-group">
 								<div class="col-sm-offset-1 col-sm-10">
-									<button class="btn">로그인</button>
+									<button class="btn" formmethod="post" formaction="/login">로그인</button>
 									<button class="btn c_user" formaction="/c_user">회원가입</button>
 								</div>
 							</div>

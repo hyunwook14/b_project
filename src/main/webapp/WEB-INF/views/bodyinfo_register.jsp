@@ -30,9 +30,32 @@
 </style>
 
 <script>
-	/* $(document).ready(function(){
-		
-	}) */
+var id= "";
+id ="<%= session.getAttribute("id") %>";
+
+ $(document).ready(function(){
+	 
+	var html ="";
+	
+	if( id != ""){
+		 if( id == "admin"){
+				$("#admin").removeClass("hidden");	
+			}
+		html =`<form class="row form-group">
+				<div class="col-sm-12 ">
+					<div class="form-control text-center">\${id}</div>
+				</div>
+				<div class="col-sm-6">
+					<button class=" btn form-control">내정보</button>
+				</div>
+				<div class="col-sm-6">
+					<button class=" btn form-control" formaction="/logout">로그아웃</button>
+				</div>
+			   </form>	 `;
+	}
+	$("#myinfo").append(html);
+	
+}); 
 </script>
 </head>
 <body>
@@ -45,20 +68,11 @@
 				 	<li class=""><a href="/player_recommand">선수추천목록</a>
 				 	<li class=""><a href="/exercise_recommand">운동목록</a>
 				 	<li class=""><a href="/m_list">경기기록</a>
-				 	<li class=""><a href="/admin">관리자</a>
+				 	<li id="admin" class="hidden"><a href="/admin">관리자</a>
 				 </ul>
-				 <div>
-					<form class="row form-group">
-						<div class="col-sm-12 ">
-							<div class="form-control text-center">Admin</div>
-						</div>
-						<div class="col-sm-6">
-							<button class=" btn form-control">내정보</button>
-						</div>
-						<div class="col-sm-6">
-							<button class=" btn form-control">로그아웃</button>
-						</div>
-					</form>	 
+				 <div id="myinfo">
+					
+					
 				 </div>
 			 </nav>
 			 
@@ -74,15 +88,15 @@
 						<form>
 							<div class="form-group">
 								<label for="nickname">닉네임:</label>
-								<input type="text" id="nickname" name="nickname" placeholder="닉네임을입력하세요" class="form-control">
+								<input type="text" id="nickname" name="character_nickname" placeholder="닉네임을입력하세요" class="form-control">
 							</div>
 							<div class="form-group">
 								<label for="height">키:</label>
-								<input type="number" id="height" name="height" placeholder="키를입력해주세요" class="form-control">
+								<input type="number" id="height" name="character_height" placeholder="키를입력해주세요" class="form-control">
 							</div>
 							<div class="form-group">
 								<label for="weight">몸무게:</label>
-								<input type="number" id="weight" name="weight" placeholder="몸무게를입력해주세요" class="form-control"> 
+								<input type="number" id="weight" name="character_weight" placeholder="몸무게를입력해주세요" class="form-control"> 
 							</div>
 							<div class="form-group ">
 								<div class="btn col-sm-6 btn-default" data-toggle="collapse" data-target="#position">포지션추천</div>

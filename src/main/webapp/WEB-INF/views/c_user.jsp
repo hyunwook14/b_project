@@ -9,10 +9,7 @@
 <link rel="stylesheet" type="text/css" href="/resources/css/Main.css" >
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <style>
-*{
-	padiing:0;
-	margin:0;
-}
+
 
 .bgray{
 	background-color: #f1f1f1;
@@ -40,6 +37,109 @@
 }
 
 </style>
+<script>
+	$(document).ready(function(){
+		var idflag=0;
+		var pwflag=0;
+		
+		/* id중복검사 */
+		$("#idcheck").click(function(){
+			var id = $("#id").val();
+			if(id == ""){
+				alert("아이디를 입력해주세요");
+			}else{
+				$.ajax({
+					url:"/idcheck",
+					type:"POST",
+					data:{"id": id}
+				}).done(function(data){
+					if(data == "true"){
+						alert("아이디 사용가능합니다");
+						idflag=1;
+						$("#id").css("borderColor", "#86E57F");
+					}else{
+						$("#id").css("borderColor", "red");
+						alert("아이디값이 중복됩니다");
+					}
+				});
+			}
+		});
+		
+		/*비밀번호중복검사*/
+		$("#pw").change(function(){
+			var pw = $("#pw").val();
+			var pw2 = $("#pw2").val();
+			if( pw2 != "" ){
+				$("#pw2").css("borderColor", "#86E57F");
+				if(pw == pw2){
+					$("#pw1").css("borderColor", "#86E57F");
+					pwflag=1;
+				}else{
+					$("#pw1").css("borderColor", "red");
+				}
+			}else{
+				$("#pw2").css("borderColor", "red");
+			}
+		})
+		$("#pw2").change(function(){
+			var pw = $("#pw").val();
+			var pw2 = $("#pw2").val();
+			if( pw != "" ){
+				$("#pw").css("borderColor", "#86E57F");
+				if(pw == pw2){
+					$("#pw2").css("borderColor", "#86E57F");
+					pwflag=1;
+				}else{
+					$("#pw2").css("borderColor", "red");
+				}
+			}else{
+				$("#pw").css("borderColor", "red");
+			}
+		});
+		
+		$("#create").click(function(){
+			console.log("zzzz", idflag,"--id",pwflag, "--pw")
+			
+			var re = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+       		// 이메일이 적합한지 검사할 정규식
+			var email = $("#email").val();
+			
+			if(idflag ==1 && pwflag ==1){
+				console.log(email)
+				if(email=="") {
+			           alert("이메일을 입력해 주세요");
+			           return false;
+			       }else{
+			    	   
+					$.ajax({
+						url:"/createuser",
+						type:"POST",
+						data:{"user_id": $("#id").val(),
+							  "user_pw": $("#pw").val(),
+							  "user_email": $("#email").val()
+						}
+					}).done(function(data){
+						console.log(data);
+						if( data == "1"){
+							alert("회원가입성공");
+							location.href="/";
+						}else{
+							alert("회원가입실패")
+							location.href="/c_user";
+						}
+					});
+			    	   
+			       }
+				
+			}else{
+				alert("회원정보를 확인해주세요");
+			}
+		});
+		
+	})
+	
+	
+</script>
 </head>
 <body>
 	<section class="container-fluid">
@@ -51,9 +151,9 @@
 				 	<li class=""><a href="/player_recommand">선수추천목록</a>
 				 	<li class=""><a href="/exercise_recommand">운동목록</a>
 				 	<li class=""><a href="/m_list">경기기록</a>
-				 	<li class=""><a href="/admin">관리자</a>
+				 	<li id="admin" class="hidden"><a href="/admin">관리자</a>
 				 </ul>
-				 <div>
+				 <div class="hidden" id="userinfo">
 					<form class="row form-group">
 						<div class="col-sm-12 ">
 							<div class="form-control text-center ">Admin</div>
@@ -88,36 +188,36 @@
 							<div class="form-group">
 								<label class="control-label col-sm-1" for="id"> id:</label>
 								<div class="col-sm-9">
-									<input type="text" class="form-control" name="id" id="id" placeholder="아아디를입력해주세요">
+									<input type="text" class="form-control" name="user_id" id="id" placeholder="아아디를입력해주세요">
 								</div>
 								<div class="col-sm-1">
-									<button class="btn form-contorl">확인</button>
+									<button type="button" class="btn form-contorl" id="idcheck">확인</button>
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="control-label col-sm-1"> pw:</label>
+								<label class="control-label col-sm-1" for="pw"> pw:</label>
 								<div class="col-sm-9">
-									<input type="password" class="form-control" name="pw" placeholder="비밀번호를입력해주세요">
+									<input type="password" class="form-control" name="user_pw" id="pw" placeholder="비밀번호를입력해주세요">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="control-label col-sm-1"> 확인:</label>
+								<label class="control-label col-sm-1" for="pw2"> 확인:</label>
 								<div class="col-sm-9">
-									<input type="password" class="form-control" name="pw2" placeholder="비밀번호를확인해주세요">
+									<input type="password" class="form-control" name="pw2" id="pw2" placeholder="비밀번호를확인해주세요">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="control-label col-sm-1"> email:</label>
+								<label class="control-label col-sm-1" for="email"> email:</label>
 								<div class="col-sm-9">
-									<input type="email" class="form-control" name="email" placeholder="비밀번호를확인해주세요">
+									<input type="email" class="form-control" name="user_email" id="email" placeholder="이메일을입력해주세요">
 								</div>
 							</div>
 							<div class="form-group">
 								<div class="col-sm-offset-1 col-sm-4">
-									<button class="btn form-control">뒤로가기</button>
+									<button class="btn form-control" formaction="/">뒤로가기</button>
 								</div>
 								<div class=" col-sm-4">
-									<button class="btn form-control">회원가입</button>
+									<button type="button" class="btn form-control" id="create">회원가입</button>
 								</div>
 							</div>
 						</form>

@@ -52,7 +52,7 @@
 				 	<li class=""><a href="/player_recommand">선수추천목록</a>
 				 	<li class="active"><a href="/exercise_recommand">운동추천목록</a>
 				 	<li class=""><a href="/m_list">경기기록</a>
-				 	<li class=""><a href="/admin">관리자</a>
+				 	<li id="admin" class="hidden"><a href="/admin">관리자</a>
 				 </ul>
 				 <div>
 					<form class="row form-group">
