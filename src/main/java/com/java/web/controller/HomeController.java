@@ -22,7 +22,6 @@ public class HomeController {
 		return "home";
 	}
 	
-	
 	@RequestMapping("/m_record")
 	public String m_record() {
 		return "m_record";
@@ -36,14 +35,6 @@ public class HomeController {
 	@RequestMapping("/m_detail")
 	public String m_detail() {
 		return "m_detail";
-	}
-	
-	
-	@RequestMapping("/bodyinfo_register")
-	public String bodyinfo_register(HttpSession session) {
-		if(session.getAttribute("id") ==null) return "redircet:/";
-		
-		return "bodyinfo_register";
 	}
 	
 	@RequestMapping("/admin")

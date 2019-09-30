@@ -5,6 +5,9 @@ public class UserCharacterVO {
 	private String character_nickname;
 	private int character_height;
 	private int character_weight;
+	private String character_position;
+	private String character_explanation;
+	private int user_no;
 	
 	public int getCharacter_no() {
 		return character_no;
@@ -42,16 +45,20 @@ public class UserCharacterVO {
 	public void setCharacter_explanation(String character_explanation) {
 		this.character_explanation = character_explanation;
 	}
-	private String character_position;
-	private String character_explanation;
-
+	public int getUser_no() {
+		return user_no;
+	}
+	public void setUser_no(int user_no) {
+		this.user_no = user_no;
+	}
 	@Override
 	public String toString() {
 		return "UserCharacterVO [character_no=" + character_no + ", character_nickname=" + character_nickname
 				+ ", character_height=" + character_height + ", character_weight=" + character_weight
 				+ ", character_position=" + character_position + ", character_explanation=" + character_explanation
-				+ "]";
+				+ ", user_no=" + user_no + "]";
 	}
+	
 	
 	
 }

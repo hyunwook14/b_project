@@ -32,6 +32,10 @@
 	id ="<%= session.getAttribute("id") %>";
 	
 	 $(document).ready(function(){
+		$("#c_info").click(function(){
+			console.log("???????")
+		});
+		 
 		 
 		var html ="";
 		
@@ -116,7 +120,7 @@
 				<div class="bgray linep10"></div>	
 				<div class="container userinfo">
 					<div class="row">
-						<button type="button" class="btn form-control" data-toggle="collapse" data-target="#userinfolist">내 신체정보보기 </button>
+						<button type="button" id="c_info" class="btn form-control" data-toggle="collapse" data-target="#userinfolist">내 신체정보보기 </button>
 					</div>
 					<div class="row collapse mt50p" id="userinfolist">
 							<div class="progress">

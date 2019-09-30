@@ -55,6 +55,27 @@ id ="<%= session.getAttribute("id") %>";
 	}
 	$("#myinfo").append(html);
 	
+	$("#register").click(function(){
+		console.log("test")
+		var character_nickname = $("#character_nickname").val();
+		var character_height = $("#character_height").val();
+		var character_weight = $("#character_weight").val();
+		
+		$.ajax({
+			url:"/register_bodyinfo",
+			type:"POST",
+			data:{
+				character_nickname: character_nickname,
+				character_height : character_height,
+				character_weight : character_weight
+			}
+		}).done(function(data){
+			console.log(data)
+			if(data =="1") alert("입력성공");
+			else alert("입력실패");
+		});
+	})
+	
 }); 
 </script>
 </head>
@@ -63,7 +84,7 @@ id ="<%= session.getAttribute("id") %>";
 		<div class="row content">
 			 <nav class="col-sm-3 sidenav">
 				 <ul class="menu nav nav-pills nav-stacked">
-				 	<li class=""><a href="/">Home</a></li>
+				 	<li class=""><a href="/main">Home</a></li>
 				 	<li class="active"><a href="/bodyinfo_register">신체정보등록</a></li>
 				 	<li class=""><a href="/player_recommand">선수추천목록</a>
 				 	<li class=""><a href="/exercise_recommand">운동목록</a>
@@ -88,19 +109,19 @@ id ="<%= session.getAttribute("id") %>";
 						<form>
 							<div class="form-group">
 								<label for="nickname">닉네임:</label>
-								<input type="text" id="nickname" name="character_nickname" placeholder="닉네임을입력하세요" class="form-control">
+								<input type="text" id="character_nickname" name="character_nickname" placeholder="닉네임을입력하세요" class="form-control">
 							</div>
 							<div class="form-group">
 								<label for="height">키:</label>
-								<input type="number" id="height" name="character_height" placeholder="키를입력해주세요" class="form-control">
+								<input type="number" id="character_height" name="character_height" placeholder="키를입력해주세요" class="form-control">
 							</div>
 							<div class="form-group">
 								<label for="weight">몸무게:</label>
-								<input type="number" id="weight" name="character_weight" placeholder="몸무게를입력해주세요" class="form-control"> 
+								<input type="number" id="character_weight" name="character_weight" placeholder="몸무게를입력해주세요" class="form-control"> 
 							</div>
 							<div class="form-group ">
 								<div class="btn col-sm-6 btn-default" data-toggle="collapse" data-target="#position">포지션추천</div>
-								<div class="btn col-sm-6 btn-default">등록</div>
+								<div  class="btn col-sm-6 btn-default" id="register">등록</div>
 							</div>					
 						</form>
 						<div class="collapse" id="position">
