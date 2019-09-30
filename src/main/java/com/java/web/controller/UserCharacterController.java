@@ -1,5 +1,7 @@
 package com.java.web.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -10,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.java.web.service.CharacterService;
 import com.java.web.vo.UserCharacterVO;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 @Controller
 public class UserCharacterController {
@@ -39,8 +44,17 @@ public class UserCharacterController {
 	}
 	
 	@RequestMapping(value="/selectbodyinfo", method=RequestMethod.POST)
-	public void selectbodyinfo(HttpSession session) {
-		cs.select(session);
+	public void selectbodyinfo(HttpSession session, HttpServletResponse res) {
+		try {
+			res.setContentType("application/x-www-form-urlencoded; charset=utf-8");
+			
+			List<UserCharacterVO> characterlist =cs.select(session);
+//			JSONObject jobj = JSONObject.fromObject(characterlist);
+			JSONArray jarry = JSONArray.fromObject(characterlist);
+			res.getWriter().print(jarry);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	

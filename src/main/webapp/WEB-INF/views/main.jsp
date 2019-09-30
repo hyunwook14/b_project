@@ -33,7 +33,6 @@
 	
 	 $(document).ready(function(){
 		$("#c_info").click(function(){
-			console.log("???????")
 		});
 		 
 		 
@@ -59,37 +58,50 @@
 		
 		html =`<div class="progress-bar progressw" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" >0%</div>
 			   `;
-	 	console.log(html);
 		$(".progress").eq(0).append(html);
 		
-		html = `<div class="col-sm-4">
-						<div class="well">
-						<button type="button" class="btn">수정</button>
-						<button type="button" class="btn hidden">확인</button>
-						<button type="button" class="btn">삭제</button>
-						<table class="table table-bordered mb0 ">
-							<tbody>
-								<tr class="text_center">
-									<td class="vertical-align">nickname</td>
-									<td><input type="text" value="우키" class="form-control" disabled></td>
-								</tr>
-								<tr>
-									<td class="vertical-align">키</td>
-									<td><input type="number" value="199" class="form-control" disabled></td>
-								</tr>
-								<tr>
-									<td class="vertical-align">몸무게</td>
-									<td><input type="number" value="100" class="form-control" disabled></td>
-								</tr>
-								<tr>
-									<td>추천포지션</td>
-									<td>F</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>`;
-		$("#userinfolist").append(html);
+		$.ajax({
+			url:"/selectbodyinfo",
+			type:"POST",
+			data:{}
+		}).done(function(data){
+			console.log(data);
+			var list = JSON.parse(data);
+			var html ="";
+			for(var i =0; i<list.length; i++){
+				html += `<div class="col-sm-4">
+					<div class="well">
+					<button type="button" class="btn">수정</button>
+					<button type="button" class="btn hidden">확인</button>
+					<button type="button" class="btn">삭제</button>
+					<table class="table table-bordered mb0 ">
+						<tbody>
+							<tr class="text_center">
+								<td class="vertical-align">nickname</td>
+								<td><input type="text" value="\${list[i].character_nickname}" class="form-control" disabled></td>
+							</tr>
+							<tr>
+								<td class="vertical-align">키</td>
+								<td><input type="number" value="\${list[i].character_height}" class="form-control" disabled></td>
+							</tr>
+							<tr>
+								<td class="vertical-align">몸무게</td>
+								<td><input type="number" value="\${list[i].character_weight}" class="form-control" disabled></td>
+							</tr>
+							<tr>
+								<td>추천포지션</td>
+								<td>F</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>`;
+			}
+			$("#userinfolist").append(html);
+			
+		});
+		
+		
 	}); 
 </script>
 </head>

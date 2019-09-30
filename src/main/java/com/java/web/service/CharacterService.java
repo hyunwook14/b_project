@@ -30,7 +30,7 @@ public class CharacterService {
 		List<UserCharacterVO> characterlist = sqlsession.selectList("character.select", userno);
 		System.out.println(characterlist.get(0).toString());
 		
-		return null;
+		return characterlist;
 	}
 	
 }
