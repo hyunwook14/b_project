@@ -13,8 +13,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.java.web.java.crawling;
+
 @Controller
 public class HomeController {
+	
+	@RequestMapping("/test")
+	public void test() {
+		crawling cl = new crawling();
+		cl.load();
+		
+	}
 	
 	
 	@RequestMapping("/home")
