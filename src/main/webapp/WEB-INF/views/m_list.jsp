@@ -29,10 +29,35 @@
 	}
 </style>
 <script>
+	var id= "";
+	id ="<%= session.getAttribute("id") %>";
+	
+	
 	$(document).ready(function(){
 		$(".add").click(function(){
 			location.href="/m_record"
 		});
+		
+		var html ="";
+		
+		if( id != ""){
+			 if( id == "admin"){
+					$("#admin").removeClass("hidden");	
+				}
+			html =`<form class="row form-group">
+					<div class="col-sm-12 ">
+						<div class="form-control text-center">\${id}</div>
+					</div>
+					<div class="col-sm-6">
+						<button class=" btn form-control">내정보</button>
+					</div>
+					<div class="col-sm-6">
+						<button class=" btn form-control" formaction="/logout">로그아웃</button>
+					</div>
+				   </form>	 `;
+		}
+		$("#myinfo").append(html);
+		
 	});
 </script>
 </head>
@@ -41,25 +66,16 @@
 		<div class="row content">
 			 <nav class="col-sm-3 sidenav">
 				 <ul class="menu nav nav-pills nav-stacked">
-				 	<li class=""><a href="/">Home</a></li>
+				 	<li class=""><a href="/main">Home</a></li>
 				 	<li class=""><a href="/bodyinfo_register">신체정보등록</a></li>
 				 	<li class=""><a href="/player_recommand">선수추천목록</a>
 				 	<li class=""><a href="/exercise_recommand">운동목록</a>
 				 	<li class="active"><a href="/m_list">경기기록</a>
 				 	<li id="admin" class="hidden"><a href="/admin">관리자</a>
 				 </ul>
-				 <div>
-					<form class="row form-group">
-						<div class="col-sm-12 ">
-							<div class="form-control text-center">Admin</div>
-						</div>
-						<div class="col-sm-6">
-							<button class=" btn form-control">내정보</button>
-						</div>
-						<div class="col-sm-6">
-							<button class=" btn form-control">로그아웃</button>
-						</div>
-					</form>	 
+				 <div id="myinfo">
+					
+					
 				 </div>
 			 </nav>
 			 

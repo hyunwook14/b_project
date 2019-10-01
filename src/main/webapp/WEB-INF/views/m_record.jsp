@@ -18,6 +18,9 @@
 
 
 <script>
+	var id= "";
+	id ="<%= session.getAttribute("id") %>";
+
 	function score(textflag, totalscore, parent, pmflag){
 		
 		if(textflag=="score2"){
@@ -98,6 +101,30 @@
 		}
 	
 	$(document).ready(function(){
+		
+		var html ="";
+		
+		if( id != ""){
+			 if( id == "admin"){
+					$("#admin").removeClass("hidden");	
+				}
+			html =`<form class="row form-group">
+					<div class="col-sm-12 ">
+						<div class="form-control text-center">\${id}</div>
+					</div>
+					<div class="col-sm-6">
+						<button class=" btn form-control">내정보</button>
+					</div>
+					<div class="col-sm-6">
+						<button class=" btn form-control" formaction="/logout">로그아웃</button>
+					</div>
+				   </form>	 `;
+		}
+		$("#myinfo").append(html);
+		
+		
+		
+		
 		$(".back").click(function(e){
 			location.href="/m_list";
 		});
@@ -244,25 +271,16 @@
 		<div class="row content">
 			 <nav class="col-sm-3 sidenav">
 				 <ul class="menu nav nav-pills nav-stacked">
-				 	<li class=""><a href="/">Home</a></li>
+				 	<li class=""><a href="/main">Home</a></li>
 				 	<li class=""><a href="/bodyinfo_register">신체정보등록</a></li>
 				 	<li class=""><a href="/player_recommand">선수추천목록</a>
 				 	<li class=""><a href="/exercise_recommand">운동목록</a>
 				 	<li class="active"><a href="/m_list">경기기록</a>
 				 	<li id="admin" class="hidden"><a href="/admin">관리자</a>
 				 </ul>
-				 <div>
-					<form class="row form-group">
-						<div class="col-sm-12 ">
-							<div class="form-control text-center">Admin</div>
-						</div>
-						<div class="col-sm-6">
-							<button class=" btn form-control">내정보</button>
-						</div>
-						<div class="col-sm-6">
-							<button class=" btn form-control">로그아웃</button>
-						</div>
-					</form>	 
+				  <div id="myinfo">
+					
+					
 				 </div>
 			 </nav>
 			 
@@ -274,105 +292,105 @@
 				</header>
 				<div class="bgray linep10"></div>	
 				<h1>match record</h1>
-	인원추가:<button type="button" class="btn btn-primary plusp">+</button>
-	<table class="table table-striped">
-	<thead>
-		<tr>
-			<td>TEAM</td>
-			<td>이름</td>
-			<td>2점</td>
-			<td>3점</td>
-			<td>자유튜</td>
-			<td>파울</td>
-			<td>어시스트</td>
-			<td>스틸</td>
-			<td>블록</td>
-			<td>턴오버</td>
-			<td>총득점</td>	
-		</tr>
-	</thead>
-		<tr class="people">
-			<td>home</td>
-			<td>진현욱</td>
-			<td><span class="score2">0</span> <button type="button" class="btn btn-success score2">+</button><button type="button" class="btn btn-danger score2">-</button>
-			</td>
-			<td><span class="score3">0</span> <button type="button" class="btn btn-success score3">+</button><button type="button" class="btn btn-danger score3">-</button>
-			</td>
-			<td><span class="score1">0</span> <button type="button" class="btn btn-success score1">+</button><button type="button" class="btn btn-danger score1">-</button>
-			</td>
-			<td><span class="foul">0</span> <button type="button" class="btn btn-success foul">+</button><button type="button" class="btn btn-danger foul">-</button> 
-			</td>
-			<td><span class="assist">0</span> <button type="button" class="btn btn-success assist">+</button><button type="button" class="btn btn-danger assist">-</button>
-			</td>
-			<td><span class="steal">0</span> <button type="button" class="btn btn-success steal">+</button><button type="button" class="btn btn-danger steal">-</button>
-			</td>
-			<td><span class="block">0</span> <button type="button" class="btn btn-success block">+</button><button type="button" class="btn btn-danger block">-</button>
-			</td>
-			<td><span class="turnover">0</span> <button type="button" class="btn btn-success turnover">+</button><button type="button" class="btn btn-danger turnover">-</button>
-			</td>
-			<td><span class="totalscore">0</span>
-			</td>	
-		</tr>
-		<tr>
-			<td>away</td>
-			<td>Jordan</td>
-			<td><span class="score2">0</span> <button type="button" class="btn btn-success score2">+</button><button type="button" class="btn btn-danger score2">-</button>
-			</td>
-			<td><span class="score3">0</span> <button type="button" class="btn btn-success score3">+</button><button type="button" class="btn btn-danger score3">-</button>
-			</td>
-			<td><span class="score1">0</span> <button type="button" class="btn btn-success score1">+</button><button type="button" class="btn btn-danger score1">-</button>
-			</td>
-			<td><span class="foul">0</span> <button type="button" class="btn btn-success foul">+</button><button type="button" class="btn btn-danger foul">-</button> 
-			</td>
-			<td><span class="assist">0</span> <button type="button" class="btn btn-success assist">+</button><button type="button" class="btn btn-danger assist">-</button>
-			</td>
-			<td><span class="steal">0</span> <button type="button" class="btn btn-success steal">+</button><button type="button" class="btn btn-danger steal">-</button>
-			</td>
-			<td><span class="block">0</span> <button type="button" class="btn btn-success block">+</button><button type="button" class="btn btn-danger block">-</button>
-			</td>
-			<td><span class="turnover">0</span> <button type="button" class="btn btn-success turnover">+</button><button type="button" class="btn btn-danger turnover">-</button>
-			</td>
-			<td><span class="totalscore">0</span>
-			</td>	
-		</tr>
-	</table>
-	<button type="button" class="btn back">뒤로</button><button type="button" class="btn" id="matchend">경기종료</button>
-	<!-- Modal -->
-	  <div class="modal fade" id="myModal" role="dialog">
-	    <div class="modal-dialog">
-	    
-	      <!-- Modal content-->
-	      <div class="modal-content">
-	        <div class="modal-header">
-	          <button type="button" class="close" data-dismiss="modal">&times;</button>
-	          <h4 class="modal-title">선수등록</h4>
-	        </div>
-	        <div class="modal-body">
-	          <form>
-	          	<label class="radio-inline">
-	          		<input type="radio" name="team" checked> home
-	          	</label>
-	          	<label class="radio-inline">
-	          		<input type="radio" name="team" > away
-	          	</label>
-	          	
-	          	<div class="input-group">
-	          		<label for="p_name" class="form-group">이름:</label>
-	          		<input type="text" class="form-control" placeholder="선수이름입력을 입력하세요" >
-	          		<div class="input-group-btn vab"><br>
-				        <button class="btn btn-default " type="submit"><i class="glyphicon glyphicon-search"></i></button>
+				인원추가:<button type="button" class="btn btn-primary plusp">+</button>
+				<table class="table table-striped">
+				<thead>
+					<tr>
+						<td>TEAM</td>
+						<td>이름</td>
+						<td>2점</td>
+						<td>3점</td>
+						<td>자유튜</td>
+						<td>파울</td>
+						<td>어시스트</td>
+						<td>스틸</td>
+						<td>블록</td>
+						<td>턴오버</td>
+						<td>총득점</td>	
+					</tr>
+				</thead>
+					<tr class="people">
+						<td>home</td>
+						<td>진현욱</td>
+						<td><span class="score2">0</span> <button type="button" class="btn btn-success score2">+</button><button type="button" class="btn btn-danger score2">-</button>
+						</td>
+						<td><span class="score3">0</span> <button type="button" class="btn btn-success score3">+</button><button type="button" class="btn btn-danger score3">-</button>
+						</td>
+						<td><span class="score1">0</span> <button type="button" class="btn btn-success score1">+</button><button type="button" class="btn btn-danger score1">-</button>
+						</td>
+						<td><span class="foul">0</span> <button type="button" class="btn btn-success foul">+</button><button type="button" class="btn btn-danger foul">-</button> 
+						</td>
+						<td><span class="assist">0</span> <button type="button" class="btn btn-success assist">+</button><button type="button" class="btn btn-danger assist">-</button>
+						</td>
+						<td><span class="steal">0</span> <button type="button" class="btn btn-success steal">+</button><button type="button" class="btn btn-danger steal">-</button>
+						</td>
+						<td><span class="block">0</span> <button type="button" class="btn btn-success block">+</button><button type="button" class="btn btn-danger block">-</button>
+						</td>
+						<td><span class="turnover">0</span> <button type="button" class="btn btn-success turnover">+</button><button type="button" class="btn btn-danger turnover">-</button>
+						</td>
+						<td><span class="totalscore">0</span>
+						</td>	
+					</tr>
+					<tr>
+						<td>away</td>
+						<td>Jordan</td>
+						<td><span class="score2">0</span> <button type="button" class="btn btn-success score2">+</button><button type="button" class="btn btn-danger score2">-</button>
+						</td>
+						<td><span class="score3">0</span> <button type="button" class="btn btn-success score3">+</button><button type="button" class="btn btn-danger score3">-</button>
+						</td>
+						<td><span class="score1">0</span> <button type="button" class="btn btn-success score1">+</button><button type="button" class="btn btn-danger score1">-</button>
+						</td>
+						<td><span class="foul">0</span> <button type="button" class="btn btn-success foul">+</button><button type="button" class="btn btn-danger foul">-</button> 
+						</td>
+						<td><span class="assist">0</span> <button type="button" class="btn btn-success assist">+</button><button type="button" class="btn btn-danger assist">-</button>
+						</td>
+						<td><span class="steal">0</span> <button type="button" class="btn btn-success steal">+</button><button type="button" class="btn btn-danger steal">-</button>
+						</td>
+						<td><span class="block">0</span> <button type="button" class="btn btn-success block">+</button><button type="button" class="btn btn-danger block">-</button>
+						</td>
+						<td><span class="turnover">0</span> <button type="button" class="btn btn-success turnover">+</button><button type="button" class="btn btn-danger turnover">-</button>
+						</td>
+						<td><span class="totalscore">0</span>
+						</td>	
+					</tr>
+				</table>
+				<button type="button" class="btn back">뒤로</button><button type="button" class="btn" id="matchend">경기종료</button>
+				<!-- Modal -->
+				  <div class="modal fade" id="myModal" role="dialog">
+				    <div class="modal-dialog">
+				    
+				      <!-- Modal content-->
+				      <div class="modal-content">
+				        <div class="modal-header">
+				          <button type="button" class="close" data-dismiss="modal">&times;</button>
+				          <h4 class="modal-title">선수등록</h4>
+				        </div>
+				        <div class="modal-body">
+				          <form>
+				          	<label class="radio-inline">
+				          		<input type="radio" name="team" checked> home
+				          	</label>
+				          	<label class="radio-inline">
+				          		<input type="radio" name="team" > away
+				          	</label>
+				          	
+				          	<div class="input-group">
+				          		<label for="p_name" class="form-group">이름:</label>
+				          		<input type="text" class="form-control" placeholder="선수이름입력을 입력하세요" >
+				          		<div class="input-group-btn vab"><br>
+							        <button class="btn btn-default " type="submit"><i class="glyphicon glyphicon-search"></i></button>
+							    </div>
+				          	</div>
+				          	<input type="submit" class="btn btn-default" value="등록">
+				          </form>
+				        </div>
+				        <div class="modal-footer">
+				          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				        </div>
+				      </div>
+				      
 				    </div>
-	          	</div>
-	          	<input type="submit" class="btn btn-default" value="등록">
-	          </form>
-	        </div>
-	        <div class="modal-footer">
-	          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	        </div>
-	      </div>
-	      
-	    </div>
-	  </div>
+				  </div>
 			
 			</section>
 		</div>

@@ -34,7 +34,7 @@ var id= "";
 id ="<%= session.getAttribute("id") %>";
 
  $(document).ready(function(){
-	 
+	var clicknumber = 0;
 	var html ="";
 	
 	if( id != ""){
@@ -56,25 +56,61 @@ id ="<%= session.getAttribute("id") %>";
 	$("#myinfo").append(html);
 	
 	$("#register").click(function(){
-		console.log("test")
 		var character_nickname = $("#character_nickname").val();
 		var character_height = $("#character_height").val();
 		var character_weight = $("#character_weight").val();
 		
-		$.ajax({
-			url:"/register_bodyinfo",
-			type:"POST",
-			data:{
-				character_nickname: character_nickname,
-				character_height : character_height,
-				character_weight : character_weight
-			}
-		}).done(function(data){
-			console.log(data)
-			if(data =="1") alert("입력성공");
-			else alert("입력실패");
-		});
+		if(clicknumber >0 && character_nickname != "" && character_height != "" && character_weight != "" ){
+			var position_name = $("#position_name").text();
+			var position_explanation = $("#position_explanation").text();
+			$.ajax({
+				url:"/register_bodyinfo",
+				type:"POST",
+				data:{
+					character_nickname: character_nickname,
+					character_height : character_height,
+					character_weight : character_weight,
+					character_position : position_name,
+					character_explanation : position_explanation
+				}
+			}).done(function(data){
+				console.log(data)
+				if(data =="1"){
+					alert("입력성공");
+					$("#character_nickname").val("");
+					$("#character_height").val("");
+					$("#character_weight").val("");
+					$("#position").empty();
+				}
+				else alert("입력실패");
+			});
+		}else{
+			alert("포지션추천을 눌러주세요");
+		}
 	})
+	
+	$("#recommand").click(function(){
+		clicknumber++;
+		var height = $("#character_height").val();
+		
+		$.ajax({
+			url:"/position_recommand",
+			type:"POST",
+			data:{height:height}
+		}).done(function(data){
+			var result = JSON.parse(data);
+			$("#position").empty();
+			
+			html = "";		
+			for(var i = 0; i<result.length; i++){
+				html +=`<label id="position_name">\${result[i].position_name}:</label>
+						<p id="position_explanation">\${result[i].position_explanation}</p>`;
+			}
+						
+			$("#position").append(html);
+		});
+		
+	});
 	
 }); 
 </script>
@@ -120,13 +156,12 @@ id ="<%= session.getAttribute("id") %>";
 								<input type="number" id="character_weight" name="character_weight" placeholder="몸무게를입력해주세요" class="form-control"> 
 							</div>
 							<div class="form-group ">
-								<div class="btn col-sm-6 btn-default" data-toggle="collapse" data-target="#position">포지션추천</div>
+								<div class="btn col-sm-6 btn-default" data-toggle="collapse" data-target="#position" id="recommand">포지션추천</div>
 								<div  class="btn col-sm-6 btn-default" id="register">등록</div>
 							</div>					
 						</form>
 						<div class="collapse" id="position">
-							<label>Gaurd:</label>
-							<p>가드에간단한설명</p>
+							
 						</div>
 					</div>
 					

@@ -18,8 +18,14 @@
 .mb0{
 	margin-bottom:0;
 }
-.progressw{
-	width:0%;
+.progressw33{
+	width:33%;
+}
+.progressw66{
+	width:66%;
+}
+.progressw100{
+	width:100%;
 }
 .vertical-align{
 	vertical-align: middle !important ;
@@ -56,7 +62,7 @@
 		}
 		$("#myinfo").append(html);
 		
-		html =`<div class="progress-bar progressw" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" >0%</div>
+		html =`<div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" >0%</div>
 			   `;
 		$(".progress").eq(0).append(html);
 		
@@ -65,37 +71,63 @@
 			type:"POST",
 			data:{}
 		}).done(function(data){
-			console.log(data);
 			var list = JSON.parse(data);
 			var html ="";
-			for(var i =0; i<list.length; i++){
-				html += `<div class="col-sm-4">
-					<div class="well">
-					<button type="button" class="btn">수정</button>
-					<button type="button" class="btn hidden">확인</button>
-					<button type="button" class="btn">삭제</button>
-					<table class="table table-bordered mb0 ">
-						<tbody>
-							<tr class="text_center">
-								<td class="vertical-align">nickname</td>
-								<td><input type="text" value="\${list[i].character_nickname}" class="form-control" disabled></td>
-							</tr>
-							<tr>
-								<td class="vertical-align">키</td>
-								<td><input type="number" value="\${list[i].character_height}" class="form-control" disabled></td>
-							</tr>
-							<tr>
-								<td class="vertical-align">몸무게</td>
-								<td><input type="number" value="\${list[i].character_weight}" class="form-control" disabled></td>
-							</tr>
-							<tr>
-								<td>추천포지션</td>
-								<td>F</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>`;
+			if(list.length == 0){
+				
+				html = `<div class="col-sm-4">
+							<div class="well">
+							신체정보를등록해주세요
+							</div>
+						</div>`;
+			}else{
+				for(var i =0; i<list.length; i++){
+					html += `<div class="col-sm-4">
+						<div class="well">
+						<button type="button" class="btn">수정</button>
+						<button type="button" class="btn hidden">확인</button>
+						<button type="button" class="btn">삭제</button>
+						<table class="table table-bordered mb0 ">
+							<tbody>
+								<tr class="text_center">
+									<td class="vertical-align">nickname</td>
+									<td><input type="text" value="\${list[i].character_nickname}" class="form-control" disabled></td>
+								</tr>
+								<tr>
+									<td class="vertical-align">키</td>
+									<td><input type="number" value="\${list[i].character_height}" class="form-control" disabled></td>
+								</tr>
+								<tr>
+									<td class="vertical-align">몸무게</td>
+									<td><input type="number" value="\${list[i].character_weight}" class="form-control" disabled></td>
+								</tr>
+								<tr>
+									<td>추천포지션</td>
+									<td>F</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>`;
+				}
+				
+				
+				$(".progress-bar").eq(0).removeClass("progressw33");
+				$(".progress-bar").eq(0).removeClass("progressw66");
+				$(".progress-bar").eq(0).removeClass("progressw100");
+				
+				if(list.length == 1){
+					$(".progress-bar").eq(0).addClass("progressw33");
+					$(".progress-bar").eq(0).text("33%")	
+				}
+				else if(list.length == 2){
+					$(".progress-bar").eq(0).addClass("progressw66");
+					$(".progress-bar").eq(0).text("66%")
+				}
+				else if(list.length == 3){
+					$(".progress-bar").eq(0).addClass("progressw100");
+					$(".progress-bar").eq(0).text("100%")
+				}
 			}
 			$("#userinfolist").append(html);
 			
