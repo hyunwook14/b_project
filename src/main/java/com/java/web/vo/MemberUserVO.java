@@ -5,6 +5,7 @@ public class MemberUserVO {
 	private String user_id;
 	private String user_pw;
 	private String user_email;
+	private String user_characternumber;
 	private String user_delYN;
 	public int getUser_no_pk() {
 		return user_no_pk;
@@ -36,11 +37,17 @@ public class MemberUserVO {
 	public void setUser_delYN(String user_delYN) {
 		this.user_delYN = user_delYN;
 	}
+	public String getUser_characternumber() {
+		return user_characternumber;
+	}
+	public void setUser_characternumber(String user_characternumber) {
+		this.user_characternumber = user_characternumber;
+	}
 	@Override
 	public String toString() {
 		return "MemberUserVO [user_no_pk=" + user_no_pk + ", user_id=" + user_id + ", user_pw=" + user_pw
-				+ ", user_email=" + user_email + ", user_delYN=" + user_delYN + "]";
+				+ ", user_email=" + user_email + ", user_characternumber=" + user_characternumber + ", user_delYN="
+				+ user_delYN + "]";
 	}
-	
 	
 }

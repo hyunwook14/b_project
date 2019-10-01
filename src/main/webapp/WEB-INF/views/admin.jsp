@@ -34,9 +34,55 @@
 </style>
 
 <script>
-	/* $(document).ready(function(){
+	var id= "";
+	id ="<%= session.getAttribute("id") %>";
+	
+	$(document).ready(function(){
+		var html ="";
 		
-	}) */
+		if( id != ""){
+			 if( id == "admin"){
+					$("#admin").removeClass("hidden");	
+				}
+			html =`<form class="row form-group">
+					<div class="col-sm-12 ">
+						<div class="form-control text-center">\${id}</div>
+					</div>
+					<div class="col-sm-6">
+						<button class=" btn form-control">내정보</button>
+					</div>
+					<div class="col-sm-6">
+						<button class=" btn form-control" formaction="/logout">로그아웃</button>
+					</div>
+				   </form>	 `;
+		}
+		$("#myinfo").append(html);
+		
+		$.ajax({
+			url:"/userlist",
+			type:"POST",
+			data:{}
+		}).done(function(data){
+			html="";
+			
+			for(var i =0; i<data.length; i++){
+				
+				html += `<li>
+						<ul class="tr">
+							<li><input type="checkbox">
+							<li>\${data[i].user_id}
+							<li>\${data[i].user_pw}
+							<li>\${data[i].user_characternumber}
+							<li>\${data[i].user_delYN}
+						</ul>
+						</li>`;
+			}
+			
+			$(".table").eq(0).append(html); 
+			
+		});
+		
+	}) 
 </script>
 </head>
 <body>
@@ -44,25 +90,16 @@
 		<div class="row content">
 			 <nav class="col-sm-3 sidenav">
 				 <ul class="menu nav nav-pills nav-stacked">
-				 	<li class=""><a href="/">Home</a></li>
+				 	<li class=""><a href="/main">Home</a></li>
 				 	<li class=""><a href="/bodyinfo_register">신체정보등록</a></li>
 				 	<li class=""><a href="/player_recommand">선수추천목록</a>
 				 	<li class=""><a href="/exercise_recommand">운동목록</a>
 				 	<li class=""><a href="/m_list">경기기록</a>
 				 	<li id="admin" class="active"><a href="/admin">관리자</a>
 				 </ul>
-				 <div>
-					<form class="row form-group">
-						<div class="col-sm-12 ">
-							<div class="form-control text-center">Admin</div>
-						</div>
-						<div class="col-sm-6">
-							<button class=" btn form-control">내정보</button>
-						</div>
-						<div class="col-sm-6">
-							<button class=" btn form-control">로그아웃</button>
-						</div>
-					</form>	 
+				 <div id="myinfo">
+					
+					
 				 </div>
 			 </nav>
 			 
@@ -89,7 +126,7 @@
 					<button type="button" class="btn btn-danger hidden"> 탈퇴</button>
 					<div id="demo" class="collapse">
 					<ul class="table" >
-						<li >
+						<li>
 							<ul class="tr">
 								<li>선택
 								<li>아이디
@@ -98,15 +135,7 @@
 								<li>탈퇴여부
 							</ul>
 						</li>
-						<li>
-							<ul class="tr">
-								<li><input type="checkbox">
-								<li>admin
-								<li>11
-								<li>3
-								<li>N
-							</ul>
-						</li>
+						
 					</ul>
 					</div>
 					

@@ -37,10 +37,6 @@ public class HomeController {
 		return "m_detail";
 	}
 	
-	@RequestMapping("/admin")
-	public String admin() {
-		return "admin";
-	}
 	
 	@RequestMapping("/player_recommand")
 	public String player_recommand() {

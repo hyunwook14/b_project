@@ -26,7 +26,7 @@ public class UserCharacterController {
 	//신체정보등록페이지
 	@RequestMapping("/bodyinfo_register")
 	public String bodyinfo_register(HttpSession session) {
-		if(session.getAttribute("id") ==null) return "redircet:/";
+		if(session.getAttribute("id") ==null) return "redirect:/";
 		return "bodyinfo_register";
 	}
 	//신체정보등록
@@ -35,6 +35,8 @@ public class UserCharacterController {
 		try {
 			System.out.println(character.toString());
 			int result = cs.create(character, session);
+			int update = cs.characterupdate();
+			System.out.println("update:"+ update);
 			res.setContentType("text/html; charset=utf-8");
 			res.getWriter().print(result+"");
 			

@@ -28,6 +28,14 @@ public class CharacterService {
 		
 		return sqlsession.insert("character.create", character);
 	}
+	
+	//User의 케릭터 수 업데이트
+	public int characterupdate() {
+		System.out.println("업데이트시작");
+		return sqlsession.update("user.characternumber");
+	}
+	
+	
 	//케릭터정보가져오기
 	public List<UserCharacterVO> select(HttpSession session){
 		//user 고유키값가져오기

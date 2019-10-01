@@ -9,7 +9,7 @@
   
   <!-- user정보가져오기 -->
   <select id="selectuser" parameterType="com.java.web.vo.MemberUserVO" resultType="com.java.web.vo.MemberUserVO">
-  	select user_id, user_pw from member_user where user_delYN = 'N' <if test="user_id != '' "> and user_id = #{user_id} </if> <if test="user_pw != ''"> and user_pw = #{user_pw}</if>
+  	select user_id, user_pw  from member_user  where user_delYN = 'N' <if test="user_id != '' "> and user_id = #{user_id} </if> <if test="user_pw != ''"> and user_pw = #{user_pw}</if>
   </select>
   
  <!-- id중복검사 -->
@@ -26,4 +26,16 @@
   <select id="selectno" parameterType="String" resultType="int">
   	select user_no_pk from member_user where user_id = #{id}
   </select>
+  <!-- userlist불러오기 -->
+  <select id="userlist" resultType="com.java.web.vo.MemberUserVO">
+  	select user_id, user_pw, user_characternumber, user_delYN  from member_user
+  </select>
+  
+  <update id="characternumber">
+  	UPDATE member_user AS a
+ 	INNER JOIN (SELECT *, COUNT(user_no) AS c 
+ 					FROM user_character GROUP BY user_no) AS b
+	 ON(a.user_no_pk = b.user_no)
+ 	SET a.user_characternumber = b.c
+  </update>
 </mapper>
