@@ -1,5 +1,7 @@
 package com.java.web.service;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -64,6 +66,12 @@ public class KblPlayerService {
 			}
 			return result;
 	}
+	
+	//KBL player list 가져오기
+	public List<KblPlayerVO> loadplayer() {
+		return sqlsession.selectList("kblplayer.select");
+	}
+	
 	
 	
 }

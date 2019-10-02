@@ -34,6 +34,9 @@
 .liwidth{
 	width:500px;
 }
+.w100{
+	width:100%;
+}
 </style>
 
 <script>
@@ -41,7 +44,7 @@
 	id ="<%= session.getAttribute("id") %>";
 	
 	 $(document).ready(function(){
-		 var html ="";
+		 	var html ="";
 			
 			if( id != ""){
 				 if( id == "admin"){
@@ -60,6 +63,28 @@
 					   </form>	 `;
 			}
 			$("#myinfo").append(html);
+			
+			html = "";
+			
+			$.ajax({
+				url:"/playerlistload",
+				type:"POST",
+				data:{}
+			}).done(function(data){
+				console.log(data, "data---")
+				html="";
+				for(var i = 0; i<data.length; i++){
+					html += `<div class="col-sm-2">
+								<img src="\${data[i].player_img}" alt="선수" class="img-circle w100" data-toggle="modal" data-target="#myModal">
+						   	</div>`;
+				}
+			$("#playerlist").append(html);
+				
+				
+			});
+			
+			
+			
 	}) 
 </script>
 </head>
@@ -91,16 +116,14 @@
 				
 				<div class="container">
 					<h1>선수목록</h1>
-					<div class="row">
-						<div class="col-sm-2">
+					<div class="row" id="playerlist">
+						
+						<!-- <div class="col-sm-2">
 							<img src="/resources/img/290776.jpg" alt="선수" class="img-circle" data-toggle="modal" data-target="#myModal">
 						</div>
 						<div class="col-sm-2">
 							<img src="/resources/img/290776.jpg" alt="선수" class="img-circle" data-toggle="modal" data-target="#myModal">
-						</div>
-						<div class="col-sm-2">
-							<img src="/resources/img/290776.jpg" alt="선수" class="img-circle" data-toggle="modal" data-target="#myModal">
-						</div>
+						</div> -->
 						
 						
 					</div>

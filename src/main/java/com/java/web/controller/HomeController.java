@@ -33,12 +33,6 @@ public class HomeController {
 		return "m_detail";
 	}
 	
-	
-	@RequestMapping("/player_recommand")
-	public String player_recommand() {
-		return "player_recommand";
-	}
-	
 	@RequestMapping("/exercise_recommand")
 	public String exercise_recommand() {
 		return "exercise_recommand";
