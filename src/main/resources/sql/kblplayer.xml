@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kblplayer">
+  <select id="test" resultType="int">
+    select 1 as test
+  </select>
+	
+	<!-- crawling data 디비에 저장 -->
+  <insert id="save" parameterType="com.java.web.vo.KblPlayerVO">
+  	insert into KBL_player
+  	 (player_name, player_height, player_teamnumber, player_team, player_position, player_img) 
+  		values (#{player_name}, #{player_height}, #{player_teamnumber}, #{player_team}, #{player_position}, #{player_img})
+  </insert>
+	<!-- data 확인여부 -->
+  <select id="datacount" resultType="int">
+  	select count(*) from KBL_player
+  </select>
+	 
+</mapper>

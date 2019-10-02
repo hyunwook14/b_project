@@ -62,7 +62,6 @@ public class UserService {
 	
 	//회원리스트
 	public List<MemberUserVO> userlistselect(){
-		System.out.println("오류?");
 		return sqlsession.selectList("user.userlist");
 	}
 }
