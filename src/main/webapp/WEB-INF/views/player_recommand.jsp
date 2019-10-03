@@ -44,6 +44,7 @@
 	id ="<%= session.getAttribute("id") %>";
 	
 	 $(document).ready(function(){
+		 	var playerlist =[];
 		 	var html ="";
 			
 			if( id != ""){
@@ -71,21 +72,51 @@
 				type:"POST",
 				data:{}
 			}).done(function(data){
-				console.log(data, "data---")
+				playerlist = data;
 				html="";
+				var img = new Image();
 				for(var i = 0; i<data.length; i++){
-					html += `<div class="col-sm-2">
-								<img src="\${data[i].player_img}" alt="선수" class="img-circle w100" data-toggle="modal" data-target="#myModal">
-						   	</div>`;
+						/* image존재여부 확인*/
+					 isImage(data[i].player_img, data[i]); 
+					
 				}
-			$("#playerlist").append(html);
-				
 				
 			});
 			
+			$(document).on("click", ".player", function(){
+				var src = $(this).attr("src");
+				$(".media-object").eq(0).attr("src",src);
+				
+				for( var i = 0; i< playerlist.length; i++){
+					if(src == playerlist[i].player_img ){
+						$("#playername").text(playerlist[i].player_name);
+						$("#playerheight").text(playerlist[i].player_height);
+						$("#playerteam").text(playerlist[i].player_team);
+						$("#playerposition").text(playerlist[i].player_position);
+					}
+				}
+			})			
 			
-			
-	}) 
+	});
+	
+	function isImage(src){
+		 var html = "";
+		 var img = new Image();
+		 
+		 img.onload = function(){
+			 html += `<div class="col-sm-2">
+					<img src="\${src}" alt="선수" class="img-circle w100 player " data-toggle="modal" data-target="#myModal"> 
+			   	</div>`;
+			 $("#playerlist").append(html);
+			 
+		 }
+		 
+		 img.onerror= function(){
+		 }
+		 img.src=""+src;
+		 
+		 
+	 }
 </script>
 </head>
 <body>
@@ -118,20 +149,10 @@
 					<h1>선수목록</h1>
 					<div class="row" id="playerlist">
 						
-						<!-- <div class="col-sm-2">
-							<img src="/resources/img/290776.jpg" alt="선수" class="img-circle" data-toggle="modal" data-target="#myModal">
-						</div>
-						<div class="col-sm-2">
-							<img src="/resources/img/290776.jpg" alt="선수" class="img-circle" data-toggle="modal" data-target="#myModal">
-						</div> -->
-						
-						
 					</div>
 					
 				</div>
-				<div>
-					
-				</div>
+				
 				
 				<!-- Modal -->
 				  <div class="modal fade" id="myModal" role="dialog">
@@ -145,26 +166,26 @@
 				        </div>
 				        <div class="modal-body media ">
 				        	<div class="media-left">
-				        		<img src="/resources/img/290776.jpg" alt="선수" class="media-object" style="width:">
+				        		<img src="/resources/img/290776.jpg" alt="선수" class="media-object" style="width:150px; height:180px" >
 				        	</div>
 				        	<div class="media-body ">
 					        	<ul class="table ">
 					        		<li class="">
 					        			<ul class="tr">
 					        				<li>이름
-					        				<li>허웅
+					        				<li id="playername">허웅
 					        			</ul>
 					        			<ul class="tr">
 					        				<li>신장
-					        				<li>185
+					        				<li id="playerheight">185
 					        			</ul>
 					        			<ul class="tr">
 					        				<li>소속
-					        				<li>상무
+					        				<li id="playerteam">상무
 					        			</ul>
 					        			<ul class="tr">
 					        				<li>포지션
-					        				<li>Gaurd
+					        				<li id="playerposition">Gaurd
 					        			</ul>
 					        		</li>
 					        	</ul>
