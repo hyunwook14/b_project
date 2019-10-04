@@ -20,7 +20,7 @@
   
   <select id="select" resultType="com.java.web.vo.KblPlayerVO">
    select player_name, player_height, player_teamnumber, player_team, player_position, player_img
-   	from KBL_player limit 50
+   	from KBL_player 
   </select>
 	 
 </mapper>

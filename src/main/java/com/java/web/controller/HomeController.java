@@ -37,4 +37,6 @@ public class HomeController {
 	public String exercise_recommand() {
 		return "exercise_recommand";
 	}
+	
+	
 }

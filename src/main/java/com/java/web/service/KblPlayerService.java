@@ -1,5 +1,14 @@
 package com.java.web.service;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -33,29 +42,34 @@ public class KblPlayerService {
 						Elements playerframes = doc.select(".player_frame");
 						
 						String imgpath = urlpath+playerframes.select("img").eq(0).attr("src");
-						String names =playerframes.select(".name").eq(0).text();
-						String[] temp = names.split(" ");
-						String teamnumber ="";
-						String name = "";
-						for(int j= 0; j<temp.length; j++) {
-							if(!"NO".equals(temp[j])) {
-								String[] temp2 = temp[j].split("\\.");
-								if(temp2.length == 2) {
-									teamnumber = temp2[0];
-									name = temp2[1];
+						
+						boolean imgresult = isImage(imgpath);
+						if(imgresult == true) {
+							String names =playerframes.select(".name").eq(0).text();
+							String[] temp = names.split(" ");
+							String teamnumber ="";
+							String name = "";
+							for(int j= 0; j<temp.length; j++) {
+								if(!"NO".equals(temp[j])) {
+									String[] temp2 = temp[j].split("\\.");
+									if(temp2.length == 2) {
+										teamnumber = temp2[0];
+										name = temp2[1];
+									}
 								}
 							}
+							String height =playerframes.select(".stature").eq(0).text();
+							String team = playerframes.select(".team_name").eq(0).text();
+							String position = playerframes.select(".position").eq(0).text();
+							
+							if(!"".equals(name) && !"".equals(teamnumber)) {
+								KblPlayerVO player = new KblPlayerVO(name, height, Integer.parseInt(teamnumber), team, position, imgpath);
+								System.out.println(player.toString());
+								//DB에 저장
+								result = sqlsession.insert("kblplayer.save", player);
+							}
 						}
-						String height =playerframes.select(".stature").eq(0).text();
-						String team = playerframes.select(".team_name").eq(0).text();
-						String position = playerframes.select(".position").eq(0).text();
 						
-						if(!"".equals(name) && !"".equals(teamnumber)) {
-							KblPlayerVO player = new KblPlayerVO(name, height, Integer.parseInt(teamnumber), team, position, imgpath);
-							System.out.println(player.toString());
-							//DB에 저장
-							result = sqlsession.insert("kblplayer.save", player);
-						}
 						
 					}
 				}catch(Exception e) {
@@ -72,6 +86,34 @@ public class KblPlayerService {
 		return sqlsession.selectList("kblplayer.select");
 	}
 	
-	
+	//KBL palyer img 확인여부검사
+	public boolean isImage(String url) throws Exception{
+		boolean result =false;
+		try {
+			URL urltest = new URL(url);
+			
+			InputStream input = urltest.openStream();
+			URLConnection con = urltest.openConnection(); 
+			HttpURLConnection exitCode = (HttpURLConnection)con;
+			System.out.println(exitCode.getResponseCode());
+			System.out.println(con.getContentType());
+			
+			if(con.getContentType().indexOf("png") > -1) {
+				System.out.println("Image 화면");
+				result = true;
+			}else {
+				System.out.println("HTML 화면");
+			}
+			
+			System.out.println("sucees: "+input.read());
+			
+			input.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 	
 }

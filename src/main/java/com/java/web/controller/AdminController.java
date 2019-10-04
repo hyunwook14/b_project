@@ -59,4 +59,13 @@ public class AdminController {
 		}
 	}
 	
+	@RequestMapping("/test")
+	public void test() throws Exception {
+		
+		for(int i = 290100; i < 290105; i++) {
+			String url = "https://kbl.or.kr/images/playersPhoto/"+i+".png";
+			kps.isImage(url);
+		}
+		
+	}
 }

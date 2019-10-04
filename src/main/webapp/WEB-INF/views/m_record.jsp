@@ -13,6 +13,11 @@
 		.vab{
 			vertical-align:bottom;
 		}
+		
+		.table>tbody>tr>td{
+			vertical-align: middle;
+		}
+		
 	</style>
 </head>
 
@@ -28,17 +33,17 @@
 			 if(pmflag ==1){
 				 score += 2;
 				 totalscore += 2;
-			 }else{
+			 }else if(pmflag ==0 && score > 0){
 				 score -= 2;
 				 totalscore -=2;
 			 }
 			 parent.children().eq(2).children().eq(0).text(score);
-		}else if(textflag=="score3"){
+		}else if(textflag=="score3" ){
 			var score = parseInt(parent.children().eq(3).children().eq(0).text()); 
 			if(pmflag ==1){
 				 score += 3;
 				 totalscore += 3;
-			 }else{
+			 }else if(pmflag ==0 && score > 0){
 				 score -= 3;
 				 totalscore -=3;
 			 }
@@ -48,16 +53,16 @@
 			if(pmflag ==1){
 				 score += 1;
 				 totalscore += 1;
-			 }else{
+			 }else if(pmflag ==0 && score > 0){
 				 score -= 1;
 				 totalscore -=1;
 			 }
 			 parent.children().eq(4).children().eq(0).text(score);
 		}else if(textflag=="foul"){
 			var score = parseInt(parent.children().eq(5).children().eq(0).text()); 
-			if(pmflag ==1){
+			if(pmflag ==1 && score <5){
 				 score += 1;
-			 }else{
+			 }else if(pmflag ==0 && score > 0){
 				 score -= 1;
 			 }
 			 parent.children().eq(5).children().eq(0).text(score);
@@ -65,7 +70,7 @@
 			var score = parseInt(parent.children().eq(6).children().eq(0).text()); 
 			if(pmflag ==1){
 				 score += 1;
-			 }else{
+			 }else if(pmflag ==0 && score > 0){
 				 score -= 1;
 			 }
 			 parent.children().eq(6).children().eq(0).text(score);
@@ -73,7 +78,7 @@
 			var score = parseInt(parent.children().eq(7).children().eq(0).text()); 
 			if(pmflag ==1){
 				 score += 1;
-			 }else{
+			 }else if(pmflag ==0 && score > 0){
 				 score -= 1;
 			 }
 			 parent.children().eq(7).children().eq(0).text(score);
@@ -81,7 +86,7 @@
 			var score = parseInt(parent.children().eq(8).children().eq(0).text()); 
 			if(pmflag ==1){
 				 score += 1;
-			 }else{
+			 }else if(pmflag ==0 && score > 0){
 				 score -= 1;
 			 }
 			 parent.children().eq(8).children().eq(0).text(score);
@@ -89,19 +94,86 @@
 			var score = parseInt(parent.children().eq(9).children().eq(0).text()); 
 			if(pmflag ==1){
 				 score += 1;
-			 }else{
+			 }else if(pmflag ==0 && score > 0){
 				 score -= 1;
 			 }
 			 parent.children().eq(9).children().eq(0).text(score);
 		}
-		
-		
-		
 		parent.children().eq(10).children().text(totalscore);	
 		}
 	
+	
+	function genRowspan(className){
+	    $("." + className).each(function() {
+	        var rows = $("." + className + ":contains('" + $(this).text() + "')");
+	        console.log($(this).text())
+	        console.log(rows)
+	        if (rows.length > 1) {
+	            rows.eq(0).attr("rowspan", rows.length);
+	            rows.not(":eq(0)").remove();
+	        }else if($(".teamdivision:contains('home')").eq(rows.length).text() == "away"){
+	        	console.log(" 이걸로넘어가냐")
+	        }
+	    });
+	}
+	
+	
 	$(document).ready(function(){
 		
+		var peoplelist = [];
+		
+		$("#register").click(function(){
+			var people = {};
+			people.team =$("input[name=team]:checked").val();
+			people.nickname = $("#nickname").val();
+			people.score2 = 0;
+			people.score3 = 0;
+			people.score1 = 0;
+			people.foul = 0;
+			people.assist = 0;
+			people.steal = 0;
+			people.block = 0;
+			people.turnover = 0;
+			people.totalscore = 0;
+			peoplelist.push(people);
+			
+			$("#team").empty();
+			html = "";
+			
+			for(var i =0; i<peoplelist.length; i++){
+				html += ` 
+					<tr class="people">
+						<td class="teamdivision">\${peoplelist[i].team}</td>
+						<td>\${peoplelist[i].nickname}</td>
+						<td><span class="score2">\${peoplelist[i].score2}</span> <button type="button" class="btn btn-success score2">+</button><button type="button" class="btn btn-danger score2">-</button>
+						</td>
+						<td><span class="score3">\${peoplelist[i].score3}</span> <button type="button" class="btn btn-success score3">+</button><button type="button" class="btn btn-danger score3">-</button>
+						</td>
+						<td><span class="score1">\${peoplelist[i].score1}</span> <button type="button" class="btn btn-success score1">+</button><button type="button" class="btn btn-danger score1">-</button>
+						</td>
+						<td><span class="foul">\${peoplelist[i].foul}</span> <button type="button" class="btn btn-success foul">+</button><button type="button" class="btn btn-danger foul">-</button> 
+						</td>
+						<td><span class="assist">\${peoplelist[i].assist}</span> <button type="button" class="btn btn-success assist">+</button><button type="button" class="btn btn-danger assist">-</button>
+						</td>
+						<td><span class="steal">\${peoplelist[i].steal}</span> <button type="button" class="btn btn-success steal">+</button><button type="button" class="btn btn-danger steal">-</button>
+						</td>
+						<td><span class="block">\${peoplelist[i].block}</span> <button type="button" class="btn btn-success block">+</button><button type="button" class="btn btn-danger block">-</button>
+						</td>
+						<td><span class="turnover">\${peoplelist[i].turnover}</span> <button type="button" class="btn btn-success turnover">+</button><button type="button" class="btn btn-danger turnover">-</button>
+						</td>
+						<td><span class="totalscore">\${peoplelist[i].totalscore}</span>
+						</td>
+					</tr>
+				`;
+			}
+			$("#team").append(html);
+			$("#nickname").val("");
+			genRowspan("teamdivision");
+			
+			
+			$("#myModal").modal("hide");
+			
+		});
 		var html ="";
 		
 		if( id != ""){
@@ -122,23 +194,51 @@
 		}
 		$("#myinfo").append(html);
 		
-		
-		
-		
 		$(".back").click(function(e){
 			location.href="/m_list";
 		});
 		
 		$("#matchend").click(function(e){
-			e.preventDefault();
 			console.log("경기종료")
+			
 		});
 		
 		$(".plusp").click(function(){
 			$("#myModal").modal("show"); //모달창 띄우기
 		});
 		
-		$(".btn-success").click(function(e){
+		$(document).on("click",".btn-success", function(){
+			var textflag;	 	//버튼클릭시 여러이벤트
+			var pmflag;			//득점 감점 flag
+			var classtexts = $(this).attr("class").split(" ");
+			for(var i = 0; i<classtexts.length; i++){
+				textflag = classtexts[i];
+			}
+			if(classtexts[1] == "btn-success") pmflag = 1; 	//득점
+			else pmflag = 0; 								//감점
+			
+			var totalscore = parseInt($(this).parent().parent().eq(0).children().eq(10)[0].innerText);
+			var parent = $(this).parent().parent();
+			score(textflag, totalscore, parent, pmflag);
+		})
+		
+		$(document).on("click",".btn-danger", function(){
+			var textflag;	 	//버튼클릭시 여러이벤트
+			var pmflag;			//득점 감점 flag
+			var classtexts = $(this).attr("class").split(" ");
+			for(var i = 0; i<classtexts.length; i++){
+				textflag = classtexts[i];
+			}
+			if(classtexts[1] == "btn-success") pmflag = 1; 	//득점
+			else pmflag = 0; 								//감점
+			
+			var totalscore = parseInt($(this).parent().parent().eq(0).children().eq(10)[0].innerText);
+			var parent = $(this).parent().parent();
+			score(textflag, totalscore, parent, pmflag);
+		})
+		
+		
+		/* $(".btn-success").click(function(e){
 			var textflag;	 	//버튼클릭시 여러이벤트
 			var pmflag;			//득점 감점 flag
 			var classtexts = $(this).attr("class").split(" ");
@@ -152,7 +252,7 @@
 			var parent = $(this).parent().parent();
 			score(textflag, totalscore, parent, pmflag);
 			
-		});
+		}); */
 		
 		$(".btn-danger").click(function(e){
 			var textflag;	 	//버튼클릭시 여러이벤트
@@ -169,101 +269,7 @@
 			score(textflag, totalscore, parent, pmflag);
 		});
 		
-		/*
-		$("button").click(function(e){
-			var index = $("button").index(this);
-			if( index == 0){
-			}else{
-			
-				var textflag;	 	//버튼클릭시 여러이벤트
-				var pmflag;			//득점 감점 flag
-				var classtexts = $(this).attr("class").split(" ");
-				for(var i = 0; i<classtexts.length; i++){
-					textflag = classtexts[i];
-				}
-				if(classtexts[1] == "btn-success") pmflag = 1; 	//득점
-				else pmflag = 0; 								//감점
-				
-				var totalscore = parseInt($(this).parent().parent().eq(0).children().eq(10)[0].innerText);
-				
-				if(textflag=="score2"){
-					var score = parseInt($(this).parent()[0].childNodes[0].innerText);
-					if( pmflag == 1){
-						score += 2;
-						totalscore += 2;
-					}else{
-						score -= 2;
-						totalscore -= 2;
-					}
-					$(this).parent()[0].childNodes[0].innerText = score;
-					$(this).parent().parent().eq(0).children().eq(10)[0].innerText= totalscore;
-				}else if(textflag=="score3"){
-					var score = parseInt($(this).parent()[0].childNodes[0].innerText);
-					if( pmflag == 1){
-						score += 3;
-						totalscore += 3;
-					}else{
-						score -= 3;
-						totalscore -= 3;
-					}
-					$(this).parent()[0].childNodes[0].innerText = score;
-					$(this).parent().parent().eq(0).children().eq(10)[0].innerText= totalscore;
-				}else if(textflag=="score1"){
-					var score = parseInt($(this).parent()[0].childNodes[0].innerText);
-					if( pmflag == 1){
-						score += 1;
-						totalscore += 1;
-					}else{
-						score -= 1;
-						totalscore -= 1;
-					}
-					$(this).parent()[0].childNodes[0].innerText = score;
-					$(this).parent().parent().eq(0).children().eq(10)[0].innerText= totalscore;
-				}else if(textflag=="foul"){
-					var score = parseInt($(this).parent()[0].childNodes[0].innerText);
-					if( pmflag == 1){
-						score += 1;
-					}else{
-						score -= 1;
-					}
-					$(this).parent()[0].childNodes[0].innerText = score;
-				}else if(textflag=="assist"){
-					var score = parseInt($(this).parent()[0].childNodes[0].innerText);
-					if( pmflag == 1){
-						score += 1;
-					}else{
-						score -= 1;
-					}
-					$(this).parent()[0].childNodes[0].innerText = score;
-				}else if(textflag=="steal"){
-					var score = parseInt($(this).parent()[0].childNodes[0].innerText);
-					if( pmflag == 1){
-						score += 1;
-					}else{
-						score -= 1;
-					}
-					$(this).parent()[0].childNodes[0].innerText = score;
-				}else if(textflag=="block"){
-					var score = parseInt($(this).parent()[0].childNodes[0].innerText);
-					if( pmflag == 1){
-						score += 1;
-					}else{
-						score -= 1;
-					}
-					$(this).parent()[0].childNodes[0].innerText = score;
-				}else if(textflag=="turnover"){
-					var score = parseInt($(this).parent()[0].childNodes[0].innerText);
-					if( pmflag == 1){
-						score += 1;
-					}else{
-						score -= 1;
-					}
-					$(this).parent()[0].childNodes[0].innerText = score;
-				}
-			
-			/*console.log($(this).parent().parent())  *//*
-			}
-		});*/
+		
 	});
 </script>
 <body>
@@ -293,68 +299,29 @@
 				<div class="bgray linep10"></div>	
 				<h1>match record</h1>
 				인원추가:<button type="button" class="btn btn-primary plusp">+</button>
-				<table class="table table-striped">
-				<thead>
-					<tr>
-						<td>TEAM</td>
-						<td>이름</td>
-						<td>2점</td>
-						<td>3점</td>
-						<td>자유튜</td>
-						<td>파울</td>
-						<td>어시스트</td>
-						<td>스틸</td>
-						<td>블록</td>
-						<td>턴오버</td>
-						<td>총득점</td>	
-					</tr>
-				</thead>
-					<tr class="people">
-						<td>home</td>
-						<td>진현욱</td>
-						<td><span class="score2">0</span> <button type="button" class="btn btn-success score2">+</button><button type="button" class="btn btn-danger score2">-</button>
-						</td>
-						<td><span class="score3">0</span> <button type="button" class="btn btn-success score3">+</button><button type="button" class="btn btn-danger score3">-</button>
-						</td>
-						<td><span class="score1">0</span> <button type="button" class="btn btn-success score1">+</button><button type="button" class="btn btn-danger score1">-</button>
-						</td>
-						<td><span class="foul">0</span> <button type="button" class="btn btn-success foul">+</button><button type="button" class="btn btn-danger foul">-</button> 
-						</td>
-						<td><span class="assist">0</span> <button type="button" class="btn btn-success assist">+</button><button type="button" class="btn btn-danger assist">-</button>
-						</td>
-						<td><span class="steal">0</span> <button type="button" class="btn btn-success steal">+</button><button type="button" class="btn btn-danger steal">-</button>
-						</td>
-						<td><span class="block">0</span> <button type="button" class="btn btn-success block">+</button><button type="button" class="btn btn-danger block">-</button>
-						</td>
-						<td><span class="turnover">0</span> <button type="button" class="btn btn-success turnover">+</button><button type="button" class="btn btn-danger turnover">-</button>
-						</td>
-						<td><span class="totalscore">0</span>
-						</td>	
-					</tr>
-					<tr>
-						<td>away</td>
-						<td>Jordan</td>
-						<td><span class="score2">0</span> <button type="button" class="btn btn-success score2">+</button><button type="button" class="btn btn-danger score2">-</button>
-						</td>
-						<td><span class="score3">0</span> <button type="button" class="btn btn-success score3">+</button><button type="button" class="btn btn-danger score3">-</button>
-						</td>
-						<td><span class="score1">0</span> <button type="button" class="btn btn-success score1">+</button><button type="button" class="btn btn-danger score1">-</button>
-						</td>
-						<td><span class="foul">0</span> <button type="button" class="btn btn-success foul">+</button><button type="button" class="btn btn-danger foul">-</button> 
-						</td>
-						<td><span class="assist">0</span> <button type="button" class="btn btn-success assist">+</button><button type="button" class="btn btn-danger assist">-</button>
-						</td>
-						<td><span class="steal">0</span> <button type="button" class="btn btn-success steal">+</button><button type="button" class="btn btn-danger steal">-</button>
-						</td>
-						<td><span class="block">0</span> <button type="button" class="btn btn-success block">+</button><button type="button" class="btn btn-danger block">-</button>
-						</td>
-						<td><span class="turnover">0</span> <button type="button" class="btn btn-success turnover">+</button><button type="button" class="btn btn-danger turnover">-</button>
-						</td>
-						<td><span class="totalscore">0</span>
-						</td>	
-					</tr>
+				<table class="table">
+					<thead>
+						<tr>
+							<td>TEAM</td>
+							<td>이름</td>
+							<td>2점</td>
+							<td>3점</td>
+							<td>자유튜</td>
+							<td>파울</td>
+							<td>어시스트</td>
+							<td>스틸</td>
+							<td>블록</td>
+							<td>턴오버</td>
+							<td>총득점</td>	
+						</tr>
+					</thead>
+					<tbody id="team">
+						
+					</tbody>
 				</table>
-				<button type="button" class="btn back">뒤로</button><button type="button" class="btn" id="matchend">경기종료</button>
+				<button type="button" class="btn back">뒤로</button>
+				<button type="button" class="btn" id="matchend">경기종료</button>
+				
 				<!-- Modal -->
 				  <div class="modal fade" id="myModal" role="dialog">
 				    <div class="modal-dialog">
@@ -368,20 +335,20 @@
 				        <div class="modal-body">
 				          <form>
 				          	<label class="radio-inline">
-				          		<input type="radio" name="team" checked> home
+				          		<input type="radio" name="team" checked value="home"> home
 				          	</label>
 				          	<label class="radio-inline">
-				          		<input type="radio" name="team" > away
+				          		<input type="radio" name="team" value="away"> away
 				          	</label>
 				          	
 				          	<div class="input-group">
 				          		<label for="p_name" class="form-group">이름:</label>
-				          		<input type="text" class="form-control" placeholder="선수이름입력을 입력하세요" >
+				          		<input type="text" class="form-control" id="nickname" placeholder="선수이름입력을 입력하세요" >
 				          		<div class="input-group-btn vab"><br>
 							        <button class="btn btn-default " type="submit"><i class="glyphicon glyphicon-search"></i></button>
 							    </div>
 				          	</div>
-				          	<input type="submit" class="btn btn-default" value="등록">
+				          	<input type="button" class="btn btn-default" id="register" value="등록">
 				          </form>
 				        </div>
 				        <div class="modal-footer">
