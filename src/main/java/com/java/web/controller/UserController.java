@@ -37,7 +37,7 @@ public class UserController {
 	
 	
 	//유저로그인
-	@RequestMapping(value="login", method=RequestMethod.POST)
+	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public void login(MemberUserVO user, HttpSession session, HttpServletResponse res) {
 		try {
 			int result = us.userlogin(user);
@@ -58,7 +58,7 @@ public class UserController {
 	}
 	
 	//유저로그아웃
-	@RequestMapping(value="logout")
+	@RequestMapping(value="/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "redirect:/";

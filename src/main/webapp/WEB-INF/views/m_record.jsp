@@ -168,7 +168,7 @@
 			}
 			$("#team").append(html);
 			$("#nickname").val("");
-			genRowspan("teamdivision");
+			//genRowspan("teamdivision");
 			
 			
 			$("#myModal").modal("hide");
@@ -199,8 +199,46 @@
 		});
 		
 		$("#matchend").click(function(e){
-			console.log("경기종료")
-			
+			console.log($("#quarter").val())
+			var list = [];
+			if($(".people").length == 0 ){
+				alert("인원을 추가해주세요");
+			}else{
+				for(var i = 0 ; i< $(".people").length; i++){
+					var p = {};
+					p.record_assortment =$(".people").eq(i).children().eq(0).text(); //home away
+					p.record_nickname =$(".people").eq(i).children().eq(1).text(); //nickname
+					p.record_twop =$(".people").eq(i).children().eq(2).children().eq(0).text(); //score2
+					p.record_threep =$(".people").eq(i).children().eq(3).children().eq(0).text(); //score3
+					p.record_onep =$(".people").eq(i).children().eq(4).children().eq(0).text(); //score1
+					p.record_foul =$(".people").eq(i).children().eq(5).children().eq(0).text(); //foul
+					p.record_assist =$(".people").eq(i).children().eq(6).children().eq(0).text(); //assist
+					p.record_steal =$(".people").eq(i).children().eq(7).children().eq(0).text(); //steal
+					p.record_block =$(".people").eq(i).children().eq(8).children().eq(0).text(); //block
+					p.record_turnover=$(".people").eq(i).children().eq(9).children().eq(0).text(); //turnover
+					p.totalp=$(".people").eq(i).children().eq(10).children().eq(0).text(); //totalp
+					p.record_quarter =$("#quarter").val();
+					
+					list.push(p);
+				}
+				
+				var data = JSON.stringify(list);
+				console.log(data)
+				//jQuery.ajaxSettings.traditional = true;
+				$.ajax({
+					url:"/recordsave",
+					type:"POST",
+					data:{list:data},
+				}).done(function(data){
+					console.log(data)
+					if( data == 1){
+						alert("시합저장완료");
+						location.href="/m_list";
+					}else{
+						alert("저장실패");
+					}
+				});
+			}
 		});
 		
 		$(".plusp").click(function(){
@@ -217,7 +255,10 @@
 			if(classtexts[1] == "btn-success") pmflag = 1; 	//득점
 			else pmflag = 0; 								//감점
 			
-			var totalscore = parseInt($(this).parent().parent().eq(0).children().eq(10)[0].innerText);
+			if($(this).parent().parent().eq(0).children().length == 11)
+				var totalscore = parseInt($(this).parent().parent().eq(0).children().eq(10)[0].innerText);
+			else if($(this).parent().parent().eq(0).children().length == 10)
+				var totalscore = parseInt($(this).parent().parent().eq(0).children().eq(9)[0].innerText);
 			var parent = $(this).parent().parent();
 			score(textflag, totalscore, parent, pmflag);
 		})
@@ -231,8 +272,12 @@
 			}
 			if(classtexts[1] == "btn-success") pmflag = 1; 	//득점
 			else pmflag = 0; 								//감점
-			
-			var totalscore = parseInt($(this).parent().parent().eq(0).children().eq(10)[0].innerText);
+			console.log($(this).parent().parent().eq(0).children().length, " --total")
+			console.log($(this).parent().parent().eq(0))
+			if($(this).parent().parent().eq(0).children().length == 11)
+				var totalscore = parseInt($(this).parent().parent().eq(0).children().eq(10)[0].innerText);
+			else if($(this).parent().parent().eq(0).children().length == 10)
+				var totalscore = parseInt($(this).parent().parent().eq(0).children().eq(9)[0].innerText);
 			var parent = $(this).parent().parent();
 			score(textflag, totalscore, parent, pmflag);
 		})
@@ -298,6 +343,7 @@
 				</header>
 				<div class="bgray linep10"></div>	
 				<h1>match record</h1>
+				쿼터:<input type="number" class="btn" min=1 max="4" id="quarter" value="1">
 				인원추가:<button type="button" class="btn btn-primary plusp">+</button>
 				<table class="table">
 					<thead>
@@ -345,7 +391,7 @@
 				          		<label for="p_name" class="form-group">이름:</label>
 				          		<input type="text" class="form-control" id="nickname" placeholder="선수이름입력을 입력하세요" >
 				          		<div class="input-group-btn vab"><br>
-							        <button class="btn btn-default " type="submit"><i class="glyphicon glyphicon-search"></i></button>
+							        <button type="button" class="btn btn-default " type="submit"><i class="glyphicon glyphicon-search"></i></button>
 							    </div>
 				          	</div>
 				          	<input type="button" class="btn btn-default" id="register" value="등록">
@@ -358,6 +404,8 @@
 				      
 				    </div>
 				  </div>
+				  
+				  
 			
 			</section>
 		</div>

@@ -18,10 +18,6 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping("/m_record")
-	public String m_record() {
-		return "m_record";
-	}
 	
 	@RequestMapping("/m_list")
 	public String m_list() {
