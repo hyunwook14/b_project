@@ -15,6 +15,7 @@ public class GamelistrecordVO {
 	private int record_turnover;
 	private int record_totalp;
 	private int record_quarter;
+	private String record_date;
 	
 //	public GamelistrecordVO(String record_assortment, String record_nickname, int record_twop,
 //			int record_threep, int record_onep, int record_foul, 
@@ -33,6 +34,12 @@ public class GamelistrecordVO {
 //		setRecord_totalp(record_totalp);
 //	}
 	
+	public String getRecord_date() {
+		return record_date;
+	}
+	public void setRecord_date(String record_date) {
+		this.record_date = record_date;
+	}
 	public int getRecord_quarter() {
 		return record_quarter;
 	}

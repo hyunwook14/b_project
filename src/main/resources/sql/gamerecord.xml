@@ -19,5 +19,14 @@
   	#{record_totalp}, #{record_quarter}
   	) 
   </insert>
+  
+  <!-- 게임저장리스트 -->
+ <select id="selectgamelist" resultType="hashmap">
+ 		select record_date, record_quarter ,count(record_nickname) as peoplen from gamelist_record group by record_quarter, record_date
+ </select>
  
+ <!-- 게임리스트 존재여부 검사 -->
+ <select id="checklist" resultType="int">
+ 	select count(record_nickname) from gamelist_record
+ </select>
 </mapper>

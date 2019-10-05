@@ -58,6 +58,69 @@
 		}
 		$("#myinfo").append(html);
 		
+		$.ajax({
+			url:"/loadgamelist",
+			type:"POST"
+		}).done(function(data){
+			html ="";
+			console.log(data)
+		
+			for(var i =0; i<data.length; i++){
+				html += `
+				<tr class="detail">
+					<td>\${data[i].record_date.year+1900}-\${data[i].record_date.month+1}-\${data[i].record_date.date} \${data[i].record_date.hours}:\${data[i].record_date.minutes}</td>
+					<td>\${data[i].record_quarter}Q</td>
+					<td>\${data[i].peoplen}</td>
+				</tr>`;
+			}
+			
+			
+			$("#content").append(html);
+		});
+		
+		$(document).on("click", ".detail", function(){
+			console.log("과연 기억이 잘맞는지?")
+			
+			html ="";
+			html =`
+				<tr class="people">
+				<td class="teamdivision">home</td>
+				<td>away</td>
+				<td>
+				 <span class="score2">0</span> 
+				</td>
+				<td>
+				 <span class="score3">0</span> 
+				</td>
+				<td>
+				 <span class="score1">0</span>
+				</td>
+				<td>
+				 <span class="foul">0</span>
+				</td>
+				<td>
+				 <span class="assist">0</span>
+				</td>
+				<td>
+				 <span class="steal">0</span>
+				</td>
+				<td>
+				 <span class="block">0</span>
+				</td>
+				<td>
+				 <span class="turnover">0</span>
+				</td>
+				<td><span class="totalscore">0</span>
+				</td>
+			</tr>
+			`;
+			
+			$("#team").append(html);
+			
+			$("#myModal").modal("show");
+		})
+		
+		
 	});
 </script>
 </head>
@@ -87,38 +150,67 @@
 				</header>
 				<div class="bgray linep10"></div>	
 				<div class="w80p">
-			<h1 class="mtb20"> 경기 목록 </h1>
-			<div class="mtb10">
-				<form>
-					<button type="button" class="btn btn-primary add">경기추가</button>
-				</form>
-			
-			</div>
+					<h1 class="mtb20"> 경기 목록 </h1>
+					<div class="mtb10">
+						<form>
+							<button type="button" class="btn btn-primary add">경기추가</button>
+						</form>
+					
+					</div>
+				
+					<table class="table">
+						<thead>
+							<tr>
+								<td>날짜</td>
+								<td>쿼터</td>
+								<td>인원</td>
+							</tr>
+						</thead>
+						<tbody id="content">
+							
+						</tbody>
+					</table>
 		
-			<table class="table">
-				<thead>
-					<tr>
-						<td>날짜</td>
-						<td>쿼터</td>
-						<td>인원</td>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>2019-09-24</td>
-						<td>1Q</td>
-						<td>10</td>
-					</tr>
-					<tr>
-						<td>2019-09-24</td>
-						<td>2Q</td>
-						<td>10</td>
-					</tr>
-				</tbody>
-			</table>
-		
-		</div>
-			
+				</div>
+				<!-- Modal -->
+				  <div class="modal fade" id="myModal" role="dialog">
+				    <div class="modal-dialog">
+				    
+				      <!-- Modal content-->
+				      <div class="modal-content">
+				        <div class="modal-header">
+				          <button type="button" class="close" data-dismiss="modal">&times;</button>
+				          <h4 class="modal-title">자세히보기</h4>
+				        </div>
+				        <div class="modal-body">
+				          <table class="table">
+							<thead>
+								<tr>
+									<td>TEAM</td>
+									<td>이름</td>
+									<td>2점</td>
+									<td>3점</td>
+									<td>자유튜</td>
+									<td>파울</td>
+									<td>어시스트</td>
+									<td>스틸</td>
+									<td>블록</td>
+									<td>턴오버</td>
+									<td>총득점</td>	
+								</tr>
+							</thead>
+							<tbody id="team">
+								
+							</tbody>
+						 </table>
+				        </div>
+				        <div class="modal-footer">
+				          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				        </div>
+				      </div>
+				      
+				    </div>
+				  </div>
 			</section>
 		</div>
 	</section>

@@ -1,5 +1,7 @@
 package com.java.web.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -45,6 +47,18 @@ public class MatchrecordService {
 //						Integer.parseInt((String) jobj.get("record_steal")), Integer.parseInt((String) jobj.get("record_block")),
 //						Integer.parseInt((String) jobj.get("record_turnover")), Integer.parseInt((String) jobj.get("totalp")));
 			result = sqlsession.insert("gamerecord.saverecord", gamerecord);
+		}
+		
+		return result;
+	}
+	
+	public List<HashMap<String, String>> loadgamelist(){
+//		List<GamelistrecordVO> result = new ArrayList<>();
+		List<HashMap<String, String>> result = new ArrayList<>();
+		if((int)sqlsession.selectOne("gamerecord.checklist") != 0 ) {
+			result = sqlsession.selectList("gamerecord.selectgamelist");
+		}else {
+			System.out.println("값이 존재하지 않습니다.");
 		}
 		
 		return result;
