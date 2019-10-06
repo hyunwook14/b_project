@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.java.web.service.CharacterService;
 import com.java.web.vo.BasketballPositionVO;
+import com.java.web.vo.GamelistrecordVO;
 import com.java.web.vo.UserCharacterVO;
 
 import net.sf.json.JSONArray;
@@ -60,14 +61,28 @@ public class UserCharacterController {
 	}
 	//포지션추천 키별로
 	@RequestMapping(value="/position_recommand", method=RequestMethod.POST)
-	public void position_recommand(HttpServletRequest req, HttpServletResponse res) {
+	public void position_recommand(HttpServletRequest req, HttpServletResponse res, HttpSession session) {
 		try {
 			res.setContentType("application/x-www-form-urlencoded; charset=utf-8");
 			
-			List<BasketballPositionVO> positionlist =cs.positionselect(req);
+			List<BasketballPositionVO> positionlist =cs.positionselect(req, session);
 			JSONArray jarry = JSONArray.fromObject(positionlist);
 			res.getWriter().print(jarry);
 			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	//케릭터 정보로 시합경기 리스트가져오기
+	@RequestMapping(value="/mymatchlist", method=RequestMethod.POST)
+	public void mymatchlist(HttpSession session, HttpServletResponse res) {
+		try {
+			System.out.println("id :"+ session.getAttribute("id"));
+			List<GamelistrecordVO> list =cs.selectmymatch(session);
+			JSONArray jarry = JSONArray.fromObject(list);
+			res.setContentType("application/json; charset=utf-8"); 
+			res.getWriter().print(jarry);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

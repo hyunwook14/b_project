@@ -103,7 +103,7 @@
 								</tr>
 								<tr>
 									<td>추천포지션</td>
-									<td>F</td>
+									<td>\${list[i].character_position}</td>
 								</tr>
 							</tbody>
 						</table>
@@ -130,6 +130,28 @@
 				}
 			}
 			$("#userinfolist").append(html);
+			
+			
+			$("#matchbtn").click(function(){
+				$.ajax({
+					url:"/mymatchlist",
+					type:"POST"
+				}).done(function(data){
+					$("#matchlist").empty();
+					html ="";
+					for(var i =0 ; i < data.length; i++){
+						html +=`
+							<tr>
+								<td>\${data[i].record_date}</td>
+								<td>\${data[i].record_nickname}</td>
+								<td>\${data[i].record_quarter} Q</td>
+							</tr>
+						`;
+					}
+					$("#matchlist").append(html);
+				});
+				
+			});
 			
 		});
 		
@@ -169,21 +191,11 @@
 					<div class="row collapse mt50p" id="userinfolist">
 							<div class="progress">
 							</div>
-							  
-							<!-- <div class="col-sm-4">
-								<div class="well">
-									2
-								</div>
-							</div>
-							<div class="col-sm-4">
-								<div class="well">
-									3
-								</div>
-							</div> -->
+							
 					</div>
 					<div class="">
 						<div>
-							<button  type="button" class="btn form-control" data-toggle="collapse" data-target="#mymatch">내 시합목록 </button>
+							<button  type="button" class="btn form-control" data-toggle="collapse" data-target="#mymatch" id="matchbtn">내 시합목록 </button>
 						</div>
 						<div class="row collapse mt50p" id="mymatch">
 							<div class="">
@@ -191,16 +203,11 @@
 										<thead>
 											<tr>
 												<td>경기날짜</td>
+												<td>닉네임</td>
 												<td>쿼터</td>
-												<td>총인원</td>
 											</tr>
 										</thead>
-										<tbody>
-											<tr>
-												<td>2019-09-26</td>
-												<td>1</td>
-												<td>12</td>
-											</tr>
+										<tbody id="matchlist">
 											
 										</tbody>
 									</table>

@@ -32,6 +32,17 @@
 	var id= "";
 	id ="<%= session.getAttribute("id") %>";
 	
+	function genRowspan(className){
+	    $("." + className).each(function() {
+	        var rows = $("." + className + ":contains('" + $(this).text() + "')");
+	        console.log($(this).text())
+	        console.log(rows)
+	        if (rows.length > 1) {
+	            rows.eq(0).attr("rowspan", rows.length);
+	            rows.not(":eq(0)").remove();
+	        }
+	    });
+	}
 	
 	$(document).ready(function(){
 		$(".add").click(function(){
@@ -63,13 +74,17 @@
 			type:"POST"
 		}).done(function(data){
 			html ="";
-			console.log(data)
 		
 			for(var i =0; i<data.length; i++){
 				html += `
-				<tr class="detail">
-					<td>\${data[i].record_date.year+1900}-\${data[i].record_date.month+1}-\${data[i].record_date.date} \${data[i].record_date.hours}:\${data[i].record_date.minutes}</td>
-					<td>\${data[i].record_quarter}Q</td>
+				<tr class="detail">`;
+				if( data[i].record_date.date  < 10){
+					html +=`<td class='date'>\${data[i].record_date.year+1900}-\${data[i].record_date.month+1}-0\${data[i].record_date.date} \${data[i].record_date.hours}:\${data[i].record_date.minutes}</td> `;
+				}else{
+					html +=`<td class='date'>\${data[i].record_date.year+1900}-\${data[i].record_date.month+1}-\${data[i].record_date.date} \${data[i].record_date.hours}:\${data[i].record_date.minutes}</td> `;
+				}
+				
+					html+=` <td class='quarter'>\${data[i].record_quarter} Q</td>
 					<td>\${data[i].peoplen}</td>
 				</tr>`;
 			}
@@ -79,45 +94,64 @@
 		});
 		
 		$(document).on("click", ".detail", function(){
-			console.log("과연 기억이 잘맞는지?")
+			var index = $(this).index()
+			var date = $(".date").eq(index).text();
+			var quarters = $(".quarter").eq(index).text().split(" ");
+			var quarter = quarters[0];
+			console.log(date," - " ,quarter, "---datae")
 			
-			html ="";
-			html =`
-				<tr class="people">
-				<td class="teamdivision">home</td>
-				<td>away</td>
-				<td>
-				 <span class="score2">0</span> 
-				</td>
-				<td>
-				 <span class="score3">0</span> 
-				</td>
-				<td>
-				 <span class="score1">0</span>
-				</td>
-				<td>
-				 <span class="foul">0</span>
-				</td>
-				<td>
-				 <span class="assist">0</span>
-				</td>
-				<td>
-				 <span class="steal">0</span>
-				</td>
-				<td>
-				 <span class="block">0</span>
-				</td>
-				<td>
-				 <span class="turnover">0</span>
-				</td>
-				<td><span class="totalscore">0</span>
-				</td>
-			</tr>
-			`;
+			$.ajax({
+				url:"/loadresult",
+				type:"POST",
+				data:{
+					record_date: date,
+					record_quarter:quarter
+				}
+			}).done(function(data){
+				html ="";
+				$("#team").empty();
+				console.log(data)
+				for(var i=0; i<data.length; i++){
+				html +=`
+					<tr class="people">
+					<td class="teamdivision">\${data[i].record_assortment}</td>
+					<td>\${data[i].record_nickname}</td>
+					<td>
+					 <span class="score2">\${data[i].record_twop}</span> 
+					</td>
+					<td>
+					 <span class="score3">\${data[i].record_threep}</span> 
+					</td>
+					<td>
+					 <span class="score1">\${data[i].record_onep}</span>
+					</td>
+					<td>
+					 <span class="foul">\${data[i].record_foul}</span>
+					</td>
+					<td>
+					 <span class="assist">\${data[i].record_assist}</span>
+					</td>
+					<td>
+					 <span class="steal">\${data[i].record_steal}</span>
+					</td>
+					<td>
+					 <span class="block">\${data[i].record_block}</span>
+					</td>
+					<td>
+					 <span class="turnover">\${data[i].record_turnover}</span>
+					</td>
+					<td><span class="totalscore">\${data[i].record_totalp}</span>
+					</td>
+				</tr>
+				`;
+					
+				}
+				$("#team").append(html);
+				//genRowspan("teamdivision");
+			});
 			
-			$("#team").append(html);
+				$("#myModal").modal("show");
 			
-			$("#myModal").modal("show");
 		})
 		
 		

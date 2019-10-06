@@ -42,7 +42,6 @@ public class MatchrecordController {
 	public void recordsave( HttpServletRequest req, HttpServletResponse res ) {
 		try {
 			int result =mrs.saverecord(req);
-			
 			res.getWriter().print(result+"");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -59,6 +58,18 @@ public class MatchrecordController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+	}
+	
+	@RequestMapping(value="/loadresult", method=RequestMethod.POST)
+	public void loadresult(GamelistrecordVO record, HttpServletResponse res) {
+		try {
+			List<GamelistrecordVO> list = mrs.loaddetail(record);
+			JSONArray jary = JSONArray.fromObject(list);
+			res.setContentType("application/json; charset=utf-8");
+			res.getWriter().print(jary);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

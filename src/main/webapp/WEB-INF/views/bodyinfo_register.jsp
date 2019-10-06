@@ -82,7 +82,7 @@ id ="<%= session.getAttribute("id") %>";
 					$("#character_weight").val("");
 					$("#position").empty();
 				}
-				else alert("입력실패");
+				else alert("케릭터인원초과했습니다.");
 			});
 		}else{
 			alert("포지션추천을 눌러주세요");

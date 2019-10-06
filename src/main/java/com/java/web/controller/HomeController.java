@@ -18,11 +18,6 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping("/m_detail")
-	public String m_detail() {
-		return "m_detail";
-	}
-	
 	@RequestMapping("/exercise_recommand")
 	public String exercise_recommand() {
 		return "exercise_recommand";

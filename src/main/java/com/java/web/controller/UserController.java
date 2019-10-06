@@ -70,18 +70,18 @@ public class UserController {
 		return "c_user";
 	}
 	
+	//
 	@RequestMapping(value="/idcheck", method=RequestMethod.POST)
 	public void idcheck(HttpServletRequest req, HttpServletResponse res) {
 		try {
 			res.setContentType("text/html; charset=utf-8"); 
-			System.out.println("idcheck서버단");
 			boolean result = us.idcheck(req);
 			res.getWriter().print(result);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+	//
 	@RequestMapping(value="/createuser")
 	public void createuser(MemberUserVO user, HttpServletResponse res) {
 		try {
@@ -98,4 +98,5 @@ public class UserController {
 			e.printStackTrace();
 		}
 	}
+	
 }

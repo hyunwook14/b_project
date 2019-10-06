@@ -102,22 +102,6 @@
 		parent.children().eq(10).children().text(totalscore);	
 		}
 	
-	
-	function genRowspan(className){
-	    $("." + className).each(function() {
-	        var rows = $("." + className + ":contains('" + $(this).text() + "')");
-	        console.log($(this).text())
-	        console.log(rows)
-	        if (rows.length > 1) {
-	            rows.eq(0).attr("rowspan", rows.length);
-	            rows.not(":eq(0)").remove();
-	        }else if($(".teamdivision:contains('home')").eq(rows.length).text() == "away"){
-	        	console.log(" 이걸로넘어가냐")
-	        }
-	    });
-	}
-	
-	
 	$(document).ready(function(){
 		
 		var peoplelist = [];
@@ -168,7 +152,7 @@
 			}
 			$("#team").append(html);
 			$("#nickname").val("");
-			//genRowspan("teamdivision");
+			
 			
 			
 			$("#myModal").modal("hide");

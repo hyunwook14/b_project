@@ -52,6 +52,7 @@ public class MatchrecordService {
 		return result;
 	}
 	
+	//저장된 시합목록 불러오기
 	public List<HashMap<String, String>> loadgamelist(){
 //		List<GamelistrecordVO> result = new ArrayList<>();
 		List<HashMap<String, String>> result = new ArrayList<>();
@@ -64,4 +65,9 @@ public class MatchrecordService {
 		return result;
 	}
 	
+	//저장된 시합기록 불러오기
+	public List<GamelistrecordVO> loaddetail(GamelistrecordVO record) {
+		List<GamelistrecordVO> result = sqlsession.selectList("gamerecord.selectdetail", record);
+		return result;
+	}
 }

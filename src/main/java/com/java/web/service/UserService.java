@@ -64,4 +64,5 @@ public class UserService {
 	public List<MemberUserVO> userlistselect(){
 		return sqlsession.selectList("user.userlist");
 	}
+	
 }

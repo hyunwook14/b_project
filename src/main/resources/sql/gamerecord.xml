@@ -22,11 +22,30 @@
   
   <!-- 게임저장리스트 -->
  <select id="selectgamelist" resultType="hashmap">
- 		select record_date, record_quarter ,count(record_nickname) as peoplen from gamelist_record group by record_quarter, record_date
+ 		select record_date, record_quarter ,count(record_nickname) as peoplen 
+ 		from gamelist_record 
+ 		group by record_quarter, record_date
+ 		order by  record_date, record_quarter 
  </select>
  
  <!-- 게임리스트 존재여부 검사 -->
  <select id="checklist" resultType="int">
  	select count(record_nickname) from gamelist_record
+ </select>
+ 
+ <!-- 자세히 보기 -->
+ <select id="selectdetail" parameterType="com.java.web.vo.GamelistrecordVO" resultType="com.java.web.vo.GamelistrecordVO">
+ 	select record_assortment, record_nickname, record_twop, record_threep, record_onep, record_foul,
+       record_assist, record_steal, record_block, record_turnover, record_totalp, record_quarter
+          from gamelist_record 
+		   where date_format(record_date,'%Y-%m-%d %H:%i') = #{record_date}  and record_quarter = #{record_quarter}
+		   order by record_assortment desc
+ </select>
+ <!-- 케릭터이름으로  시합정보가져오기 -->
+ <select id="characterlistselect" parameterType="com.java.web.vo.UserCharacterVO" resultType="com.java.web.vo.GamelistrecordVO">
+  select record_nickname, record_date, record_quarter 
+  from gamelist_record 
+  where record_nickname = #{character_nickname}
+  order by record_date, record_quarter
  </select>
 </mapper>

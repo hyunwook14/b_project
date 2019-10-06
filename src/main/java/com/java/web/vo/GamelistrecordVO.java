@@ -125,8 +125,10 @@ public class GamelistrecordVO {
 				+ record_threep + ", record_onep=" + record_onep + ", record_foul=" + record_foul + ", record_assist="
 				+ record_assist + ", record_steal=" + record_steal + ", record_block=" + record_block
 				+ ", record_turnover=" + record_turnover + ", record_totalp=" + record_totalp + ", record_quarter="
-				+ record_quarter + "]";
+				+ record_quarter + ", record_date=" + record_date + "]";
 	}
+	
+	
 	
 	
 	
