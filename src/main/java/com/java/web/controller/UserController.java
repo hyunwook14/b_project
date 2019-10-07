@@ -19,7 +19,8 @@ public class UserController {
 	UserService us;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String index() {
+	public String index(HttpSession session) {
+		if(session.getAttribute("id") != null) return "redirect:main";
 		return "index";
 	}
 	
