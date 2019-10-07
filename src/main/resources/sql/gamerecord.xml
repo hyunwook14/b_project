@@ -21,11 +21,16 @@
   </insert>
   
   <!-- 게임저장리스트 -->
- <select id="selectgamelist" resultType="hashmap">
+ <select id="selectgamelist" parameterType="int" resultType="hashmap">
  		select record_date, record_quarter ,count(record_nickname) as peoplen 
  		from gamelist_record 
  		group by record_quarter, record_date
  		order by  record_date, record_quarter 
+ 		limit #{index}, 10
+ </select>
+ <!-- 총 게임리스트 개수 -->
+ <select id="countgamelist" resultType="int">
+ 	select count(*) from gamelist_record
  </select>
  
  <!-- 게임리스트 존재여부 검사 -->

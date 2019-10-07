@@ -1,5 +1,10 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,9 +33,11 @@
 		cursor:pointer;
 	}
 </style>
+
 <script>
 	var id= "";
 	id ="<%= session.getAttribute("id") %>";
+	
 	
 	function genRowspan(className){
 	    $("." + className).each(function() {
@@ -45,6 +52,7 @@
 	}
 	
 	$(document).ready(function(){
+		
 		$(".add").click(function(){
 			location.href="/m_record"
 		});
@@ -69,29 +77,38 @@
 		}
 		$("#myinfo").append(html);
 		
-		$.ajax({
-			url:"/loadgamelist",
-			type:"POST"
-		}).done(function(data){
-			html ="";
-		
-			for(var i =0; i<data.length; i++){
-				html += `
-				<tr class="detail">`;
-				if( data[i].record_date.date  < 10){
-					html +=`<td class='date'>\${data[i].record_date.year+1900}-\${data[i].record_date.month+1}-0\${data[i].record_date.date} \${data[i].record_date.hours}:\${data[i].record_date.minutes}</td> `;
-				}else{
-					html +=`<td class='date'>\${data[i].record_date.year+1900}-\${data[i].record_date.month+1}-\${data[i].record_date.date} \${data[i].record_date.hours}:\${data[i].record_date.minutes}</td> `;
+		console.log(`${result}`, "--result")
+		var result = new Array(`${result}`);
+		console.log(result," - " ,typeof result)
+		if(result == ""){
+			console.log("저장된값이없습니다.")
+			$.ajax({
+				url:"/loadgamelist",
+				type:"POST"
+			}).done(function(data){
+				html ="";
+			
+				for(var i =0; i<data.length; i++){
+					html += `
+					<tr class="detail">`;
+					if( data[i].record_date.date  < 10){
+						html +=`<td class='date'>\${data[i].record_date.year+1900}-\${data[i].record_date.month+1}-0\${data[i].record_date.date} \${data[i].record_date.hours}:\${data[i].record_date.minutes}</td> `;
+					}else{
+						html +=`<td class='date'>\${data[i].record_date.year+1900}-\${data[i].record_date.month+1}-\${data[i].record_date.date} \${data[i].record_date.hours}:\${data[i].record_date.minutes}</td> `;
+					}
+					
+						html+=` <td class='quarter'>\${data[i].record_quarter} Q</td>
+						<td>\${data[i].peoplen}</td>
+					</tr>`;
 				}
 				
-					html+=` <td class='quarter'>\${data[i].record_quarter} Q</td>
-					<td>\${data[i].peoplen}</td>
-				</tr>`;
-			}
+				
+				$("#content").append(html);
+			});
+		}else{
 			
-			
-			$("#content").append(html);
-		});
+		}
+		
 		
 		$(document).on("click", ".detail", function(){
 			var index = $(this).index()
@@ -159,6 +176,7 @@
 </script>
 </head>
 <body>
+ 	
 	<section class="container-fluid">
 		<div class="row content">
 			 <nav class="col-sm-3 sidenav">
@@ -204,7 +222,10 @@
 							
 						</tbody>
 					</table>
-		
+					 <ul id="page">
+						 	<li><a href="/m_list/1">1</a>
+						 	<li><a href="/m_list/2">2</a>
+					 </ul>
 				</div>
 				<!-- Modal -->
 				  <div class="modal fade" id="myModal" role="dialog">
@@ -237,6 +258,7 @@
 								
 							</tbody>
 						 </table>
+						
 				        </div>
 				        <div class="modal-footer">
 				          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

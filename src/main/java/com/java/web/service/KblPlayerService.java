@@ -88,8 +88,6 @@ public class KblPlayerService {
 	public List<KblPlayerVO> loadplayer(HttpServletRequest req) {
 		List<KblPlayerVO> result = new ArrayList<KblPlayerVO>();
 		int index = 0;
-		System.out.println("test");
-		System.out.println(req.getParameter("index"));
 		if(req.getParameter("index")==null) {
 			System.out.println("null");
 		}else {

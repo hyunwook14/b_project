@@ -1,5 +1,6 @@
 package com.java.web.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -35,6 +37,17 @@ public class MatchrecordController {
 	@RequestMapping("/m_list")
 	public String m_list(HttpSession session) {
 		if(session.getAttribute("id") == null) return "redirect:/";
+		return "m_list";
+	}
+	@RequestMapping("/m_list/{index}")
+	public String m_list(HttpSession session, @PathVariable int index, HttpServletRequest req) {
+		if(session.getAttribute("id") == null) return "redirect:/";
+		System.out.println(index);
+		List<HashMap<String,String>> result =   mrs.loadgamelist(index);
+		System.out.println(result.get(0).toString());
+		JSONArray jarry = JSONArray.fromObject(result);
+		req.setAttribute("result", jarry);
+		
 		return "m_list";
 	}
 	

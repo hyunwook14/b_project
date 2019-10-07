@@ -54,16 +54,31 @@ public class MatchrecordService {
 	
 	//저장된 시합목록 불러오기
 	public List<HashMap<String, String>> loadgamelist(){
+		int index = 0;
 //		List<GamelistrecordVO> result = new ArrayList<>();
 		List<HashMap<String, String>> result = new ArrayList<>();
 		if((int)sqlsession.selectOne("gamerecord.checklist") != 0 ) {
-			result = sqlsession.selectList("gamerecord.selectgamelist");
+			result = sqlsession.selectList("gamerecord.selectgamelist", index);
 		}else {
 			System.out.println("값이 존재하지 않습니다.");
 		}
 		
 		return result;
 	}
+	
+	// get방식 저장된 시합목록 불러오기
+		public List<HashMap<String, String>> loadgamelist(int index){
+			
+//			List<GamelistrecordVO> result = new ArrayList<>();
+			List<HashMap<String, String>> result = new ArrayList<>();
+			if((int)sqlsession.selectOne("gamerecord.checklist") != 0 ) {
+				result = sqlsession.selectList("gamerecord.selectgamelist", (index-1)*10);
+			}else {
+				System.out.println("값이 존재하지 않습니다.");
+			}
+			
+			return result;
+		}
 	
 	//저장된 시합기록 불러오기
 	public List<GamelistrecordVO> loaddetail(GamelistrecordVO record) {
