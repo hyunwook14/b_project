@@ -2,11 +2,13 @@ package com.java.web.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -28,13 +30,13 @@ public class PlayerController {
 	}
 	
 	@RequestMapping(value="/playerlistload", method=RequestMethod.POST)
-	public void playerlistload(HttpServletResponse res) {
+	public void playerlistload(HttpServletRequest req, HttpServletResponse res, HttpSession session) {
 		try {
 			res.setContentType("application/json; charset=utf-8");
-			
-			List<KblPlayerVO> resultlist = kps.loadplayer();
+			List<KblPlayerVO> resultlist = kps.loadplayer(req);
+			int totalpage = kps.pagenumber();
 			JSONArray jary = JSONArray.fromObject(resultlist);
-			
+			jary.add(jary.size(), totalpage);
 			res.getWriter().print(jary);
 			
 		} catch (Exception e) {

@@ -9,7 +9,10 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSession;
 import org.jsoup.Jsoup;
@@ -82,8 +85,24 @@ public class KblPlayerService {
 	}
 	
 	//KBL player list 가져오기
-	public List<KblPlayerVO> loadplayer() {
-		return sqlsession.selectList("kblplayer.select");
+	public List<KblPlayerVO> loadplayer(HttpServletRequest req) {
+		List<KblPlayerVO> result = new ArrayList<KblPlayerVO>();
+		int index = 0;
+		System.out.println("test");
+		System.out.println(req.getParameter("index"));
+		if(req.getParameter("index")==null) {
+			System.out.println("null");
+		}else {
+			index = Integer.parseInt(req.getParameter("index")) * 12;
+		}
+		result = sqlsession.selectList("kblplayer.select", index);
+		
+		return  result;
+	}
+	
+	//KBL player list page 개수
+	public int pagenumber() {
+		return sqlsession.selectOne("kblplayer.count");
 	}
 	
 	//KBL palyer img 확인여부검사

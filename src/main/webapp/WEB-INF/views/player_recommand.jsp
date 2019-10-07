@@ -74,12 +74,21 @@
 			}).done(function(data){
 				playerlist = data;
 				html="";
+				console.log(playerlist[playerlist.length-1]);
 				var img = new Image();
-				for(var i = 0; i<data.length; i++){
+				for(var i = 0; i<data.length-1; i++){
 						/* image존재여부 확인*/
 					 isImage(data[i].player_img, data[i]); 
 					
 				}
+				$("#page").empty();
+				var pagenumber = Math.ceil(playerlist[playerlist.length-1] / 12);
+				console.log(pagenumber)
+				for(var i = 1; i<pagenumber; i++){
+				html += `<button type="button" class="pagenumber btn btn-default">\${i}</button>`;
+				}
+				$("#page").append(html);
+				$(".pagenumber").eq(0).addClass("active");
 				
 			});
 			
@@ -95,16 +104,47 @@
 						$("#playerposition").text(playerlist[i].player_position);
 					}
 				}
-			})			
+			})
+			
+			$(document).on("click", ".pagenumber", function(){
+				var index = $(this).index();
+				 $.ajax({
+					url:"/playerlistload",
+					type:"POST",
+					data:{index : index}
+				}).done(function(data){
+					playerlist = data;
+					html="";
+					var img = new Image();
+					for(var i = 0; i<data.length-1; i++){
+							/* image존재여부 확인*/
+						 isImage(data[i].player_img, data[i]); 
+						
+					}
+					$("#page").empty();
+					var pagenumber = Math.ceil(playerlist[playerlist.length-1] / 12);
+					for(var i = 1; i<pagenumber; i++){
+						html += `<button type="button" class="pagenumber btn btn-default">\${i}</button>`;
+					}
+					$("#page").append(html);
+					$(".pagenumber").eq(index).addClass("active");
+					
+				}); 
+			});
+			
+			$(".pagenumber").click(function(){
+				
+			})
 			
 	});
 	
 	function isImage(src){
 		 var html = "";
 		 var img = new Image();
-		 
+		 $("#playerlist").empty();
 		 img.onload = function(){
-			 html += `<div class="col-sm-2">
+			 
+			 html += `<div class="col-sm-2" style="margin: 20px 0;">
 					<img src="\${src}" alt="선수" class="img-circle w100 player " data-toggle="modal" data-target="#myModal"> 
 			   	</div>`;
 			 $("#playerlist").append(html);
@@ -149,6 +189,8 @@
 					<h1>선수목록</h1>
 					<div class="row" id="playerlist">
 						
+					</div>
+					<div id="page" style="margin: 15px 0; text-align:center;" >
 					</div>
 					
 				</div>
