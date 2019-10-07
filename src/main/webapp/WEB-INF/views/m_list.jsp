@@ -80,15 +80,25 @@
 		console.log(`${result}`, "--result")
 		var result = new Array(`${result}`);
 		console.log(result," - " ,typeof result)
-		if(result == ""){
+		//if(result == ""){
+			console.log(location.href.lastIndexOf("/"), " : ")
+			var lastindex = location.href.lastIndexOf("/")+ 1;
+			var index = location.href.substring(lastindex);
+			console.log("index++",index)
+			if( index == "m_list") {
+				console.log("index없다")
+				index = 0
+			}
+			console.log(index)
 			console.log("저장된값이없습니다.")
 			$.ajax({
 				url:"/loadgamelist",
-				type:"POST"
+				type:"POST",
+				data:{index:index}
 			}).done(function(data){
 				html ="";
-			
-				for(var i =0; i<data.length; i++){
+				
+				for(var i =0; i<data.length-1; i++){
 					html += `
 					<tr class="detail">`;
 					if( data[i].record_date.date  < 10){
@@ -101,13 +111,22 @@
 						<td>\${data[i].peoplen}</td>
 					</tr>`;
 				}
-				
+				console.log(data)
+				console.log(data[data.length-1])
 				
 				$("#content").append(html);
+				var page = Math.ceil(data[data.length-1] / 10)
+				console.log(page)
+				html ="";
+				for(var i = 1; i <= page; i++){
+					html += `<li><a href="/m_list/\${i}">\${i}</a>`;
+				}
+				$("#page").empty();
+				$("#page").append(html);
 			});
-		}else{
+		/* }else{
 			
-		}
+		} */
 		
 		
 		$(document).on("click", ".detail", function(){
@@ -222,9 +241,9 @@
 							
 						</tbody>
 					</table>
-					 <ul id="page">
-						 	<li><a href="/m_list/1">1</a>
-						 	<li><a href="/m_list/2">2</a>
+					 <ul id="page" class="pagination">
+						 	
+						 	
 					 </ul>
 				</div>
 				<!-- Modal -->

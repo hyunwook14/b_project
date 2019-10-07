@@ -30,7 +30,9 @@
  </select>
  <!-- 총 게임리스트 개수 -->
  <select id="countgamelist" resultType="int">
- 	select count(*) from gamelist_record
+ 	select count(*) from 
+	(select * from gamelist_record
+	group by  record_date, record_quarter) as gamelist
  </select>
  
  <!-- 게임리스트 존재여부 검사 -->

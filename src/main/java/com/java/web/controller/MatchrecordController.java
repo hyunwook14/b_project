@@ -42,11 +42,11 @@ public class MatchrecordController {
 	@RequestMapping("/m_list/{index}")
 	public String m_list(HttpSession session, @PathVariable int index, HttpServletRequest req) {
 		if(session.getAttribute("id") == null) return "redirect:/";
-		System.out.println(index);
-		List<HashMap<String,String>> result =   mrs.loadgamelist(index);
-		System.out.println(result.get(0).toString());
-		JSONArray jarry = JSONArray.fromObject(result);
-		req.setAttribute("result", jarry);
+//		System.out.println(index);
+//		List<HashMap<String,String>> result =   mrs.loadgamelist(index);
+//		System.out.println(result.get(0).toString());
+//		JSONArray jarry = JSONArray.fromObject(result);
+//		req.setAttribute("result", jarry);
 		
 		return "m_list";
 	}
@@ -62,10 +62,12 @@ public class MatchrecordController {
 	}
 	
 	@RequestMapping(value="/loadgamelist", method=RequestMethod.POST)
-	public void loadgamelist(HttpServletResponse res){
+	public void loadgamelist(HttpServletRequest req, HttpServletResponse res){
 		try {
-			List<HashMap<String,String>> result =mrs.loadgamelist();
+			List<HashMap<String,String>> result =mrs.loadgamelist(req);
 			JSONArray jarry = JSONArray.fromObject(result);
+			int totalpage =mrs.totalgamelist();
+			jarry.add(jarry.size(), totalpage);
 			res.setContentType("application/json; charset=utf-8");
 			res.getWriter().println(jarry);
 		} catch (Exception e) {

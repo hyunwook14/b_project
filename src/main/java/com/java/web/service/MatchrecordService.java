@@ -51,14 +51,23 @@ public class MatchrecordService {
 		
 		return result;
 	}
+	//총 시합 개수 가져오기
+	public int totalgamelist() {
+		return sqlsession.selectOne("gamerecord.countgamelist");
+	}
 	
 	//저장된 시합목록 불러오기
-	public List<HashMap<String, String>> loadgamelist(){
-		int index = 0;
+	public List<HashMap<String, String>> loadgamelist(HttpServletRequest req){
+		int index = Integer.parseInt(req.getParameter("index"));
+		if(index == 0) {
+			index =0;
+		}else {
+			index = index-1;
+		}
 //		List<GamelistrecordVO> result = new ArrayList<>();
 		List<HashMap<String, String>> result = new ArrayList<>();
 		if((int)sqlsession.selectOne("gamerecord.checklist") != 0 ) {
-			result = sqlsession.selectList("gamerecord.selectgamelist", index);
+			result = sqlsession.selectList("gamerecord.selectgamelist", index*10);
 		}else {
 			System.out.println("값이 존재하지 않습니다.");
 		}
