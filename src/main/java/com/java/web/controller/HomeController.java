@@ -1,5 +1,7 @@
 package com.java.web.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +23,12 @@ public class HomeController {
 	@RequestMapping("/exercise_recommand")
 	public String exercise_recommand() {
 		return "exercise_recommand";
+	}
+	
+	@RequestMapping("/myinfo")
+	public String myinfo(HttpSession session) {
+		if(session.getAttribute("id") == null) return "redirect:/";
+		return "/myinfo";
 	}
 	
 	
