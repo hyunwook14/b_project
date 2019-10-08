@@ -7,7 +7,7 @@
 <title>회원가입</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/resources/css/Main.css" >
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 <style>
 
 
@@ -26,120 +26,13 @@
 	background-position: top;
 	background-size:cover;
 }
-.opacityd{
-	opacity:1;
-}
+
 .ptb50p{
 	padding:25px 0;
 }
-.mt50p{
-	/* margin-top:450px; */
-}
 
 </style>
-<script>
-	$(document).ready(function(){
-		var idflag=0;
-		var pwflag=0;
-		
-		/* id중복검사 */
-		$("#idcheck").click(function(){
-			var id = $("#id").val();
-			if(id == ""){
-				alert("아이디를 입력해주세요");
-			}else{
-				$.ajax({
-					url:"/idcheck",
-					type:"POST",
-					data:{"id": id}
-				}).done(function(data){
-					if(data == "true"){
-						alert("아이디 사용가능합니다");
-						idflag=1;
-						$("#id").css("borderColor", "#86E57F");
-					}else{
-						$("#id").css("borderColor", "red");
-						alert("아이디값이 중복됩니다");
-					}
-				});
-			}
-		});
-		
-		/*비밀번호중복검사*/
-		$("#pw").change(function(){
-			var pw = $("#pw").val();
-			var pw2 = $("#pw2").val();
-			if( pw2 != "" ){
-				$("#pw2").css("borderColor", "#86E57F");
-				if(pw == pw2){
-					$("#pw1").css("borderColor", "#86E57F");
-					pwflag=1;
-				}else{
-					$("#pw1").css("borderColor", "red");
-				}
-			}else{
-				$("#pw2").css("borderColor", "red");
-			}
-		})
-		$("#pw2").change(function(){
-			var pw = $("#pw").val();
-			var pw2 = $("#pw2").val();
-			if( pw != "" ){
-				$("#pw").css("borderColor", "#86E57F");
-				if(pw == pw2){
-					$("#pw2").css("borderColor", "#86E57F");
-					pwflag=1;
-				}else{
-					$("#pw2").css("borderColor", "red");
-				}
-			}else{
-				$("#pw").css("borderColor", "red");
-			}
-		});
-		
-		$("#create").click(function(){
-			console.log("zzzz", idflag,"--id",pwflag, "--pw")
-			
-			var re = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-       		// 이메일이 적합한지 검사할 정규식
-			var email = $("#email").val();
-			
-			if(idflag ==1 && pwflag ==1){
-				console.log(email)
-				if(email=="") {
-			           alert("이메일을 입력해 주세요");
-			           return false;
-			       }else{
-			    	   
-					$.ajax({
-						url:"/createuser",
-						type:"POST",
-						data:{"user_id": $("#id").val(),
-							  "user_pw": $("#pw").val(),
-							  "user_email": $("#email").val()
-						}
-					}).done(function(data){
-						console.log(data);
-						if( data == "1"){
-							alert("회원가입성공");
-							location.href="/";
-						}else{
-							alert("회원가입실패")
-							location.href="/c_user";
-						}
-					});
-			    	   
-			       }
-				
-			}else{
-				alert("회원정보를 확인해주세요");
-			}
-		});
-		
-	})
-	
-	
-</script>
+
 </head>
 <body>
 	<section class="container-fluid">
@@ -232,5 +125,109 @@
 	 <div>
 	 </div>
 	</footer>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			var idflag=0;
+			var pwflag=0;
+			
+			/* id중복검사 */
+			$("#idcheck").click(function(){
+				var id = $("#id").val();
+				if(id == ""){
+					alert("아이디를 입력해주세요");
+				}else{
+					$.ajax({
+						url:"/idcheck",
+						type:"POST",
+						data:{"id": id}
+					}).done(function(data){
+						if(data == "true"){
+							alert("아이디 사용가능합니다");
+							idflag=1;
+							$("#id").css("borderColor", "#86E57F");
+						}else{
+							$("#id").css("borderColor", "red");
+							alert("아이디값이 중복됩니다");
+						}
+					});
+				}
+			});
+			
+			/*비밀번호중복검사*/
+			$("#pw").change(function(){
+				var pw = $("#pw").val();
+				var pw2 = $("#pw2").val();
+				if( pw2 != "" ){
+					$("#pw2").css("borderColor", "#86E57F");
+					if(pw == pw2){
+						$("#pw1").css("borderColor", "#86E57F");
+						pwflag=1;
+					}else{
+						$("#pw1").css("borderColor", "red");
+					}
+				}else{
+					$("#pw2").css("borderColor", "red");
+				}
+			})
+			$("#pw2").change(function(){
+				var pw = $("#pw").val();
+				var pw2 = $("#pw2").val();
+				if( pw != "" ){
+					$("#pw").css("borderColor", "#86E57F");
+					if(pw == pw2){
+						$("#pw2").css("borderColor", "#86E57F");
+						pwflag=1;
+					}else{
+						$("#pw2").css("borderColor", "red");
+					}
+				}else{
+					$("#pw").css("borderColor", "red");
+				}
+			});
+			
+			$("#create").click(function(){
+				console.log("zzzz", idflag,"--id",pwflag, "--pw")
+				
+				var re = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+	       		// 이메일이 적합한지 검사할 정규식
+				var email = $("#email").val();
+				
+				if(idflag ==1 && pwflag ==1){
+					console.log(email)
+					if(email=="") {
+				           alert("이메일을 입력해 주세요");
+				           return false;
+				       }else{
+				    	   
+						$.ajax({
+							url:"/createuser",
+							type:"POST",
+							data:{"user_id": $("#id").val(),
+								  "user_pw": $("#pw").val(),
+								  "user_email": $("#email").val()
+							}
+						}).done(function(data){
+							console.log(data);
+							if( data == "1"){
+								alert("회원가입성공");
+								location.href="/";
+							}else{
+								alert("회원가입실패")
+								location.href="/c_user";
+							}
+						});
+				    	   
+				       }
+					
+				}else{
+					alert("회원정보를 확인해주세요");
+				}
+			});
+			
+		})
+	
+	
+	</script>
 </body>
 </html>

@@ -7,7 +7,7 @@
 <title>home</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/resources/css/Main.css" >
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 <style>
 *{
 	padiing:0;
@@ -29,9 +29,7 @@
 	background-position: top;
 	background-size:cover;
 }
-.opacityd{
-	opacity:1;
-}
+
 .ptb50p{
 	padding:25px 0;
 }
@@ -40,11 +38,6 @@
 }
 </style>
 
-<script>
-	/* $(document).ready(function(){
-		
-	}) */
-</script>
 </head>
 <body>
 	<section class="container-fluid">
@@ -120,5 +113,6 @@
 	 <div>
 	 </div>
 	</footer>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </body>
 </html>

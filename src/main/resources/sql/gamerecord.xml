@@ -25,7 +25,7 @@
  		select record_date, record_quarter ,count(record_nickname) as peoplen 
  		from gamelist_record 
  		group by record_quarter, record_date
- 		order by  record_date, record_quarter 
+ 		order by  record_date desc, record_quarter 
  		limit #{index}, 10
  </select>
  <!-- 총 게임리스트 개수 -->

@@ -12,8 +12,6 @@
 <title>기록 목록</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/resources/css/Main.css" >
-
-
 <style>
 	.w80p{
 		width:75%;
@@ -33,7 +31,6 @@
 		cursor:pointer;
 	}
 </style>
-
 </head>
 <body>
  	
@@ -49,7 +46,6 @@
 				 	<li id="admin" class="hidden"><a href="/admin">관리자</a>
 				 </ul>
 				 <div id="myinfo">
-					
 					
 				 </div>
 			 </nav>
@@ -134,11 +130,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/resources/js/Myinfo.js"></script>
+<script src="/resources/js/common.js"></script>
 <script>
 	var id= "";
 	id ="<%= session.getAttribute("id") %>";
-	
-	
 	
 	function genRowspan(className){
 	    $("." + className).each(function() {
@@ -160,38 +155,13 @@
 		
 		var html ="";
 		
-		if( id != ""){
-			 if( id == "admin"){
-					$("#admin").removeClass("hidden");	
-				}
-			html =`<form class="row form-group">
-					<div class="col-sm-12 ">
-						<div class="form-control text-center">\${id}</div>
-					</div>
-					<div class="col-sm-6">
-						<button type="button" id="myinfobtn" class=" btn form-control">내정보</button>
-					</div>
-					<div class="col-sm-6">
-						<button class=" btn form-control" formaction="/logout">로그아웃</button>
-					</div>
-				   </form>	 `;
-		}
-		$("#myinfo").append(html);
+		myinfoload(id);
 		
-		console.log(`${result}`, "--result")
-		var result = new Array(`${result}`);
-		console.log(result," - " ,typeof result)
-		//if(result == ""){
-			console.log(location.href.lastIndexOf("/"), " : ")
 			var lastindex = location.href.lastIndexOf("/")+ 1;
 			var index = location.href.substring(lastindex);
-			console.log("index++",index)
-			if( index == "m_list") {
-				console.log("index없다")
-				index = 0
+			if( index == "m_list" || index == 0 || index == "") {
+				index = 1
 			}
-			console.log(index)
-			console.log("저장된값이없습니다.")
 			$.ajax({
 				url:"/loadgamelist",
 				type:"POST",
@@ -212,22 +182,54 @@
 						<td>\${data[i].peoplen}</td>
 					</tr>`;
 				}
-				console.log(data)
-				console.log(data[data.length-1])
 				
 				$("#content").append(html);
-				var page = Math.ceil(data[data.length-1] / 10)
-				console.log(page)
-				html ="";
-				for(var i = 1; i <= page; i++){
-					html += `<li><a href="/m_list/\${i}">\${i}</a>`;
+				
+				var totalpage = Math.ceil(data[data.length-1] / 10)
+				
+				console.log(Math.ceil((index- 1)/5) , "--")
+				
+				 var startpage ;
+				
+				if(index <6 ){
+					startpage = 1;
+				}else{
+					startpage = Math.ceil(index / 5) * 5 -4;
 				}
+				/*if (index % 5 == 0) {
+					startpage = (index / 5 - 1)*5 + 1;
+				} else {
+					startpage = Math.trunc(index / 5)*5 +1;
+				} */
+				
+			
+				
+				console.log(startpage, "---spage")
+				var prepage= startpage -5;
+				if(prepage <0) prepage = 1;
+				var nextpage= startpage +5;
+				if(nextpage > totalpage) nextpage -= 5;
+				
+				console.log(totalpage, "-totalpage")
+				var count = 0;
+				html ="";
+				html += `<li><a href="/m_list/\${prepage}"><</a>`;
+				for(var i = startpage; i <= totalpage; i++){
+					count++;
+					html += `<li id ="\${i}" class="pagenum"><a href="/m_list/\${i}">\${i}</a>`;
+					if(count == 5) break;
+				}
+				html += `<li><a href="/m_list/\${nextpage}">></a>`;
 				$("#page").empty();
 				$("#page").append(html);
+				
+				console.log(index)
+				 if((index-1) <0){
+					index = 1
+				}
+				$(`#\${index}`).addClass("active");
 			});
-		/* }else{
-			
-		} */
+		
 		
 		
 		$(document).on("click", ".detail", function(){

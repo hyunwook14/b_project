@@ -58,24 +58,27 @@ public class CharacterService {
 	public List<BasketballPositionVO> positionselect(HttpServletRequest req, HttpSession session){
 		List<BasketballPositionVO> resultlist = new ArrayList<BasketballPositionVO>(); 
 		int height = Integer.parseInt( (String)req.getParameter("height") );
+		System.out.println(height);
 		int no = 0;
 		
 		//키별로 포지션구별
-		if(height <180 && height > 100) {
-			no = 1;
-			resultlist = sqlsession.selectList("character.position_select", no);
-		}else if(height <184) {
-			no=2;
-			resultlist.add((BasketballPositionVO) sqlsession.selectList("character.position_select", no).get(0));
-		}else if(height <188) {
-			no=3;
-			resultlist.add((BasketballPositionVO) sqlsession.selectList("character.position_select", no).get(0));
-		}else if(height < 190) {
-			no=4;
-			resultlist.add((BasketballPositionVO) sqlsession.selectList("character.position_select", no).get(0));
-		}else if(height >= 190){
+		if(  height < 230 && height >=190) {
 			no=5;
 			resultlist.add((BasketballPositionVO) sqlsession.selectList("character.position_select", no).get(0));
+		}else if(height <190 && height >=188) {
+			no=4;
+			resultlist.add((BasketballPositionVO) sqlsession.selectList("character.position_select", no).get(0));
+		}else if(height <188 && height >= 183) {
+			no=3;
+			resultlist.add((BasketballPositionVO) sqlsession.selectList("character.position_select", no).get(0));
+		}else if(height < 183 && height >= 180) {
+			no=2;
+			resultlist.add((BasketballPositionVO) sqlsession.selectList("character.position_select", no).get(0));
+		}else if(height < 180 && height > 100){
+			no = 1;
+			resultlist = sqlsession.selectList("character.position_select", no);
+		}else {
+			System.out.println("포지션추천해줄수없는 키입니다.");
 		}
 		return resultlist;
 	}
@@ -93,6 +96,10 @@ public class CharacterService {
 			}
 		}
 		return list;
-		
+	}
+	// 케릭터 삭제
+	public int delete(HttpServletRequest req) {
+		int character_no = Integer.parseInt(req.getParameter("character_no"));
+		return sqlsession.delete("character.delete", character_no);
 	}
 }

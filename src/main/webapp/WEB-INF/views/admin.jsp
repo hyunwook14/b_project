@@ -52,78 +52,7 @@ h1:hover{
 
 </style>
 
-<script>
-	var id= "";
-	id ="<%= session.getAttribute("id") %>";
-	
-	$(document).ready(function(){
-		var html ="";
-		
-		if( id != ""){
-			 if( id == "admin"){
-					$("#admin").removeClass("hidden");	
-				}
-			html =`<form class="row form-group">
-					<div class="col-sm-12 ">
-						<div class="form-control text-center">\${id}</div>
-					</div>
-					<div class="col-sm-6">
-						<button class=" btn form-control">내정보</button>
-					</div>
-					<div class="col-sm-6">
-						<button class=" btn form-control" formaction="/logout">로그아웃</button>
-					</div>
-				   </form>	 `;
-		}
-		$("#myinfo").append(html);
-		
-		$.ajax({
-			url:"/userlist",
-			type:"POST",
-			data:{}
-		}).done(function(data){
-			html="";
-			
-			for(var i =0; i<data.length; i++){
-				
-				html += `<li>
-						<ul class="tr">
-							<li><input type="checkbox">
-							<li>\${data[i].user_id}
-							<li>\${data[i].user_pw}
-							<li>\${data[i].user_characternumber}
-							<li>\${data[i].user_delYN}
-						</ul>
-						</li>`;
-			}
-			
-			$(".table").eq(0).append(html); 
-			
-		});
-		
-		$("#crawling").click(function(){
-			$("#popupbackground").removeClass("hidden");
-			$("#popup").removeClass("hidden");
-			
-			$.ajax({
-				url:"/crawling",
-				type:"POST",
-				data:{}
-			}).done(function(data){
-				console.log("adfadfad")
-				console.log(data)
-				
-				$("#popupbackground").addClass("hidden");
-				$("#popup").addClass("hidden");
-				
-				if( data == 0) {
-					alert("이미 데이터가 존재합니다");
-				}
-			});
-		})
-		
-	}) 
-</script>
+
 </head>
 <body>
 	<section class="container-fluid">
@@ -196,5 +125,78 @@ h1:hover{
 	 <div>
 	 </div>
 	</footer>
+	<script type="text/javascript" src="/resources/js/Myinfo.js"></script>
+	<script>
+	var id= "";
+	id ="<%= session.getAttribute("id") %>";
+	
+	$(document).ready(function(){
+		var html ="";
+		
+		if( id != ""){
+			 if( id == "admin"){
+					$("#admin").removeClass("hidden");	
+				}
+			html =`<form class="row form-group">
+					<div class="col-sm-12 ">
+						<div class="form-control text-center">\${id}</div>
+					</div>
+					<div class="col-sm-6">
+						<button type="button" id="myinfobtn" class=" btn form-control">내정보</button>
+					</div>
+					<div class="col-sm-6">
+						<button class=" btn form-control" formaction="/logout">로그아웃</button>
+					</div>
+				   </form>	 `;
+		}
+		$("#myinfo").append(html);
+		
+		$.ajax({
+			url:"/userlist",
+			type:"POST",
+			data:{}
+		}).done(function(data){
+			html="";
+			
+			for(var i =0; i<data.length; i++){
+				
+				html += `<li>
+						<ul class="tr">
+							<li><input type="checkbox">
+							<li>\${data[i].user_id}
+							<li>\${data[i].user_pw}
+							<li>\${data[i].user_characternumber}
+							<li>\${data[i].user_delYN}
+						</ul>
+						</li>`;
+			}
+			
+			$(".table").eq(0).append(html); 
+			
+		});
+		
+		$("#crawling").click(function(){
+			$("#popupbackground").removeClass("hidden");
+			$("#popup").removeClass("hidden");
+			
+			$.ajax({
+				url:"/crawling",
+				type:"POST",
+				data:{}
+			}).done(function(data){
+				console.log("adfadfad")
+				console.log(data)
+				
+				$("#popupbackground").addClass("hidden");
+				$("#popup").addClass("hidden");
+				
+				if( data == 0) {
+					alert("이미 데이터가 존재합니다");
+				}
+			});
+		})
+		
+	}) 
+	</script>
 </body>
 </html>

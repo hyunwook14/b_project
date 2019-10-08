@@ -7,8 +7,7 @@
 <title>신체정보등록</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/resources/css/Main.css" >
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
 <style>
 *{
 	padding:0;
@@ -29,91 +28,7 @@
 }
 </style>
 
-<script>
-var id= "";
-id ="<%= session.getAttribute("id") %>";
 
- $(document).ready(function(){
-	var clicknumber = 0;
-	var html ="";
-	
-	if( id != ""){
-		 if( id == "admin"){
-				$("#admin").removeClass("hidden");	
-			}
-		html =`<form class="row form-group">
-				<div class="col-sm-12 ">
-					<div class="form-control text-center">\${id}</div>
-				</div>
-				<div class="col-sm-6">
-					<button class=" btn form-control">내정보</button>
-				</div>
-				<div class="col-sm-6">
-					<button class=" btn form-control" formaction="/logout">로그아웃</button>
-				</div>
-			   </form>	 `;
-	}
-	$("#myinfo").append(html);
-	
-	$("#register").click(function(){
-		var character_nickname = $("#character_nickname").val();
-		var character_height = $("#character_height").val();
-		var character_weight = $("#character_weight").val();
-		
-		if(clicknumber >0 && character_nickname != "" && character_height != "" && character_weight != "" ){
-			var position_name = $("#position_name").text();
-			var position_explanation = $("#position_explanation").text();
-			$.ajax({
-				url:"/register_bodyinfo",
-				type:"POST",
-				data:{
-					character_nickname: character_nickname,
-					character_height : character_height,
-					character_weight : character_weight,
-					character_position : position_name,
-					character_explanation : position_explanation
-				}
-			}).done(function(data){
-				console.log(data)
-				if(data =="1"){
-					alert("입력성공");
-					$("#character_nickname").val("");
-					$("#character_height").val("");
-					$("#character_weight").val("");
-					$("#position").empty();
-				}
-				else alert("케릭터인원초과했습니다.");
-			});
-		}else{
-			alert("포지션추천을 눌러주세요");
-		}
-	})
-	
-	$("#recommand").click(function(){
-		clicknumber++;
-		var height = $("#character_height").val();
-		
-		$.ajax({
-			url:"/position_recommand",
-			type:"POST",
-			data:{height:height}
-		}).done(function(data){
-			var result = JSON.parse(data);
-			$("#position").empty();
-			
-			html = "";		
-			for(var i = 0; i<result.length; i++){
-				html +=`<label id="position_name">\${result[i].position_name}:</label>
-						<p id="position_explanation">\${result[i].position_explanation}</p>`;
-			}
-						
-			$("#position").append(html);
-		});
-		
-	});
-	
-}); 
-</script>
 </head>
 <body>
 	<section class="container-fluid">
@@ -177,5 +92,106 @@ id ="<%= session.getAttribute("id") %>";
 	 <div>
 	 </div>
 	</footer>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/resources/js/Myinfo.js"></script>
+	<script src="/resources/js/common.js"></script>
+	<script>
+		var id= "";
+		id ="<%= session.getAttribute("id") %>";
+		
+		 $(document).ready(function(){
+			var clicknumber = 0;
+			var html ="";
+			
+			myinfoload(id);
+			
+			$("#register").click(function(){
+				var character_nickname = $("#character_nickname").val();
+				var character_height = $("#character_height").val();
+				var character_weight = $("#character_weight").val();
+				
+				 
+				
+				if(clicknumber >0 && character_nickname != "" && character_height >= 100 && character_height <= 230 && character_weight >= 30 && character_weight <= 160){
+							
+							var position_name = $("#position_name").text();
+							var position_explanation = $("#position_explanation").text();
+							$.ajax({
+								url:"/register_bodyinfo",
+								type:"POST",
+								data:{
+									character_nickname: character_nickname,
+									character_height : character_height,
+									character_weight : character_weight,
+									character_position : position_name,
+									character_explanation : position_explanation
+								}
+							}).done(function(data){
+								console.log(data)
+								if(data =="1"){
+									alert("등록");
+									$("#character_nickname").val("");
+									$("#character_height").val("");
+									$("#character_weight").val("");
+									$("#position").empty();
+								}
+								else alert("케릭터인원초과했습니다.");
+							}); 
+					}else if(character_nickname == "" || character_height == "" || character_weight == "" ){
+						alert("정보를 확인하고 다시 입력하세요");
+					}else if(clicknumber < 1){
+						alert("포지션추천을 눌러주세요");
+					}else if(character_height < 100 || character_height > 230 ){
+						alert("키가 이상합니다 다시입력해주세요")
+					}else if(character_weight < 30 || character_weight > 160){
+						alert("몸무게가 이상합니다 다시입력해주세요")
+					}
+			})
+			
+			$("#recommand").click(function(){
+				clicknumber++;
+				var height = $("#character_height").val();
+				var weight = $("#character_weight").val();
+				if(height=="" || weight==""){
+					alert("키와 몸무게 입력해주세요")
+				}else{
+					$.ajax({
+						url:"/position_recommand",
+						type:"POST",
+						data:{height:height}
+					}).done(function(data){
+						var result = JSON.parse(data);
+						console.log(data.length)
+						if(data.length == 2){
+								alert("정보를 수정해주세요")
+								$("#position").empty();
+								
+								html = "";		
+								
+								html =`<label id="position_name">키값이 이상합니다:</label>
+										<p id="position_explanation">다시입력해주세요</p>`;
+								
+								
+								$("#position").append(html);
+							}else{
+							$("#position").empty();
+							
+							html = "";		
+							for(var i = 0; i<result.length; i++){
+								html +=`<label id="position_name">\${result[i].position_name}:</label>
+										<p id="position_explanation">\${result[i].position_explanation}</p>`;
+							}
+										
+							$("#position").append(html);
+						}
+					});
+				}
+				
+				
+			});
+			
+		}); 
+	</script>
 </body>
 </html>

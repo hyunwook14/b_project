@@ -14,8 +14,8 @@
   </insert>
   <!-- 유저정보로 케릭터정보가져오기 -->
   <select id="select" parameterType="int" resultType ="com.java.web.vo.UserCharacterVO">
-   select character_nickname, character_height, character_weight, character_position
-   		from user_character where user_no = #{userno}
+   select  character_no, character_nickname, character_height, character_weight, character_position
+   		from user_character where user_no = #{userno} and character_delYN = 'N'
   </select>
   <!-- 포지션에 따른 요구되는 능력  -->
   <select id="position_select" parameterType="int" resultType="com.java.web.vo.BasketballPositionVO">
@@ -24,7 +24,11 @@
   </select>
   <!-- 케릭터 개수 가져오기 -->
   <select id="checknumber" parameterType="int" resultType="int">
-  	select count(*) from user_character where user_no = #{userno}
+  	select count(*) from user_character where user_no = #{userno} AND character_delYN = 'N'
   </select>
+  <!-- 케릭터 삭제 -->
+  <update id="delete" parameterType="int">
+  	UPDATE user_character set character_delYN = 'Y' where character_no = #{character_no} 
+  </update>
  
 </mapper>

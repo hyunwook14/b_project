@@ -87,4 +87,23 @@ public class UserCharacterController {
 			e.printStackTrace();
 		}
 	}
+	//케릭터 삭제
+	@RequestMapping(value="/deletecharacter", method=RequestMethod.POST)
+	public void deletecharacter(HttpServletRequest req, HttpServletResponse res) {
+		try {
+			int result = cs.delete(req);
+			System.out.println("req:character_no : "+ req.getParameter("character_no"));
+			String msg ="";
+			res.setContentType("text/html; charset=utf-8"); 
+			if(result == 0) {
+				msg =" <script> alert('삭제실패'); </script>";
+			}else if(result ==1 ) {
+				msg =" <script> location.href='/'; alert('삭제완료'); </script>";
+			}
+			res.getWriter().print(msg);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

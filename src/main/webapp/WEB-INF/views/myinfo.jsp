@@ -7,126 +7,123 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>내정보</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="/resources/css/Main.css" >
-
-
-<style>
-	.w80p{
-		width:75%;
-		margin: auto;
-	}
-	.w20{
-		width: 350px;
-		text-align: center;
-	}
-	.mtb10{
-		margin: 10px 0;
-	}
-	.mtb10{
-		margin: 20px 0;
-	}
-	tbody{
-		cursor:pointer;
-	}
-</style>
-
-</head>
-<body>
- 	
-	<section class="container-fluid">
-		<div class="row content">
-			 <nav class="col-sm-3 sidenav">
-				 <ul class="menu nav nav-pills nav-stacked">
-				 	<li class=""><a href="/main">Home</a></li>
-				 	<li class=""><a href="/bodyinfo_register">신체정보등록</a></li>
-				 	<li class=""><a href="/player_recommand">선수추천목록</a>
-				 	<li class=""><a href="/exercise_recommand">운동목록</a>
-				 	<li class=""><a href="/m_list">경기기록</a>
-				 	<li id="admin" class="hidden"><a href="/admin">관리자</a>
-				 </ul>
-				 <div id="myinfo">
-					
-					
-				 </div>
-			 </nav>
-			 
-		 	 <section class="col-sm-9">
-				<header class="jumbotron bgc">
-					<div class="container text-center">
-						<img src="http://www.gdu.co.kr/images/main/logo.png" alt="IMAGE">
-					</div>
-				</header>
-				<div class="bgray linep10"></div>	
-				<div class="w80p">
-					<h1 class="mtb20"> 내정보 </h1>
-					<div class="mtb10">
-						<form class="">
-							<div class="form-group">
-								<label for="usrid">아이디:</label>	
-								<input type="text" id="usrid" class="form-control">
-							</div>
-							<div class="form-group">
-								<label for="usrpw">비밀번호:</label>	
-								<input type="password" id="usrpw" class="form-control">
-							</div>
-							<div class="form-group">
-								<label for="usremail">이메일:</label>	
-								<input type="email" id="usremail" class="form-control">
-							</div>
-							<div class="form-group">
-								<label for="characternumber">케릭터수:</label>	
-								<input type="text" id="characternumber" class="form-control">
-							</div>
-							<div class="form-group">
-								<button type="button" class="btn btn-info">수정</button>
-								<button type="button" class="btn btn-danger">탈퇴</button>
-							</div>
-						</form>
-					</div>
-				
-				</div>
-				  
-			</section>
-		</div>
-	</section>
-<footer></footer>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/resources/js/Myinfo.js"></script>
-<script>
-	var id= "";
-	id ="<%= session.getAttribute("id") %>";
-	
-	$(document).ready(function(){
-		
-		
-		var html ="";
-		
-		if( id != ""){
-			 if( id == "admin"){
-					$("#admin").removeClass("hidden");	
-				}
-			html =`<form class="row form-group">
-					<div class="col-sm-12 ">
-						<div class="form-control text-center">\${id}</div>
-					</div>
-					<div class="col-sm-6">
-						<button type="button" id="myinfobtn" class=" btn form-control">내정보</button>
-					</div>
-					<div class="col-sm-6">
-						<button class=" btn form-control" formaction="/logout">로그아웃</button>
-					</div>
-				   </form>	 `;
+	<head>
+	<meta charset="UTF-8">
+	<title>내정보</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/resources/css/Main.css" >
+	<style>
+		.w80p{
+			width:75%;
+			margin: auto;
 		}
-		$("#myinfo").append(html);
+		.w20{
+			width: 350px;
+			text-align: center;
+		}
+		.mtb10{
+			margin: 10px 0;
+		}
+		.mtb10{
+			margin: 20px 0;
+		}
+		tbody{
+			cursor:pointer;
+		}
+	</style>
+	
+	</head>
+	<body>
+	 	
+		<section class="container-fluid">
+			<div class="row content">
+				 <nav class="col-sm-3 sidenav">
+					 <ul class="menu nav nav-pills nav-stacked">
+					 	<li class=""><a href="/main">Home</a></li>
+					 	<li class=""><a href="/bodyinfo_register">신체정보등록</a></li>
+					 	<li class=""><a href="/player_recommand">선수추천목록</a>
+					 	<li class=""><a href="/exercise_recommand">운동목록</a>
+					 	<li class=""><a href="/m_list">경기기록</a>
+					 	<li id="admin" class="hidden"><a href="/admin">관리자</a>
+					 </ul>
+					 <div id="myinfo">
+						
+						
+					 </div>
+				 </nav>
+				 
+			 	 <section class="col-sm-9">
+					<header class="jumbotron bgc">
+						<div class="container text-center">
+							<img src="http://www.gdu.co.kr/images/main/logo.png" alt="IMAGE">
+						</div>
+					</header>
+					<div class="bgray linep10"></div>	
+					<div class="w80p">
+						<h1 class="mtb20"> 내정보 </h1>
+						<div class="mtb10">
+							<form class="">
+								<div class="form-group">
+									<label for="usrid">아이디:</label>	
+									<input type="text" id="usrid" class="form-control">
+								</div>
+								<div class="form-group">
+									<label for="usrpw">비밀번호:</label>	
+									<input type="password" id="usrpw" class="form-control">
+								</div>
+								<div class="form-group">
+									<label for="usremail">이메일:</label>	
+									<input type="email" id="usremail" class="form-control">
+								</div>
+								<div class="form-group">
+									<label for="characternumber">케릭터수:</label>	
+									<input type="text" id="characternumber" class="form-control">
+								</div>
+								<div class="form-group">
+									<button type="button" class="btn btn-info">수정</button>
+									<button type="button" class="btn btn-danger">탈퇴</button>
+								</div>
+							</form>
+						</div>
+					
+					</div>
+					  
+				</section>
+			</div>
+		</section>
+	<footer></footer>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/resources/js/Myinfo.js"></script>
+	<script>
+		var id= "";
+		id ="<%= session.getAttribute("id") %>";
 		
-		
-	});
-</script>
-</body>
-
+		$(document).ready(function(){
+			
+			
+			var html ="";
+			
+			if( id != ""){
+				 if( id == "admin"){
+						$("#admin").removeClass("hidden");	
+					}
+				html =`<form class="row form-group">
+						<div class="col-sm-12 ">
+							<div class="form-control text-center">\${id}</div>
+						</div>
+						<div class="col-sm-6">
+							<button type="button" id="myinfobtn" class=" btn form-control">내정보</button>
+						</div>
+						<div class="col-sm-6">
+							<button class=" btn form-control" formaction="/logout">로그아웃</button>
+						</div>
+					   </form>	 `;
+			}
+			$("#myinfo").append(html);
+			
+			
+		});
+	</script>
+	</body>
 </html>
