@@ -6,10 +6,13 @@
   <select id="test" resultType="String">
     select 1 as test
   </select>
-  
-  <!-- user정보가져오기 -->
+  <!-- 회원 탈퇴 여부 -->
+  <select id="checkdelYN" parameterType="com.java.web.vo.MemberUserVO" resultType="int">
+  	select count(*) from member_user where user_id = #{user_id} and user_delYN = 'Y'
+  </select>
+  <!-- user 정보 가져오기 -->
   <select id="selectuser" parameterType="com.java.web.vo.MemberUserVO" resultType="com.java.web.vo.MemberUserVO">
-  	select user_id, user_pw  from member_user  where user_delYN = 'N' <if test="user_id != '' "> and user_id = #{user_id} </if> <if test="user_pw != ''"> and user_pw = #{user_pw}</if>
+  	select user_id, user_pw, user_email, user_characternumber  from member_user  where user_delYN = 'N' <if test="user_id != '' "> and user_id = #{user_id} </if> 
   </select>
   
  <!-- id중복검사 -->
@@ -30,7 +33,7 @@
   <select id="userlist" resultType="com.java.web.vo.MemberUserVO">
   	select user_id, user_pw, user_characternumber, user_delYN  from member_user
   </select>
-  
+  <!-- 케릭터 수 업데이트 -->
   <update id="characternumber">
   	UPDATE member_user AS a
  	INNER JOIN (SELECT *, COUNT(user_no) AS c 
@@ -40,4 +43,17 @@
 	 ON(a.user_no_pk = b.user_no)
  	SET a.user_characternumber = b.c 
   </update>
+  <!-- 정보수정 -->
+  <update id="updateuser" parameterType="com.java.web.vo.MemberUserVO">
+  	 	update member_user set user_pw = #{user_pw}, user_email = #{user_email} 
+  	 	where user_id = #{user_id} and user_characternumber = #{user_characternumber}
+  </update>
+  <!-- 정보탈퇴 -->
+  <update id="deleteuser" parameterType="com.java.web.vo.MemberUserVO">
+  update member_user set user_delYN = 'Y' 
+  	 	where user_id = #{user_id} and user_characternumber = #{user_characternumber} 
+  	 	and user_pw = #{user_pw} and user_email = #{user_email}
+  	 	
+  </update>
+  
 </mapper>

@@ -65,7 +65,7 @@
 							<form class="">
 								<div class="form-group">
 									<label for="usrid">아이디:</label>	
-									<input type="text" id="usrid" class="form-control">
+									<input type="text" id="usrid" class="form-control" readonly>
 								</div>
 								<div class="form-group">
 									<label for="usrpw">비밀번호:</label>	
@@ -77,11 +77,11 @@
 								</div>
 								<div class="form-group">
 									<label for="characternumber">케릭터수:</label>	
-									<input type="text" id="characternumber" class="form-control">
+									<input type="text" id="characternumber" class="form-control" readonly>
 								</div>
 								<div class="form-group">
-									<button type="button" class="btn btn-info">수정</button>
-									<button type="button" class="btn btn-danger">탈퇴</button>
+									<button type="button" class="btn btn-info" id="update">수정</button>
+									<button type="button" class="btn btn-danger" id="delete">탈퇴</button>
 								</div>
 							</form>
 						</div>
@@ -122,7 +122,49 @@
 			}
 			$("#myinfo").append(html);
 			
+			$.ajax({
+				url:"/loadmyinfo",
+				type:"POST"
+			}).done(function(data){
+				console.log(data )
+				$("#usrid").val(data.user_id);
+				$("#usrpw").val(data.user_pw);
+				$("#usremail").val(data.user_email);
+				$("#characternumber").val(data.user_characternumber);
+			});
 			
+			$("button").click(function(){
+				console.log("수정,삭제")
+				var user_id = $("#usrid").val();
+				var user_pw = $("#usrpw").val();
+				var user_email =$("#usremail").val();
+				var user_characternumber = $("#characternumber").val()
+				var index =  $(this).index();
+				console.log(typeof index)
+				console.log($(this).index(), $(this))
+				
+				$.ajax({
+					url:"/updatemyinfo",
+					type:"POST",
+					data:{
+						user_id:user_id,
+						user_pw :user_pw,
+						user_email :user_email,
+						user_characternumber :user_characternumber,
+						index : index
+					}
+				}).done(function(data){
+					console.log(data)
+					if(data == 1){
+						alert("정보수정성공했습니다.")
+					}else if(data == 2){
+						alert("회원탈퇴성공했습니다.")
+						location.href="/logout";
+					}else{
+						alert("정보 수정,삭제 실패했습니다.")
+					}
+				});
+			});
 		});
 	</script>
 	</body>
