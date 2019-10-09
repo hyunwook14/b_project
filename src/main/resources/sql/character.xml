@@ -6,6 +6,10 @@
   <select id="test" resultType="String">
     select 1 as test
   </select>
+  <!-- 케릭터 이름 중복확인 -->
+  <select id="nicknamecheck" parameterType="String" resultType="int">
+ 	 select count(character_nickname) from user_character where character_nickname = #{id}
+  </select>
   <!-- 케릭터생성 -->
   <insert id="create" parameterType="com.java.web.vo.UserCharacterVO">
   	insert into user_character 

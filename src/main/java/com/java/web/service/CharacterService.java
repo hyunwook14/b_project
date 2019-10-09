@@ -20,6 +20,11 @@ public class CharacterService {
 	@Autowired
 	SqlSession sqlsession;
 	
+	//케릭터 이름 중복확인
+	public int nicknamecheck(String nickname) {
+		return sqlsession.selectOne("character.nicknamecheck", nickname);
+	}
+	
 	//케릭터 생성
 	public int create(UserCharacterVO character, HttpSession session) {
 		int result = 0;
@@ -28,10 +33,16 @@ public class CharacterService {
 		//로그인된 user 고유키값 등록
 		character.setUser_no(userno);
 		
-		int count = sqlsession.selectOne("character.checknumber", userno);
-		if( count < 3) {
-			result = sqlsession.insert("character.create", character);
+		result = nicknamecheck(character.getCharacter_nickname());
+		if(result != 0) {
+			result = 3;
+		}else {
+			int count = sqlsession.selectOne("character.checknumber", userno);
+			if( count < 3 ) {
+				result = sqlsession.insert("character.create", character);
+			}
 		}
+		
 		
 		return result;
 	}
@@ -50,7 +61,6 @@ public class CharacterService {
 		
 		//user키값으로 케릭터정보가져오기
 		List<UserCharacterVO> characterlist = sqlsession.selectList("character.select", userno);
-		
 		return characterlist;
 	}
 	

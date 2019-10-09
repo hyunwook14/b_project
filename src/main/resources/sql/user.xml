@@ -34,8 +34,10 @@
   <update id="characternumber">
   	UPDATE member_user AS a
  	INNER JOIN (SELECT *, COUNT(user_no) AS c 
- 					FROM user_character GROUP BY user_no) AS b
+ 					FROM user_character 
+ 					where character_delYN ='N'
+ 					GROUP BY user_no) AS b
 	 ON(a.user_no_pk = b.user_no)
- 	SET a.user_characternumber = b.c
+ 	SET a.user_characternumber = b.c 
   </update>
 </mapper>

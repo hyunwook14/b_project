@@ -37,6 +37,7 @@ public class UserCharacterController {
 			System.out.println(character.toString());
 			int result = cs.create(character, session);
 			int update = cs.characterupdate();
+			System.out.println("result: "+result);
 			System.out.println("update:"+ update);
 			res.setContentType("text/html; charset=utf-8");
 			res.getWriter().print(result+"");

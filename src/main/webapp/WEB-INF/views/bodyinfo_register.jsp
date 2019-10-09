@@ -135,6 +135,8 @@
 									$("#character_height").val("");
 									$("#character_weight").val("");
 									$("#position").empty();
+								}else if(data == 3){
+									alert("케릭터이름 중복됩니다.");
 								}
 								else alert("케릭터인원초과했습니다.");
 							}); 
