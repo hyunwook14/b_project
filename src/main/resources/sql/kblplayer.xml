@@ -23,8 +23,20 @@
    	from KBL_player <if test="index != null"> limit #{index}, 12 </if> 
   </select>
   <!-- pagenumber 총개수 -->
-  <select id="count" resultType="int">
-   select count(*) from KBL_player
+  <select id="count"  resultType="int">
+   select count(*) from KBL_player 
   </select>
+  <!-- 추천 pagenumber 총개수 -->
+  <select id="recommandcount" parameterType="String" resultType="int">
+   select count(*) from KBL_player where player_position = #{position} 
+  </select>
+  <!-- 포지션에 맞는 선수 추천 -->
+  <select id="recommand" parameterType="Hashmap" resultType="com.java.web.vo.KblPlayerVO">
+   select player_name, player_height, player_teamnumber, player_team, player_position, player_img 
+   from KBL_player 
+   where player_position = #{position} 
+   limit #{index}, 12
+  </select>
+  
 	 
 </mapper>

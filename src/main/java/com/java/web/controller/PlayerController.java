@@ -1,5 +1,6 @@
 package com.java.web.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,6 +30,13 @@ public class PlayerController {
 		return "player_recommand";
 	}
 	
+	@RequestMapping("/player_recommand/{name}")
+	public String player_recommand(HttpSession session, @PathVariable String name, HttpServletRequest req) {
+		if(session.getAttribute("id") == null) return "redirect:/";
+		
+		return "player_recommand";
+	}
+	
 	@RequestMapping(value="/playerlistload", method=RequestMethod.POST)
 	public void playerlistload(HttpServletRequest req, HttpServletResponse res, HttpSession session) {
 		try {
@@ -42,6 +50,14 @@ public class PlayerController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@RequestMapping(value ="/recommandlist", method=RequestMethod.POST)
+	public void recommandlist(HttpServletRequest req, HttpServletResponse res) throws IOException {
+		JSONArray jarry = kps.recommend(req);
+		res.setContentType("application/json; charset=utf-8");
+		res.getWriter().print(jarry);
+		
 	}
 	
 }

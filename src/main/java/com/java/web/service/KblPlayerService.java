@@ -10,6 +10,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +23,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.java.web.vo.KblPlayerVO;
+import com.java.web.vo.UserCharacterVO;
+
+import net.sf.json.JSONArray;
 
 @Service
 public class KblPlayerService {
@@ -131,6 +135,47 @@ public class KblPlayerService {
 		}
 		
 		return result;
+	}
+	
+	//케릭터 포지션에 맞는 선수추천
+	public JSONArray recommend(HttpServletRequest req) {
+		String name = req.getParameter("nickname");
+		int index = 0;
+		if(req.getParameter("index")==null) {
+			System.out.println("index는 null");
+		}else {
+			index = Integer.parseInt(req.getParameter("index")) * 12;
+		}
+		System.out.println(name + " :name은?");
+		UserCharacterVO character = sqlsession.selectOne("character.info", name);
+		System.out.println(character);
+		String[] positions = character.getCharacter_position().split(" ");
+		String position = "";
+		for(int i =0 ; i < positions.length; i++) {
+			if("Forward".equals(positions[i])) {
+				position ="FD";
+			}else if("Center".equals(positions[i])) {
+				position = "C";
+			}else if("Guard".equals(positions[i])) {
+				position = "GD";
+			}
+		}
+		System.out.println(position+ ": position");
+		HashMap<String, Object> inputMap = new HashMap<String, Object>();
+		inputMap.put("position", position);
+		inputMap.put("index", index);
+		List<KblPlayerVO> listplayer  = sqlsession.selectList("kblplayer.recommand", inputMap);
+		System.out.println(listplayer.size() + ":size?");
+		int recommandcount = recommandcount(position);
+		JSONArray jarry = JSONArray.fromObject(listplayer);
+		System.out.println(jarry.size()+" jarry size");
+		jarry.add(jarry.size(), recommandcount);
+		
+		return jarry;
+	}
+	
+	public int recommandcount(String position) {
+		return sqlsession.selectOne("kblplayer.recommandcount", position);
 	}
 	
 }

@@ -34,7 +34,6 @@ public class UserController {
 		if(session.getAttribute("id")==null) {
 			return "redirect:/";
 		}
-		
 		return "main";
 	}
 	

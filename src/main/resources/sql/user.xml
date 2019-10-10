@@ -33,7 +33,7 @@
   <select id="userlist" resultType="com.java.web.vo.MemberUserVO">
   	select user_id, user_pw, user_characternumber, user_delYN  from member_user
   </select>
-  <!-- 케릭터 수 업데이트 -->
+  <!-- 전체 케릭터 수 업데이트 -->
   <update id="characternumber">
   	UPDATE member_user AS a
  	INNER JOIN (SELECT *, COUNT(user_no) AS c 
@@ -55,5 +55,6 @@
   	 	and user_pw = #{user_pw} and user_email = #{user_email}
   	 	
   </update>
+ 
   
 </mapper>

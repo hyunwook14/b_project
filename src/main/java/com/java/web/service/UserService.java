@@ -98,5 +98,9 @@ public class UserService {
 		
 		return result;
 	}
+	//케릭터 수 업데이트
+	public int updatecharacternumber() {
+		return sqlsession.update("user.characternumber");
+	}
 	
 }

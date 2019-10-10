@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자</title>
+<title>선수추천목록</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/resources/css/Main.css" >
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -68,6 +68,16 @@
 				
 				<div class="container">
 					<h1>선수목록</h1>
+					
+					<div class="dropdown">
+					    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" id="nickname">케릭터이름
+					    <span class="caret"></span></button>
+					    <ul class="dropdown-menu" id="namemenu">
+												      
+					      
+					    </ul>
+					  </div>
+					
 					<div class="row" id="playerlist">
 						
 					</div>
@@ -144,29 +154,75 @@
 			html = "";
 			
 			$.ajax({
-				url:"/playerlistload",
+				url:"/selectbodyinfo",
 				type:"POST",
 				data:{}
 			}).done(function(data){
-				playerlist = data;
-				html="";
-				console.log(playerlist[playerlist.length-1]);
-				var img = new Image();
-				for(var i = 0; i<data.length-1; i++){
-						/* image존재여부 확인*/
-					 isImage(data[i].player_img, data[i]); 
-					
+				var result = JSON.parse(data);
+				console.log(result)
+				
+				for(var i = 0; i<result.length; i++){
+					html +=`<li><a href="/player_recommand/\${result[i].character_nickname}">\${result[i].character_nickname}</a></li>`;
 				}
-				$("#page").empty();
-				var pagenumber = Math.ceil(playerlist[playerlist.length-1] / 12);
-				console.log(pagenumber)
-				for(var i = 1; i<pagenumber; i++){
-				html += `<button type="button" class="pagenumber btn btn-default">\${i}</button>`;
-				}
-				$("#page").append(html);
-				$(".pagenumber").eq(0).addClass("active");
+				
+				$("#namemenu").append(html);
 				
 			});
+			
+			var urlnumber = location.href.split("/");
+			console.log(urlnumber, " -- urlnumber");
+			
+			if(urlnumber.length == 4){
+				$.ajax({
+					url:"/playerlistload",
+					type:"POST",
+					data:{}
+				}).done(function(data){
+					playerlist = data;
+					html="";
+					var img = new Image();
+					for(var i = 0; i<data.length-1; i++){
+							/* image존재여부 확인*/
+						 isImage(data[i].player_img, data[i]); 
+						
+					}
+					$("#page").empty();
+					var pagenumber = Math.ceil(playerlist[playerlist.length-1] / 12);
+					for(var i = 1; i<pagenumber; i++){
+					html += `<button type="button" class="pagenumber btn btn-default">\${i}</button>`;
+					}
+					$("#page").append(html);
+					$(".pagenumber").eq(0).addClass("active");
+					
+				});
+			}else if(urlnumber.length ==5){
+				nickname = urlnumber[4];
+				$("#nickname").text(nickname);
+				$("#nickname").append(`<span class="caret"></span>`);
+				$.ajax({
+					url:"/recommandlist",
+					type:"POST",
+					data:{nickname : nickname}
+				}).done(function(data){
+					console.log(data)
+					playerlist = data;
+					html ="";
+					var img = new Image();
+					for(var i = 0; i< data.length - 1; i++){
+						isImage(data[i].player_img, data[i]);
+					}
+					$("#page").empty();
+					var pagenumber = Math.ceil(data[data.length-1] / 12);
+					console.log(pagenumber , " , pagenumber")
+					for(var i = 1; i<=pagenumber; i++){
+					html += `<button type="button" class="recommandpagenumber btn btn-default">\${i}</button>`;
+					}
+					$("#page").append(html);
+					$(".recommandpagenumber").eq(0).addClass("active");
+					
+				});
+			}
+			
 			
 			$(document).on("click", ".player", function(){
 				var src = $(this).attr("src");
@@ -184,6 +240,7 @@
 			
 			$(document).on("click", ".pagenumber", function(){
 				var index = $(this).index();
+				
 				 $.ajax({
 					url:"/playerlistload",
 					type:"POST",
@@ -199,7 +256,7 @@
 					}
 					$("#page").empty();
 					var pagenumber = Math.ceil(playerlist[playerlist.length-1] / 12);
-					for(var i = 1; i<pagenumber; i++){
+					for(var i = 1; i<=pagenumber; i++){
 						html += `<button type="button" class="pagenumber btn btn-default">\${i}</button>`;
 					}
 					$("#page").append(html);
@@ -208,9 +265,34 @@
 				}); 
 			});
 			
-			$(".pagenumber").click(function(){
+			$(document).on("click", ".recommandpagenumber", function(){
+				var index = $(this).index();
 				
-			})
+				console.log(nickname ,"???")
+				 $.ajax({
+					url:"/recommandlist",
+					type:"POST",
+					data:{index : index,
+						nickname : nickname}
+				}).done(function(data){
+					playerlist = data;
+					html="";
+					var img = new Image();
+					for(var i = 0; i<data.length-1; i++){
+							/* image존재여부 확인*/
+						 isImage(data[i].player_img, data[i]); 
+						
+					}
+					$("#page").empty();
+					var pagenumber = Math.ceil(playerlist[playerlist.length-1] / 12);
+					for(var i = 1; i<=pagenumber; i++){
+						html += `<button type="button" class="recommandpagenumber btn btn-default">\${i}</button>`;
+					}
+					$("#page").append(html);
+					$(".pagenumber").eq(index).addClass("active");
+					
+				}); 
+			});
 			
 	});
 	

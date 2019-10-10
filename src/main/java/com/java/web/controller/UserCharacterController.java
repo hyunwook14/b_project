@@ -90,7 +90,7 @@ public class UserCharacterController {
 	}
 	//케릭터 삭제
 	@RequestMapping(value="/deletecharacter", method=RequestMethod.POST)
-	public void deletecharacter(HttpServletRequest req, HttpServletResponse res) {
+	public void deletecharacter(HttpServletRequest req, HttpServletResponse res,HttpSession session) {
 		try {
 			int result = cs.delete(req);
 			System.out.println("req:character_no : "+ req.getParameter("character_no"));
@@ -99,7 +99,9 @@ public class UserCharacterController {
 			if(result == 0) {
 				msg =" <script> alert('삭제실패'); </script>";
 			}else if(result ==1 ) {
+				int updatenumber = cs.delete_updatenumber(session);
 				msg =" <script> location.href='/'; alert('삭제완료'); </script>";
+				System.out.println(updatenumber + " : 삭제 업데이트 수");
 			}
 			res.getWriter().print(msg);
 			

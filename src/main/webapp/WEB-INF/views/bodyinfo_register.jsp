@@ -181,7 +181,7 @@
 							
 							html = "";		
 							for(var i = 0; i<result.length; i++){
-								html +=`<label id="position_name">\${result[i].position_name}:</label>
+								html +=`<label id="position_name">\${result[i].position_name}</label>
 										<p id="position_explanation">\${result[i].position_explanation}</p>`;
 							}
 										

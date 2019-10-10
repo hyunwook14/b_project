@@ -34,5 +34,14 @@
   <update id="delete" parameterType="int">
   	UPDATE user_character set character_delYN = 'Y' where character_no = #{character_no} 
   </update>
+   <!-- 케릭터 삭제시 수 업데이트 -->
+   <update id="deletenumberupdate" parameterType="hashmap">
+   	update member_user set user_characternumber = #{count}
+   	where user_no_pk = #{user_no}
+   </update>
+   <!-- 케릭터이름으로 키 몸무게 포지션 가져오기 -->
+   <select id="info" parameterType="String" resultType="com.java.web.vo.UserCharacterVO">
+   	select character_height, character_weight, character_position from user_character where character_nickname = #{name}
+   </select>
  
 </mapper>

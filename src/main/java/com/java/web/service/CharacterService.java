@@ -1,6 +1,7 @@
 package com.java.web.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -110,6 +111,20 @@ public class CharacterService {
 	// 케릭터 삭제
 	public int delete(HttpServletRequest req) {
 		int character_no = Integer.parseInt(req.getParameter("character_no"));
-		return sqlsession.delete("character.delete", character_no);
+		return sqlsession.update("character.delete", character_no);
+	}
+	// 케릭터 삭제시 수 변경
+	public int delete_updatenumber(HttpSession session) {
+		String userid = (String) session.getAttribute("id");
+		int userno = sqlsession.selectOne("user.selectno", userid);
+		System.out.println("userno : "+userno);
+		int count = sqlsession.selectOne("character.checknumber", userno);
+		System.out.println(count);
+		HashMap<String, Object> inputMap = new HashMap<String, Object>();
+		inputMap.put("user_no", userno);
+		inputMap.put("count", count);
+		System.out.println("케릭터 삭제시 수변경");
+		return sqlsession.update("character.deletenumberupdate", inputMap);
+		
 	}
 }
