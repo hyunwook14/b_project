@@ -1,0 +1,25 @@
+*{
+	padding:0;
+	margin:0;
+}
+section{
+	height:calc(100vh - 100px);
+}
+.container-fluid{
+	padding-right:0;
+}
+footer{
+	height: 100px; 
+	background-color:black;
+	opacity:0.7;
+	
+}
+
+.biw100{
+	width:100%;
+	height:calc(100vh - 262px);
+	background-image: url('https://news.hmgjournal.com/upload/common/activeSquare/binary/slamdunk-1[0].jpg');
+	background-repeat: no-repeat;
+	background-position: top;
+	background-size:cover;
+}

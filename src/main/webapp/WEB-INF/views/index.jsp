@@ -7,13 +7,8 @@
 <title>home</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/resources/css/Main.css" >
-
+<link rel="stylesheet" type="text/css" href="/resources/css/common.css" >
 <style>
-*{
-	padiing:0;
-	margin:0;
-}
-
 .bgray{
 	background-color: #f1f1f1;
 }
@@ -21,21 +16,10 @@
 	padding:10px 0;
 }
 
-.biw100{
-	width:100%;
-	height:calc(850px - 162px);
-	background-image: url('https://news.hmgjournal.com/upload/common/activeSquare/binary/slamdunk-1[0].jpg');
-	background-repeat: no-repeat;
-	background-position: top;
-	background-size:cover;
-}
-
 .ptb50p{
 	padding:25px 0;
 }
-.containerw{
- width:750px;
-}
+
 </style>
 
 </head>
@@ -47,7 +31,7 @@
 				 	<li class="active"><a href="/">Home</a></li>
 				 	<li class=""><a href="/bodyinfo_register">신체정보등록</a></li>
 				 	<li class=""><a href="/player_recommand">선수추천목록</a>
-				 	<li class=""><a href="/exercise_recommand">운동목록</a>
+				 	<li class=""><a href="/exercise_recommand">운동추천목록</a>
 				 	<li class=""><a href="/m_list">경기기록</a>
 				 	<li id="admin" class="hidden"><a href="/admin">관리자</a>
 				 </ul>
@@ -76,7 +60,7 @@
 				<div class="biw100 imgw">
 					<div class="ptb50p"></div>
 					
-					<div class="container well containerw">
+					<div class=" well">
 						<form class="form-horizontal">
 							<div class="form-group ">
 								<div class="col-sm-offset-1 ">
@@ -109,7 +93,7 @@
 		</div>
 		
 	</section>
-	<footer>
+	<footer class="">
 	 <div>
 	 </div>
 	</footer>

@@ -1,5 +1,6 @@
 package com.java.web.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -29,14 +30,22 @@ public class MatchrecordController {
 	MatchrecordService mrs;
 	
 	@RequestMapping("/m_record")
-	public String m_record(HttpSession session) {
-		if(session.getAttribute("id") == null) return "redirect:/";
+	public String m_record(HttpSession session, HttpServletResponse res) throws IOException {
+		if(session.getAttribute("id") == null) {
+			res.setContentType("text/html; charset=utf-8");
+			res.getWriter().print("<script>alert('로그인이 필요합니다'); location.href='/';</script>");
+			res.getWriter().flush();
+		}
 		return "m_record";
 	}
 	
 	@RequestMapping("/m_list")
-	public String m_list(HttpSession session) {
-		if(session.getAttribute("id") == null) return "redirect:/";
+	public String m_list(HttpSession session, HttpServletResponse res) throws IOException {
+		if(session.getAttribute("id") == null) {
+			res.setContentType("text/html; charset=utf-8");
+			res.getWriter().print("<script>alert('로그인이 필요합니다'); location.href='/';</script>");
+			res.getWriter().flush();
+		}
 		return "m_list";
 	}
 	@RequestMapping("/m_list/{index}")

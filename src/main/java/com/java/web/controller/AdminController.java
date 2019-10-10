@@ -27,8 +27,12 @@ public class AdminController {
 	KblPlayerService kps;
 	
 	@RequestMapping("/admin")
-	public String admin(HttpSession session) {
-		if(session.getAttribute("id") ==null) return "redirect:/";
+	public String admin(HttpSession session , HttpServletResponse res) throws IOException {
+		if(session.getAttribute("id") ==null) {
+			res.setContentType("text/html; charset=utf-8");
+			res.getWriter().print("<script>alert('로그인이 필요합니다'); location.href='/';</script>");
+			res.getWriter().flush();
+		}
 		return "admin";
 	}
 	

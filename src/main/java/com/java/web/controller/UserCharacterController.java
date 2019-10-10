@@ -1,5 +1,6 @@
 package com.java.web.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,8 +27,12 @@ public class UserCharacterController {
 	
 	//신체정보등록페이지
 	@RequestMapping("/bodyinfo_register")
-	public String bodyinfo_register(HttpSession session) {
-		if(session.getAttribute("id") ==null) return "redirect:/";
+	public String bodyinfo_register(HttpSession session, HttpServletResponse res) throws IOException {
+		if(session.getAttribute("id") ==null) {
+			res.setContentType("text/html; charset=utf-8");
+			res.getWriter().print("<script>alert('로그인이 필요합니다'); location.href='/';</script>");
+			res.getWriter().flush();
+		}
 		return "bodyinfo_register";
 	}
 	//신체정보등록

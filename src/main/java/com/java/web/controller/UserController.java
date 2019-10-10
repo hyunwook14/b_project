@@ -1,5 +1,7 @@
 package com.java.web.controller;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -21,18 +23,20 @@ public class UserController {
 	UserService us;
 	//첫 대문 화면
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String index(HttpSession session) {
+	public String index(HttpSession session, HttpServletRequest req) {
 		if(session.getAttribute("id") != null) return "redirect:main";
 		return "index";
 	}
 	//로그인시 보여지는  화면
 	@RequestMapping("/main")
-	public String main(HttpSession session){
+	public String main(HttpSession session, HttpServletResponse res) throws IOException{
 		System.out.println(session.getAttribute("id"));
 		
 		// session id 값이 없을떄 첫화면으로 이동
 		if(session.getAttribute("id")==null) {
-			return "redirect:/";
+			res.setContentType("text/html; charset=utf-8");
+			res.getWriter().print("<script>alert('로그인이 필요합니다'); location.href='/';</script>");
+			res.getWriter().flush();
 		}
 		return "main";
 	}

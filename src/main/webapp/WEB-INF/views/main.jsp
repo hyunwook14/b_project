@@ -7,7 +7,7 @@
 	<title>Main</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="/resources/css/Main.css" >
-	
+	<link rel="stylesheet" type="text/css" href="/resources/css/common.css" >
 	<style>
 	
 	.ptb50p{
@@ -40,7 +40,7 @@
 					 	<li class="active"><a href="/main">Home</a></li>
 					 	<li class=""><a href="/bodyinfo_register">신체정보등록</a></li>
 					 	<li class=""><a href="/player_recommand">선수추천목록</a>
-					 	<li class=""><a href="/exercise_recommand">운동목록</a>
+					 	<li class=""><a href="/exercise_recommand">운동추천목록</a>
 					 	<li class=""><a href="/m_list">경기기록</a>
 					 	<li id="admin" class="hidden"><a href="/admin">관리자</a>
 					 </ul>

@@ -25,8 +25,12 @@ public class PlayerController {
 	KblPlayerService kps;
 	
 	@RequestMapping("/player_recommand")
-	public String player_recommand(HttpSession session) {
-		if(session.getAttribute("id") == null) return "redirect:/";
+	public String player_recommand(HttpSession session, HttpServletResponse res) throws IOException {
+		if(session.getAttribute("id") == null) {
+			res.setContentType("text/html; charset=utf-8");
+			res.getWriter().print("<script>alert('로그인이 필요합니다'); location.href='/';</script>");
+			res.getWriter().flush();
+		}
 		return "player_recommand";
 	}
 	

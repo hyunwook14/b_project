@@ -6,12 +6,9 @@
 
 nav{
 	background-color: #f1f1f1;
-	height:850px  
+	height: calc(100vh - 100px); 
 }
 
-footer{
-
-}
  ul{
 	list-style: none;
 	padding-inline-start: 0;
@@ -33,14 +30,7 @@ footer{
 	padding:10px 0;
 }
 
-.biw100{
-	width:100%;
-	height:calc(850px - 162px);
-	background-image: url('https://news.hmgjournal.com/upload/common/activeSquare/binary/slamdunk-1[0].jpg');
-	background-repeat: no-repeat;
-	background-position: top;
-	background-size:cover;
-}
+
 .bgray{
 	background-color: #f1f1f1;
 }
