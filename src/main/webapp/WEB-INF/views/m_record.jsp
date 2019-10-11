@@ -119,6 +119,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="/resources/js/Myinfo.js"></script>
+	<script src="/resources/js/common.js"></script>
 	<script>
 		var id= "";
 		id ="<%= session.getAttribute("id") %>";
@@ -259,23 +260,9 @@
 			});
 			var html ="";
 			
-			if( id != ""){
-				 if( id == "admin"){
-						$("#admin").removeClass("hidden");	
-					}
-				html =`<form class="row form-group">
-						<div class="col-sm-12 ">
-							<div class="form-control text-center">\${id}</div>
-						</div>
-						<div class="col-sm-6">
-							<button type="button" id="myinfobtn" class=" btn form-control">내정보</button>
-						</div>
-						<div class="col-sm-6">
-							<button class=" btn form-control" formaction="/logout">로그아웃</button>
-						</div>
-					   </form>	 `;
+			if(id != "null"){
+				myinfoload(id);
 			}
-			$("#myinfo").append(html);
 			
 			$(".back").click(function(e){
 				location.href="/m_list";
@@ -364,23 +351,6 @@
 				var parent = $(this).parent().parent();
 				score(textflag, totalscore, parent, pmflag);
 			})
-			
-			
-			/* $(".btn-success").click(function(e){
-				var textflag;	 	//버튼클릭시 여러이벤트
-				var pmflag;			//득점 감점 flag
-				var classtexts = $(this).attr("class").split(" ");
-				for(var i = 0; i<classtexts.length; i++){
-					textflag = classtexts[i];
-				}
-				if(classtexts[1] == "btn-success") pmflag = 1; 	//득점
-				else pmflag = 0; 								//감점
-				
-				var totalscore = parseInt($(this).parent().parent().eq(0).children().eq(10)[0].innerText);
-				var parent = $(this).parent().parent();
-				score(textflag, totalscore, parent, pmflag);
-				
-			}); */
 			
 			$(".btn-danger").click(function(e){
 				var textflag;	 	//버튼클릭시 여러이벤트

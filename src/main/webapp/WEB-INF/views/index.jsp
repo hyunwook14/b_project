@@ -93,7 +93,7 @@
 		</div>
 		
 	</section>
-	<footer class="">
+	<footer class="container-fluid">
 	 <div>
 	 </div>
 	</footer>

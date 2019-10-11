@@ -148,6 +148,13 @@
 	    });
 	}
 	
+	function timetrans(time){
+		if(time < 10){
+			time = "0"+time ;
+		}
+		return time
+	}
+	
 	$(document).ready(function(){
 		
 		$(".add").click(function(){
@@ -156,7 +163,10 @@
 		
 		var html ="";
 		
-		myinfoload(id);
+		if(id != "null"){
+			myinfoload(id);
+		}
+		
 		
 			var lastindex = location.href.lastIndexOf("/")+ 1;
 			var index = location.href.substring(lastindex);
@@ -169,17 +179,28 @@
 				data:{index:index}
 			}).done(function(data){
 				html ="";
-				
+				var month;
+				var date;
+				var hours;
+				var minutes;
+				var seconds;
 				for(var i =0; i<data.length-1; i++){
-					html += `
-					<tr class="detail">`;
-					if( data[i].record_date.date  < 10){
-						html +=`<td class='date'>\${data[i].record_date.year+1900}-\${data[i].record_date.month+1}-0\${data[i].record_date.date} \${data[i].record_date.hours}:\${data[i].record_date.minutes}</td> `;
-					}else{
-						html +=`<td class='date'>\${data[i].record_date.year+1900}-\${data[i].record_date.month+1}-\${data[i].record_date.date} \${data[i].record_date.hours}:\${data[i].record_date.minutes}</td> `;
-					}
+					month = data[i].record_date.month+1;
+					date = data[i].record_date.date;
+					hours = data[i].record_date.hours;
+					minutes = data[i].record_date.minutes;
+					seconds = data[i].record_date.seconds;
 					
-						html+=` <td class='quarter'>\${data[i].record_quarter} Q</td>
+					month = timetrans(month);
+					date = timetrans(date);
+					hours = timetrans(hours);
+					minutes = timetrans(minutes);
+					seconds = timetrans(seconds);
+					
+					html += `
+					<tr class="detail">
+						<td class='date'>\${data[i].record_date.year+1900}-\${month}-\${date} \${hours}:\${minutes}:\${seconds}</td> 
+						<td class='quarter'>\${data[i].record_quarter} Q</td>
 						<td>\${data[i].peoplen}</td>
 					</tr>`;
 				}
@@ -203,15 +224,11 @@
 					startpage = Math.trunc(index / 5)*5 +1;
 				} */
 				
-			
-				
-				console.log(startpage, "---spage")
 				var prepage= startpage -5;
 				if(prepage <0) prepage = 1;
 				var nextpage= startpage +5;
 				if(nextpage > totalpage) nextpage -= 5;
 				
-				console.log(totalpage, "-totalpage")
 				var count = 0;
 				html ="";
 				html += `<li><a href="/m_list/\${prepage}"><</a>`;
@@ -250,7 +267,6 @@
 			}).done(function(data){
 				html ="";
 				$("#team").empty();
-				console.log(data)
 				for(var i=0; i<data.length; i++){
 				html +=`
 					<tr class="people">

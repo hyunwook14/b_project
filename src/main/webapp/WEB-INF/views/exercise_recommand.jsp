@@ -1,3 +1,4 @@
+<%@page import="com.java.web.vo.BasketballPositionVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -11,10 +12,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <style>
-*{
-	padding:0;
-	margin:0;
-}
+
 .ptb50p{
 	padding:25px 0;
 }
@@ -69,22 +67,19 @@
 						<button class="btn dropdown-toggle form-control" type="button" data-toggle="dropdown">포지션
 						<span class="caret"></span></button>
 						<ul class="dropdown-menu">
-							<li><a href="#">1.포인트가드</a></li>
-							<li><a href="#">2.슈팅가드</a></li>
-							<li><a href="#">3.스몰포워드</a></li>
-							<li><a href="#">4.파워포워드</a></li>
-							<li><a href="#">5.센터</a></li>
+							<li><a href="/exercise_recommand/Point Guard">포인트가드</a></li>
+							<li><a href="/exercise_recommand/Shooting Guard">슈팅가드</a></li>
+							<li><a href="/exercise_recommand/Small Forward">스몰포워드</a></li>
+							<li><a href="/exercise_recommand/Power Forward">파워포워드</a></li>
+							<li><a href="/exercise_recommand/Center">센터</a></li>
 						</ul>
 					</div>
 				</div>	
 				<div>
-					<h2>포인트가드</h2>
-					<h3>요구 되는 능력</h3>
-					<span class="label label-info">속도</span>
-					<span class="label label-info">민첩성</span>
-					<span class="label label-info">볼 핸들링</span>
-					<span class="label label-info">패싱</span>
-					<span class="label label-info">득점</span>
+					<h2 id="positionname">포인트가드</h2>
+					<div id="skills">
+						
+					</div>
 				</div>			  
 			</section>
 		</div>
@@ -99,10 +94,36 @@
 	<script>
 		var id= "";
 		id ="<%= session.getAttribute("id") %>";
-	
+		<% 
+			BasketballPositionVO result = (BasketballPositionVO) request.getAttribute("result");
+			String position = result.getPosition_name();
+			String explanantion = result.getPosition_explanation();
+			String skill1 = result.getPosition_skill1();
+			String skill2 = result.getPosition_skill2();
+			String skill3 = result.getPosition_skill3();
+		%>
 		$(document).ready(function(){
 			var html ="";
 			myinfoload(id)
+			
+			var position = "<%= position %>";
+			var explanantion = "<%= explanantion %>";
+			var skill1 = "<%= skill1 %>";
+			var skill2 = "<%= skill2 %>";
+			var skill3 = "<%= skill3 %>";
+			
+			$("#positionname").text(position);
+			
+			var html = "";
+			
+			html = `
+				<h3>요구 되는 능력</h3>
+				<span class="label label-info">\${skill1}</span>
+				<span class="label label-info">\${skill2}</span>
+				<span class="label label-info">\${skill3}</span>
+			`;
+			
+			$("#skills").append(html);
 			
 		}) 
 	</script>

@@ -45,7 +45,7 @@
  	select record_assortment, record_nickname, record_twop, record_threep, record_onep, record_foul,
        record_assist, record_steal, record_block, record_turnover, record_totalp, record_quarter
           from gamelist_record 
-		   where date_format(record_date,'%Y-%m-%d %H:%i') = #{record_date}  and record_quarter = #{record_quarter}
+		   where date_format(record_date,'%Y-%m-%d %H:%i:%S') = #{record_date}  and record_quarter = #{record_quarter}
 		   order by record_assortment desc
  </select>
  <!-- 케릭터이름으로  시합정보가져오기 -->

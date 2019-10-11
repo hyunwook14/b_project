@@ -31,26 +31,26 @@ public class MatchrecordController {
 	
 	@RequestMapping("/m_record")
 	public String m_record(HttpSession session, HttpServletResponse res) throws IOException {
-		if(session.getAttribute("id") == null) {
-			res.setContentType("text/html; charset=utf-8");
-			res.getWriter().print("<script>alert('로그인이 필요합니다'); location.href='/';</script>");
-			res.getWriter().flush();
-		}
+//		if(session.getAttribute("id") == null) {
+//			res.setContentType("text/html; charset=utf-8");
+//			res.getWriter().print("<script>alert('로그인이 필요합니다'); location.href='/';</script>");
+//			res.getWriter().flush();
+//		}
 		return "m_record";
 	}
 	
 	@RequestMapping("/m_list")
 	public String m_list(HttpSession session, HttpServletResponse res) throws IOException {
-		if(session.getAttribute("id") == null) {
-			res.setContentType("text/html; charset=utf-8");
-			res.getWriter().print("<script>alert('로그인이 필요합니다'); location.href='/';</script>");
-			res.getWriter().flush();
-		}
+//		if(session.getAttribute("id") == null) {
+//			res.setContentType("text/html; charset=utf-8");
+//			res.getWriter().print("<script>alert('로그인이 필요합니다'); location.href='/';</script>");
+//			res.getWriter().flush();
+//		}
 		return "m_list";
 	}
 	@RequestMapping("/m_list/{index}")
 	public String m_list(HttpSession session, @PathVariable int index, HttpServletRequest req) {
-		if(session.getAttribute("id") == null) return "redirect:/";
+//		if(session.getAttribute("id") == null) return "redirect:/";
 //		System.out.println(index);
 //		List<HashMap<String,String>> result =   mrs.loadgamelist(index);
 //		System.out.println(result.get(0).toString());
