@@ -76,10 +76,74 @@
 					</div>
 				</div>	
 				<div>
-					<h2 id="positionname">포인트가드</h2>
+					<h2 id="positionname">포지션을선택해주세요</h2>
 					<div id="skills">
 						
 					</div>
+				</div>
+				<div class="container">
+					<a href="https://www.youtube.com/results?search_query=%ED%8F%AC%EC%9D%B8%ED%8A%B8%EA%B0%80%EB%93%9C+%EA%B0%95%EC%9D%98" target="_blanck">더보기</a>
+					<div id="myCarousel" class="carousel slide" data-ride="carousel">
+					
+				    <!-- Indicators -->
+				    <ol class="carousel-indicators">
+				      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				      <li data-target="#myCarousel" data-slide-to="1"></li>
+				      <li data-target="#myCarousel" data-slide-to="2"></li>
+				    </ol>
+				
+				    <!-- Wrapper for slides -->
+				    <div class="carousel-inner">
+				      <div class="item active">
+				         
+				         <iframe id="1" width="1150" height="720" 
+						  src="https://www.youtube.com/embed/ZTc4suDBq7Y" 
+						  frameborder="0" 
+						  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+						  allowfullscreen>
+						 </iframe>
+						
+				        <div class="carousel-caption">
+				          
+				        </div>
+				      </div>
+					
+				      <div class="item">
+				        <iframe id="2" width="1150" height="720" 
+						  src="https://www.youtube.com/embed/xrkMb8E8lBE" 
+						  frameborder="0" 
+						  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+						  allowfullscreen>
+						  </iframe>
+				        <div class="carousel-caption">
+				          
+				        </div>
+				      </div>
+				    
+				      <div class="item">
+				        <iframe id="3" width="1150" height="720" 
+						  src="https://www.youtube.com/embed/o7OLwwPothI" 
+						  frameborder="0" 
+						  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+						  allowfullscreen>
+						  </iframe>
+				        <div class="carousel-caption">
+				          
+				        </div>
+				      </div>
+				  
+				    </div>
+				
+				    <!-- Left and right controls -->
+				    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+				      <span class="glyphicon glyphicon-chevron-left"></span>
+				      <span class="sr-only">Previous</span>
+				    </a>
+				    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+				      <span class="glyphicon glyphicon-chevron-right"></span>
+				      <span class="sr-only">Next</span>
+				    </a>
+				  </div>
 				</div>			  
 			</section>
 		</div>
@@ -96,13 +160,26 @@
 		id ="<%= session.getAttribute("id") %>";
 		<% 
 			BasketballPositionVO result = (BasketballPositionVO) request.getAttribute("result");
-			String position = result.getPosition_name();
-			String explanantion = result.getPosition_explanation();
-			String skill1 = result.getPosition_skill1();
-			String skill2 = result.getPosition_skill2();
-			String skill3 = result.getPosition_skill3();
+			String position ="";
+			String explanantion="";
+			String skill1="";
+			String skill2="";
+			String skill3="";
+			if(result == null){
+				System.out.println("null값 jsp");
+			}else{
+				 position = result.getPosition_name();
+				 explanantion = result.getPosition_explanation();
+				 skill1 = result.getPosition_skill1();
+				 skill2 = result.getPosition_skill2();
+				 skill3 = result.getPosition_skill3();
+			}
 		%>
 		$(document).ready(function(){
+			$('.carousel').carousel({
+				  interval: false
+				});
+			
 			var html ="";
 			myinfoload(id)
 			
@@ -112,18 +189,36 @@
 			var skill2 = "<%= skill2 %>";
 			var skill3 = "<%= skill3 %>";
 			
-			$("#positionname").text(position);
+			/* $.ajax({
+				url:"/",
+				
+			}).done(function(data){
+				
+			}); */
 			
+			var href =location.href.split("/");
+			console.log(href);
 			var html = "";
 			
-			html = `
-				<h3>요구 되는 능력</h3>
-				<span class="label label-info">\${skill1}</span>
-				<span class="label label-info">\${skill2}</span>
-				<span class="label label-info">\${skill3}</span>
-			`;
+			if(href.length == 5 && href[4] != ""){
+				
+				$("#positionname").text(position);
+				
+				
+				html = `
+					<h3>요구 되는 능력</h3>
+					<span class="label label-info">\${skill1}</span>
+					<span class="label label-info">\${skill2}</span>
+					<span class="label label-info">\${skill3}</span>
+					<h4>포지션 특징:
+					\${explanantion}	
+					</h4>
+				`;
+				
+				$("#skills").append(html);
+				
+			}
 			
-			$("#skills").append(html);
 			
 		}) 
 	</script>

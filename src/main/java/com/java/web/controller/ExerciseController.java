@@ -38,7 +38,6 @@ public class ExerciseController {
 			res.getWriter().print("<script>alert('로그인이 필요합니다'); location.href='/';</script>");
 			res.getWriter().flush();
 		}
-		System.out.println(position_name);
 		BasketballPositionVO basketball =es.loadskill(position_name);
 		req.setAttribute("result", basketball);
 		

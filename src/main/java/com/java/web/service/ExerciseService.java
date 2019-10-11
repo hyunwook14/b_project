@@ -14,7 +14,6 @@ public class ExerciseService {
 	
 	public BasketballPositionVO loadskill(String position_name) {
 		BasketballPositionVO basketball = sqlsession.selectOne("exercise.positionskill", position_name);
-		System.out.println(basketball.toString());
 		return basketball;
 	}
 }

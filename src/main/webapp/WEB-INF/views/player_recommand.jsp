@@ -194,7 +194,7 @@
 					
 				});
 			}else if(urlnumber.length ==5){
-				nickname = urlnumber[4];
+				nickname = decodeURI(urlnumber[4]);
 				$("#nickname").text(nickname);
 				$("#nickname").append(`<span class="caret"></span>`);
 				$.ajax({
