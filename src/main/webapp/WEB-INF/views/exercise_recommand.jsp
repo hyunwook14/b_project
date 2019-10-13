@@ -94,55 +94,12 @@
 				
 				    <!-- Wrapper for slides -->
 				    <div class="carousel-inner">
-				      <div class="item active">
-				         
-				         <iframe id="1" width="1150" height="720" 
-						  src="https://www.youtube.com/embed/ZTc4suDBq7Y" 
-						  frameborder="0" 
-						  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-						  allowfullscreen>
-						 </iframe>
-						
-				        <div class="carousel-caption">
-				          
-				        </div>
-				      </div>
 					
-				      <div class="item">
-				        <iframe id="2" width="1150" height="720" 
-						  src="https://www.youtube.com/embed/xrkMb8E8lBE" 
-						  frameborder="0" 
-						  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-						  allowfullscreen>
-						  </iframe>
-				        <div class="carousel-caption">
-				          
-				        </div>
-				      </div>
-				    
-				      <div class="item">
-				        <iframe id="3" width="1150" height="720" 
-						  src="https://www.youtube.com/embed/o7OLwwPothI" 
-						  frameborder="0" 
-						  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-						  allowfullscreen>
-						  </iframe>
-				        <div class="carousel-caption">
-				          
-				        </div>
-				      </div>
-				  
+				     
 				    </div>
 				
 				    <!-- Left and right controls -->
-				    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-				      <span class="glyphicon glyphicon-chevron-left"></span>
-				      <span class="sr-only">Previous</span>
-				    </a>
-				    <a class="right carousel-control" href="#myCarousel" data-slide="next">
-				      <span class="glyphicon glyphicon-chevron-right"></span>
-				      <span class="sr-only">Next</span>
-				    </a>
+				    
 				  </div>
 				</div>			  
 			</section>
@@ -176,9 +133,6 @@
 			}
 		%>
 		$(document).ready(function(){
-			$('.carousel').carousel({
-				  interval: false
-				});
 			
 			var html ="";
 			myinfoload(id)
@@ -216,6 +170,69 @@
 				`;
 				
 				$("#skills").append(html);
+				
+				
+				html = "";
+				
+				html = `
+					 <div class="item active">
+			         
+			         <iframe id="1" width="1150" height="720" 
+					  src="https://www.youtube.com/embed/ZTc4suDBq7Y" 
+					  frameborder="0" 
+					  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+					  allowfullscreen>
+					 </iframe>
+					
+			        <div class="carousel-caption">
+			          
+			        </div>
+			      </div>
+			      
+			      <div class="item">
+			        <iframe id="2" width="1150" height="720" 
+					  src="https://www.youtube.com/embed/xrkMb8E8lBE" 
+					  frameborder="0" 
+					  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+					  allowfullscreen>
+					  </iframe>
+			        <div class="carousel-caption">
+			          
+			        </div>
+			      </div>
+			    
+			      <div class="item">
+			        <iframe id="3" width="1150" height="720" 
+					  src="https://www.youtube.com/embed/o7OLwwPothI" 
+					  frameborder="0" 
+					  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+					  allowfullscreen>
+					  </iframe>
+			        <div class="carousel-caption">
+			          
+			        </div>
+			      </div>
+			  
+				`;
+				
+				$(".carousel-inner").eq(0).append(html);
+				
+				$('.carousel').carousel({
+					  interval: false
+				});
+				
+				html = `
+					<a class="left carousel-control" href="#myCarousel" data-slide="prev">
+				      <span class="glyphicon glyphicon-chevron-left"></span>
+				      <span class="sr-only">Previous</span>
+				    </a>
+				    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+				      <span class="glyphicon glyphicon-chevron-right"></span>
+				      <span class="sr-only">Next</span>
+				    </a>
+				`;
+				
+				$("#myCarousel").append(html);
 				
 			}
 			
