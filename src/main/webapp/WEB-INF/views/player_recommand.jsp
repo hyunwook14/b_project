@@ -158,7 +158,7 @@
 			}).done(function(data){
 				var result = JSON.parse(data);
 				console.log(result)
-				
+				html = "";
 				for(var i = 0; i<result.length; i++){
 					html +=`<li><a href="/player_recommand/\${result[i].character_nickname}">\${result[i].character_nickname}</a></li>`;
 				}
@@ -266,7 +266,6 @@
 			$(document).on("click", ".recommandpagenumber", function(){
 				var index = $(this).index();
 				
-				console.log(nickname ,"???")
 				 $.ajax({
 					url:"/recommandlist",
 					type:"POST",
@@ -284,10 +283,10 @@
 					$("#page").empty();
 					var pagenumber = Math.ceil(playerlist[playerlist.length-1] / 12);
 					for(var i = 1; i<=pagenumber; i++){
-						html += `<button type="button" class="recommandpagenumber btn btn-default">\${i}</button>`;
+						html += `<button type="button" class="recommandpagenumber btn btn-default" id=\${i}>\${i}</button>`;
 					}
 					$("#page").append(html);
-					$(".pagenumber").eq(index).addClass("active");
+					$(`#\${index+1}`).addClass("active");
 					
 				}); 
 			});

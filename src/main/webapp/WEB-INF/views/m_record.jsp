@@ -94,8 +94,8 @@
 				          	<div class="input-group">
 				          		<label for="p_name" class="form-group">이름:</label>
 				          		<input type="text" class="form-control" id="nickname" placeholder="선수이름입력을 입력하세요" >
-				          		<div class="input-group-btn vab"><br>
-							        <button type="button" class="btn btn-default " type="submit"><i class="glyphicon glyphicon-search"></i></button>
+				          		<div class="input-group-btn vab hidden"><br>
+							        <button type="button" class="btn btn-default " type="button"><i class="glyphicon glyphicon-search "></i></button>
 							    </div>
 				          	</div>
 				          	<input type="button" class="btn btn-default" id="register" value="등록">

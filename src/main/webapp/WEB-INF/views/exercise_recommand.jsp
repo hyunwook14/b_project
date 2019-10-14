@@ -82,7 +82,7 @@
 					</div>
 				</div>
 				<div class="container">
-					<a href="https://www.youtube.com/results?search_query=%ED%8F%AC%EC%9D%B8%ED%8A%B8%EA%B0%80%EB%93%9C+%EA%B0%95%EC%9D%98" target="_blanck">더보기</a>
+					<a href="https://www.youtube.com/results?search_query=%EB%86%8D%EA%B5%AC+%EA%B0%95%EC%9D%98" target="_blanck">더보기</a>
 					<div id="myCarousel" class="carousel slide" data-ride="carousel">
 					
 				    <!-- Indicators -->
