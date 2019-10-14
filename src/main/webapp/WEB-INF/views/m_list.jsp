@@ -39,7 +39,7 @@
 		<div class="row content">
 			 <nav class="col-sm-3 sidenav">
 				 <ul class="menu nav nav-pills nav-stacked">
-				 	<li class=""><a href="/main">Home</a></li>
+				 	<li class=""><a href="/">Home</a></li>
 				 	<li class=""><a href="/bodyinfo_register">신체정보등록</a></li>
 				 	<li class=""><a href="/player_recommand">선수추천목록</a>
 				 	<li class=""><a href="/exercise_recommand">운동추천목록</a>

@@ -36,4 +36,9 @@ public class HomeController {
 	}
 	
 	
+	@RequestMapping("/board")
+	public String board() {
+		return "board";
+	}
+	
 }

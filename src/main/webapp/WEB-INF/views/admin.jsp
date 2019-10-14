@@ -173,6 +173,7 @@ h1:hover{
 			}
 			
 			$(".table").eq(0).append(html); 
+			$("input[type=checkbox]").eq(0).attr("disabled", true);
 			
 		});
 		
@@ -196,6 +197,24 @@ h1:hover{
 				}
 			});
 		})
+		$(document).on("click", "input[type=checkbox]", function(){
+			console.log("체크박스클릭")
+			
+			var flag = false;
+			var check = $("input[type=checkbox]");
+			
+			for(var i =0; i< check.length; i++){
+				flag = $("input[type=checkbox]").eq(i).prop("checked");
+				if(flag){
+					index = i;
+				} 
+			}
+			console.log(flag)
+/* 					$(".btn-danger").eq(0).removeClass("hidden");
+					$(".btn-danger").eq(0).addClass("hidden"); */
+			
+		})
+		
 		
 	}) 
 	</script>
