@@ -6,10 +6,14 @@
   <select id="test" resultType="String">
     select 1 as test
   </select>
-  
+  <!-- 포지션별 요구되는 능력 가져오기 -->
   <select id="positionskill" parameterType="String" resultType="com.java.web.vo.BasketballPositionVO">
   	select position_name, position_explanation, position_skill1, 
   			position_skill2, position_skill3 from basketball_position where position_name = #{position_name}
+  </select>
+  <!-- 포지션별 src 가져오기 -->
+  <select id="loadsrc" parameterType="int" resultType="com.java.web.vo.PositiontrainVO" >
+  	select src from position_train where position_no = #{position_no} order by rand() limit 3
   </select>
  
 </mapper>
